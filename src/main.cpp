@@ -18,6 +18,6 @@ int main(int argc,char* argv[])
 {
 
     cout << "It works !" << endl;
-
+    cout << "coucou" << endl;
     return 0;
 }
