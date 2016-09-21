@@ -1,6 +1,6 @@
 #include <iostream>
 
-// Un trucLes lignes suivantes ne servent qu'à vérifier que la compilation avec SFML fonctionne
+// Un truc de ouf Les lignes suivantes ne servent qu'à vérifier que la compilation avec SFML fonctionne
 #include <SFML/Graphics.hpp>
 
 void testSFML() {
