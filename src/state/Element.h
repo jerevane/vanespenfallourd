@@ -3,6 +3,7 @@
 #define STATE__ELEMENT__H
 
 #include <string>
+#include <map>
 
 namespace state {
   class Element;
@@ -15,7 +16,7 @@ namespace state {
   class Element {
     // Attributes
   public:
-    int[5][6] abilities;
+    std::map<std::string, int> abilities;
   protected:
     int HP;
     int MP;

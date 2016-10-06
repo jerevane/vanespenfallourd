@@ -18,14 +18,16 @@ namespace state {
   protected:
     std::string NodeName;
     bool WasVisited;
-    Node Previous;
-    Node Next;
+    //Node Previous;
+    //Node Next;
     // Operations
   public:
     void RandomEvent ();
     void StoryEvent ();
     Node (std::string NodeName);
     Node (Node previousNode, std::string NodeName);
+
+      Node();
   };
 
 };

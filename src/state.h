@@ -2,11 +2,12 @@
 #ifndef __STATE__H
 #define __STATE__H
 
+
 #include "state/Equipment.h"
-#include "state/Weapon.h"
-#include "state/Protection.h"
+#include "state/Item.h"
 #include "state/Element.h"
 #include "state/Character.h"
+#include "state/SphereGrid.h"
 #include "state/Ability.h"
 #include "state/MonsterTypeID.h"
 #include "state/Monster.h"
@@ -22,8 +23,10 @@
 #include "state/Claude.h"
 #include "state/Youenn.h"
 #include "state/Node.h"
+#include "state/ANodeAlloc.h"
+#include "state/NodeFactory.h"
 #include "state/State.h"
-#include "state/Map.h"
+#include "state/NodeList.h"
 #include "state/ElementList.h"
 #include "state/AElementAlloc.h"
 #include "state/ElementFactory.h"
@@ -31,4 +34,5 @@
 #include "state/Varythrix.h"
 #include "state/Wansdich.h"
 #include "state/Jenova.h"
+#include "state/NodeAlloc.h"
 #endif
