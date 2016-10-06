@@ -13,6 +13,7 @@ namespace state {
 
   /// class Varythrix - 
   class Varythrix : public state::Boss {
+      Varythrix(int playerLevel, int monsterSeed) : Boss(playerLevel, monsterSeed) {}
   };
 
 };

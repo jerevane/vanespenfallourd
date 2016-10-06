@@ -5,24 +5,23 @@
 #include <string>
 
 namespace state {
-  class Weapon;
-  class Protection;
+  class SphereGrid;
+  class Item;
   class Element;
 }
 
-#include "Weapon.h"
-#include "Protection.h"
+#include "SphereGrid.h"
+#include "Item.h"
 #include "Element.h"
 
 namespace state {
 
   /// class Character - 
   class Character : public state::Element {
+    // Associations
     // Attributes
   protected:
-    SphereGrid SphereGridInstance;
-    Weapon weapon;
-    Protection protection;
+    //SphereGrid SphereGridInstance;
     int XPToNextLevel;
     int PowerToOverdrive;
     // Operations
@@ -31,7 +30,7 @@ namespace state {
     void GainXP (int xp);
     void UseItem (Item item);
     Character ();
-    virtual std::string Overdrive (Element target) = 0;
+    std::string Overdrive (Element target);
   };
 
 };

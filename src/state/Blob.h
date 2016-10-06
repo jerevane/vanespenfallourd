@@ -15,7 +15,7 @@ namespace state {
   class Blob : public state::Monster {
     // Operations
   public:
-    Blob ();
+    Blob(int playerLevel, int monsterSeed);
   };
 
 };
