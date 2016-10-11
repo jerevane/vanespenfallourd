@@ -20,7 +20,7 @@ namespace state {
     // Associations
     // Attributes
   protected:
-    Node CurrentNode;
+    Node* CurrentNode;
     // Operations
   public:
     /// Changes CurrentNode

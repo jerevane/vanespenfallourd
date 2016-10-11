@@ -9,7 +9,6 @@ namespace state {
   class Element;
 }
 
-#include "Character.h"
 #include "Element.h"
 
 namespace state {
@@ -20,7 +19,7 @@ namespace state {
     // Operations
   public:
     Ability ();
-    void LearnAbility (Character target, std::string learnedAbility);
+    void LearnAbility (Character& target, std::string learnedAbility);
     std::string Brazier ();
   };
 

@@ -12,18 +12,8 @@ namespace state {
 
 namespace state {
 
-  /// class Monster - 
-  class Monster : public state::Element {
-    // Associations
-    // Operations
-  public:
-      Monster();
-
-      Monster (int playerLevel, int monsterSeed){}
-  };
 
 
-    Monster::Monster() {}
 
 };
 

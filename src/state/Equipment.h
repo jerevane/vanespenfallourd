@@ -4,16 +4,9 @@
 
 
 namespace state {
-  class Character;
-}
-
-#include "Character.h"
-
-namespace state {
 
   /// class Equipment - Name serves as ID for bonuses during attack
   class Equipment {
-    // Associations
     // Operations
   public:
     Equipment ();

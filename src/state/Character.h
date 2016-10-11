@@ -5,12 +5,14 @@
 #include <string>
 
 namespace state {
+  class SphereGrid;
   class Weapon;
   class Protection;
   class Item;
   class Element;
 }
 
+#include "SphereGrid.h"
 #include "Weapon.h"
 #include "Protection.h"
 #include "Item.h"
@@ -20,7 +22,6 @@ namespace state {
 
   /// class Character - 
   class Character : public state::Element {
-    // Associations
     // Attributes
   protected:
     SphereGrid SphereGridInstance;

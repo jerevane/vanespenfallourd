@@ -9,9 +9,9 @@ namespace state {
   class State;
 }
 
-#include "Node.h"
 #include "NodeFactory.h"
 #include "State.h"
+#include "Node.h"
 
 namespace state {
 
@@ -20,13 +20,13 @@ namespace state {
     // Associations
     // Attributes
   protected:
-    Node CurrentNode;
+    Node* CurrentNode;
     // Operations
   public:
     /// Changes CurrentNode
     void NextNode ();
     void PreviousNode ();
-    Map ();
+    NodeList ();
   };
 
 };
