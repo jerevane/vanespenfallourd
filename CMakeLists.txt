@@ -27,7 +27,7 @@ file(GLOB_RECURSE main_sources src/*.cpp)
 
 
 # Executables
-add_executable(run ${main_sources})
+add_executable(run ${main_sources} src/main.cpp)
 
 # SFML
 if(WIN32)
