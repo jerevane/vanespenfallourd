@@ -15,7 +15,6 @@ namespace state {
   class Elemental : public state::Monster {
     // Operations
   public:
-    Elemental(int playerLevel, int monsterSeed) : Monster(playerLevel, monsterSeed) {}
   };
 
 };

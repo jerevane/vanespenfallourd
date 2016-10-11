@@ -15,7 +15,6 @@ namespace state {
   class WaterElemental : public state::Elemental {
     // Operations
   public:
-    WaterElemental () : Elemental(0, 0) {}
   };
 
 };

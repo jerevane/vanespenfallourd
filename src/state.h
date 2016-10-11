@@ -2,12 +2,12 @@
 #ifndef __STATE__H
 #define __STATE__H
 
-
 #include "state/Equipment.h"
+#include "state/Weapon.h"
+#include "state/Protection.h"
 #include "state/Item.h"
 #include "state/Element.h"
 #include "state/Character.h"
-#include "state/SphereGrid.h"
 #include "state/Ability.h"
 #include "state/MonsterTypeID.h"
 #include "state/Monster.h"

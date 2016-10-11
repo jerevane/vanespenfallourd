@@ -15,7 +15,7 @@ namespace state {
   class Salamander : public state::Monster {
     // Operations
   public:
-    Salamander(int playerLevel, int monsterSeed);
+    Salamander ();
   };
 
 };

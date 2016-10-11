@@ -15,7 +15,6 @@ namespace state {
   class FireElemental : public state::Elemental {
     // Operations
   public:
-    FireElemental () : Elemental(0, 0) {}
   };
 
 };

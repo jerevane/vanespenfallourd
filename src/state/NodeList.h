@@ -26,7 +26,7 @@ namespace state {
     /// Changes CurrentNode
     void NextNode ();
     void PreviousNode ();
-    NodeList(Node CurrentNode);
+    Map ();
   };
 
 };

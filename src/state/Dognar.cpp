@@ -18,7 +18,6 @@ namespace state {
   class Dognar : public state::Boss {
     // Operations
   public:
-    Dognar () : Boss(0, 0) {}
     std::string Overdrive (Element target){}
   };
 

@@ -13,7 +13,6 @@ namespace state {
 
   /// class Jenova - 
   class Jenova : public state::Boss {
-      Jenova(int playerLevel, int monsterSeed) : Boss(playerLevel, monsterSeed) {}
   };
 
 };

@@ -13,7 +13,6 @@ namespace state {
 
   /// class Jenova - 
   class Jenova : public state::Boss {
-      Jenova() : Boss(0, 0) {}
   };
 
 };

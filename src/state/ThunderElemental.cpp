@@ -15,7 +15,6 @@ namespace state {
   class ThunderElemental : public state::Elemental {
     // Operations
   public:
-    ThunderElemental () : Elemental(0, 0) {}
   };
 
 };

@@ -21,7 +21,7 @@ namespace state {
     int PowerToOverdrive;
     // Operations
   public:
-    Boss(int playerLevel, int monsterSeed);
+    Boss ();
     virtual std::string Overdrive (Element target) = 0;
   };
 

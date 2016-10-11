@@ -17,8 +17,13 @@ namespace state {
     // Associations
     // Operations
   public:
-    Monster (int playerLevel, int monsterSeed){}
+      Monster();
+
+      Monster (int playerLevel, int monsterSeed){}
   };
+
+
+    Monster::Monster() {}
 
 };
 

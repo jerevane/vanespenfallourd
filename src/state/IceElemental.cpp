@@ -15,7 +15,6 @@ namespace state {
   class IceElemental : public state::Elemental {
     // Operations
   public:
-    IceElemental () : Elemental(0, 0) {}
   };
 
 };

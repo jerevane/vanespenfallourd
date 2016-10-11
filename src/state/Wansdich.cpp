@@ -13,7 +13,6 @@ namespace state {
 
   /// class Wansdich - 
   class Wansdich : public state::Boss {
-      Wansdich(int playerLevel, int monsterSeed) : Boss(0, 0) {}
   };
 
 };
