@@ -8,21 +8,10 @@ namespace state {
   class AElementAlloc;
 }
 
-#include "AElementAlloc.h"
+#include "ElementAlloc.h"
 
 namespace state {
 
-  /// class ElementAlloc - 
-  template <  class E,   typename ID>
-  class ElementAlloc : public state::AElementAlloc {
-    // Attributes
-  protected:
-    ID id;
-    // Operations
-  public:
-    ElementAlloc (ID id){}
-    Element* newInstance (){}
-  };
 
 };
 

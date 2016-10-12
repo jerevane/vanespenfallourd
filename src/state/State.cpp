@@ -2,12 +2,10 @@
 #ifndef STATE__STATE__C
 #define STATE__STATE__C
 
+#include "State.h"
 
 namespace state {
 
-  /// class State - 
-  class State {
-  };
 
 };
 

@@ -36,6 +36,54 @@ namespace state {
     void TakeDamage (std::string damage, Element target);
     void Heal (int heal, Element target);
     Element ();
+
+      const std::map<std::string, int> &getAbilities() const;
+
+      void setAbilities(const std::map<std::string, int> &abilities);
+
+      int getHP() const;
+
+      void setHP(int HP);
+
+      int getMP() const;
+
+      void setMP(int MP);
+
+      int getMaxHP() const;
+
+      void setMaxHP(int MaxHP);
+
+      int getMaxMP() const;
+
+      void setMaxMP(int MaxMP);
+
+      int getStrength() const;
+
+      void setStrength(int Strength);
+
+      int getAgility() const;
+
+      void setAgility(int Agility);
+
+      int getIntelligence() const;
+
+      void setIntelligence(int Intelligence);
+
+      bool isIsDead() const;
+
+      void setIsDead(bool IsDead);
+
+      float getMagicResist() const;
+
+      void setMagicResist(float MagicResist);
+
+      float getPhysResist() const;
+
+      void setPhysResist(float PhysResist);
+
+      int getLevel() const;
+
+      void setLevel(int Level);
   };
 
 };

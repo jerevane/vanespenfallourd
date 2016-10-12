@@ -7,13 +7,10 @@ namespace state {
   class Boss;
 }
 
-#include "Boss.h"
+#include "Varythrix.h"
 
 namespace state {
 
-  /// class Varythrix - 
-  class Varythrix : public state::Boss {
-  };
 
 };
 

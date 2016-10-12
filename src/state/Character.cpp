@@ -10,9 +10,49 @@ namespace state {
 
 #include "SphereGrid.h"
 #include "Element.h"
+#include "Character.h"
 
 namespace state {
+    
+    const SphereGrid &Character::getSphereGridInstance() const {
+        return SphereGridInstance;
+    }
 
+    void Character::setSphereGridInstance(const SphereGrid &SphereGridInstance) {
+        Character::SphereGridInstance = SphereGridInstance;
+    }
+
+    const Weapon &Character::getWeapon() const {
+        return weapon;
+    }
+
+    void Character::setWeapon(const Weapon &weapon) {
+        Character::weapon = weapon;
+    }
+
+    const Protection &Character::getProtection() const {
+        return protection;
+    }
+
+    void Character::setProtection(const Protection &protection) {
+        Character::protection = protection;
+    }
+
+    int Character::getXPToNextLevel() const {
+        return XPToNextLevel;
+    }
+
+    void Character::setXPToNextLevel(int XPToNextLevel) {
+        Character::XPToNextLevel = XPToNextLevel;
+    }
+
+    int Character::getPowerToOverdrive() const {
+        return PowerToOverdrive;
+    }
+
+    void Character::setPowerToOverdrive(int PowerToOverdrive) {
+        Character::PowerToOverdrive = PowerToOverdrive;
+    }
 };
 
 #endif

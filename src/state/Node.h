@@ -26,6 +26,22 @@ namespace state {
     void StoryEvent ();
     Node (std::string NodeName);
     Node (Node previousNode, std::string NodeName);
+
+      const std::string &getNodeName() const;
+
+      void setNodeName(const std::string &NodeName);
+
+      bool isWasVisited() const;
+
+      void setWasVisited(bool WasVisited);
+
+      Node *getPrevious() const;
+
+      void setPrevious(Node *Previous);
+
+      Node *getNext() const;
+
+      void setNext(Node *Next);
   };
 
 };

@@ -7,13 +7,10 @@ namespace state {
   class Boss;
 }
 
-#include "Boss.h"
+#include "Jenova.h"
 
 namespace state {
 
-  /// class Jenova - 
-  class Jenova : public state::Boss {
-  };
 
 };
 

@@ -7,16 +7,10 @@ namespace state {
   class Monster;
 }
 
-#include "Monster.h"
+#include "Salamander.h"
 
 namespace state {
 
-  /// class Salamander - 
-  class Salamander : public state::Monster {
-    // Operations
-  public:
-    Salamander(int playerLevel, int monsterSeed) : Monster(playerLevel, monsterSeed) {}
-  };
 
 };
 

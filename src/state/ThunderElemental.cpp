@@ -7,15 +7,10 @@ namespace state {
   class Elemental;
 }
 
-#include "Elemental.h"
+#include "ThunderElemental.h"
 
 namespace state {
 
-  /// class ThunderElemental - 
-  class ThunderElemental : public state::Elemental {
-    // Operations
-  public:
-  };
 
 };
 

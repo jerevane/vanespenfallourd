@@ -7,15 +7,10 @@ namespace state {
   class Element;
 }
 
+#include "AElementAlloc.h"
+
 namespace state {
 
-  /// class AElementAlloc - 
-  class AElementAlloc {
-    // Operations
-  public:
-    ~AElementAlloc (){}
-    Element* newInstance (){}
-  };
 
 };
 

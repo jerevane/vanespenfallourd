@@ -7,12 +7,10 @@ namespace state {
   class Element;
 }
 
-#include "Element.h"
-#include "MonsterTypeID.h"
+#include "Monster.h"
+
 
 namespace state {
-
-
 
 
 };

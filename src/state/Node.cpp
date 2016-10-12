@@ -3,6 +3,7 @@
 #define STATE__NODE__C
 
 #include <string>
+#include "Node.h"
 
 namespace state {
   class Node;
@@ -11,25 +12,38 @@ namespace state {
 
 namespace state {
 
-  /// class Node - 
-  class Node {
-    // Associations
-    // Attributes
-  protected:
-    std::string NodeName;
-    bool WasVisited;
-    Node* Previous;
-    Node* Next;
-    // Operations
-  public:
-    void RandomEvent (){}
-    void StoryEvent (){}
-    Node (std::string NodeName){}
-    Node (Node* previousNode, std::string NodeName){}
 
-      Node() {}
-  };
+    const std::string &Node::getNodeName() const {
+      return NodeName;
+    }
 
+    void Node::setNodeName(const std::string &NodeName) {
+      Node::NodeName = NodeName;
+    }
+
+    bool Node::isWasVisited() const {
+      return WasVisited;
+    }
+
+    void Node::setWasVisited(bool WasVisited) {
+      Node::WasVisited = WasVisited;
+    }
+
+    Node *Node::getPrevious() const {
+      return Previous;
+    }
+
+    void Node::setPrevious(Node *Previous) {
+      Node::Previous = Previous;
+    }
+
+    Node *Node::getNext() const {
+      return Next;
+    }
+
+    void Node::setNext(Node *Next) {
+      Node::Next = Next;
+    }
 
 };
 

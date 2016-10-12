@@ -7,15 +7,10 @@ namespace state {
   class Monster;
 }
 
-#include "Monster.h"
+#include "Elemental.h"
 
 namespace state {
 
-  /// class Elemental - 
-  class Elemental : public state::Monster {
-    // Operations
-  public:
-  };
 
 };
 

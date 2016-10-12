@@ -7,7 +7,7 @@ namespace state {
     class Equipment;
 }
 
-#include "Equipment.h"
+#include "Weapon.h"
 
 namespace state {
 

@@ -7,15 +7,9 @@ namespace state {
   class Elemental;
 }
 
-#include "Elemental.h"
+#include "FireElemental.h"
 
 namespace state {
-
-  /// class FireElemental - 
-  class FireElemental : public state::Elemental {
-    // Operations
-  public:
-  };
 
 };
 

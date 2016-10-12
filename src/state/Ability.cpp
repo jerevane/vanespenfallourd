@@ -11,18 +11,9 @@ namespace state {
 
 #include "Character.h"
 #include "Element.h"
+#include "Ability.h"
 
 namespace state {
-
-    /// class Ability -
-    class Ability {
-        // Associations
-        // Operations
-    public:
-        Ability ();
-        void LearnAbility (Character& target, std::string learnedAbility){}
-        std::string Brazier (){}
-    };
 
 };
 

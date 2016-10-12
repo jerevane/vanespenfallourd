@@ -9,18 +9,10 @@ namespace state {
   class Character;
 }
 
-#include "Element.h"
-#include "Character.h"
+#include "Claude.h"
 
 namespace state {
 
-  /// class Claude - 
-  class Claude : public state::Character {
-    // Operations
-  public:
-    Claude (){}
-    std::string Overdrive (Element target){}
-  };
 
 };
 

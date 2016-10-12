@@ -7,7 +7,7 @@ namespace state {
   class Character;
 }
 
-#include "Character.h"
+#include "SphereGrid.h"
 
 namespace state {
 

@@ -9,24 +9,17 @@ namespace state {
   class ElementList;
 }
 
-#include "ElementList.h"
-#include "AElementAlloc.h"
+#include "ElementFactory.h"
 
 namespace state {
 
-  /// class ElementFactory - 
-  class ElementFactory {
-    // Associations
-    // Attributes
-  protected:
-    std::map<char,AElementAlloc*> list;
-    // Operations
-  public:
-    ~ElementFactory (){}
-    Element* const newInstance (char id){}
-    void registerType (AElementAlloc* a, char id){}
-  };
+    const std::map<char, AElementAlloc *> &ElementFactory::getList() const {
+      return list;
+    }
 
+    void ElementFactory::setList(const std::map<char, AElementAlloc *> &list) {
+      ElementFactory::list = list;
+    }
 };
 
 #endif

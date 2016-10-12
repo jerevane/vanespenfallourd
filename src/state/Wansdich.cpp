@@ -7,13 +7,9 @@ namespace state {
   class Boss;
 }
 
-#include "Boss.h"
+#include "Wansdich.h"
 
 namespace state {
-
-  /// class Wansdich - 
-  class Wansdich : public state::Boss {
-  };
 
 };
 

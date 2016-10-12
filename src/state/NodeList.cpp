@@ -9,25 +9,17 @@ namespace state {
   class State;
 }
 
-#include "Node.h"
-#include "NodeFactory.h"
-#include "State.h"
+#include "NodeList.h"
 
 namespace state {
 
-  /// class NodeList - 
-  class NodeList {
-    // Associations
-    // Attributes
-  protected:
-    Node* CurrentNode;
-    // Operations
-  public:
-    /// Changes CurrentNode
-    void NextNode (){}
-    void PreviousNode (){}
-    NodeList(){}
-  };
+    Node *NodeList::getCurrentNode() const {
+      return CurrentNode;
+    }
+
+    void NodeList::setCurrentNode(Node *CurrentNode) {
+      NodeList::CurrentNode = CurrentNode;
+    }
 
 };
 

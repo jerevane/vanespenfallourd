@@ -27,7 +27,12 @@ namespace state {
     void NextNode ();
     void PreviousNode ();
     NodeList ();
+
+      Node *getCurrentNode() const;
+
+      void setCurrentNode(Node *CurrentNode);
   };
+
 
 };
 

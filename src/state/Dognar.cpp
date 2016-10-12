@@ -9,17 +9,10 @@ namespace state {
   class Boss;
 }
 
-#include "Element.h"
-#include "Boss.h"
+#include "Dognar.h"
 
 namespace state {
 
-  /// class Dognar - 
-  class Dognar : public state::Boss {
-    // Operations
-  public:
-    std::string Overdrive (Element target){}
-  };
 
 };
 

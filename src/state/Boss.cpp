@@ -9,20 +9,10 @@ namespace state {
   class Monster;
 }
 
-#include "Element.h"
-#include "Monster.h"
+#include "Boss.h"
 
 namespace state {
 
-  /// class Boss - 
-  class Boss : public state::Monster {
-    // Attributes
-  protected:
-    int PowerToOverdrive;
-    // Operations
-  public:
-    std::string Overdrive (Element target){}
-  };
 
 };
 
