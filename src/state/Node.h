@@ -22,26 +22,18 @@ namespace state {
     Node* Next;
     // Operations
   public:
-    void RandomEvent ();
-    void StoryEvent ();
     Node (std::string NodeName);
     Node (Node previousNode, std::string NodeName);
-
-      const std::string &getNodeName() const;
-
-      void setNodeName(const std::string &NodeName);
-
-      bool isWasVisited() const;
-
-      void setWasVisited(bool WasVisited);
-
-      Node *getPrevious() const;
-
-      void setPrevious(Node *Previous);
-
-      Node *getNext() const;
-
-      void setNext(Node *Next);
+    void RandomEvent ();
+    void StoryEvent ();
+    std::string getNodeName ();
+    void setNodeName (std::string nodename);
+    bool getWasVisited ();
+    void setWasVisited (bool wasvisited);
+    Node* getPreviousNode ();
+    void setPreviousNode (Node* previousnode);
+    Node* getNextNode ();
+    void setNextNode (Node* nextnode);
   };
 
 };

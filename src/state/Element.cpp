@@ -2,8 +2,7 @@
 #ifndef STATE__ELEMENT__C
 #define STATE__ELEMENT__C
 
-#include <string>
-#include <map>
+
 #include "Element.h"
 
 namespace state {
@@ -13,103 +12,6 @@ namespace state {
 
 namespace state {
 
-    // Getter Setter Element
-
-    const std::map<std::string, int> &Element::getAbilities() const {
-      return abilities;
-    }
-
-    void Element::setAbilities(const std::map<std::string, int> &abilities) {
-      Element::abilities = abilities;
-    }
-
-    int Element::getHP() const {
-      return HP;
-    }
-
-    void Element::setHP(int HP) {
-      Element::HP = HP;
-    }
-
-    int Element::getMP() const {
-      return MP;
-    }
-
-    void Element::setMP(int MP) {
-      Element::MP = MP;
-    }
-
-    int Element::getMaxHP() const {
-      return MaxHP;
-    }
-
-    void Element::setMaxHP(int MaxHP) {
-      Element::MaxHP = MaxHP;
-    }
-
-    int Element::getMaxMP() const {
-      return MaxMP;
-    }
-
-    void Element::setMaxMP(int MaxMP) {
-      Element::MaxMP = MaxMP;
-    }
-
-    int Element::getStrength() const {
-      return Strength;
-    }
-
-    void Element::setStrength(int Strength) {
-      Element::Strength = Strength;
-    }
-
-    int Element::getAgility() const {
-      return Agility;
-    }
-
-    void Element::setAgility(int Agility) {
-      Element::Agility = Agility;
-    }
-
-    int Element::getIntelligence() const {
-      return Intelligence;
-    }
-
-    void Element::setIntelligence(int Intelligence) {
-      Element::Intelligence = Intelligence;
-    }
-
-    bool Element::isIsDead() const {
-      return IsDead;
-    }
-
-    void Element::setIsDead(bool IsDead) {
-      Element::IsDead = IsDead;
-    }
-
-    float Element::getMagicResist() const {
-      return MagicResist;
-    }
-
-    void Element::setMagicResist(float MagicResist) {
-      Element::MagicResist = MagicResist;
-    }
-
-    float Element::getPhysResist() const {
-      return PhysResist;
-    }
-
-    void Element::setPhysResist(float PhysResist) {
-      Element::PhysResist = PhysResist;
-    }
-
-    int Element::getLevel() const {
-      return Level;
-    }
-
-    void Element::setLevel(int Level) {
-      Element::Level = Level;
-    }
 
 };
 

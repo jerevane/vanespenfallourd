@@ -2,6 +2,7 @@
 #ifndef RENDER__ANIMATION__C
 #define RENDER__ANIMATION__C
 
+#include "Animation.h"
 
 namespace render {
   class Element;

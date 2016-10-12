@@ -9,14 +9,11 @@ namespace state {
   class Element;
 }
 
-
 namespace state {
 
   /// class Element - 
   class Element {
     // Attributes
-  public:
-    std::map<std::string, int> abilities;
   protected:
     int HP;
     int MP;
@@ -29,61 +26,38 @@ namespace state {
     float MagicResist;
     float PhysResist;
     int Level;
+    std::map<std::string, bool> abilities;
     // Operations
   public:
-    std::string SpellCast (std::string abilityDamage, Element caster, Element target);
-    std::string Attack (Element caster, Element target);
-    void TakeDamage (std::string damage, Element target);
-    void Heal (int heal, Element target);
     Element ();
-
-      const std::map<std::string, int> &getAbilities() const;
-
-      void setAbilities(const std::map<std::string, int> &abilities);
-
-      int getHP() const;
-
-      void setHP(int HP);
-
-      int getMP() const;
-
-      void setMP(int MP);
-
-      int getMaxHP() const;
-
-      void setMaxHP(int MaxHP);
-
-      int getMaxMP() const;
-
-      void setMaxMP(int MaxMP);
-
-      int getStrength() const;
-
-      void setStrength(int Strength);
-
-      int getAgility() const;
-
-      void setAgility(int Agility);
-
-      int getIntelligence() const;
-
-      void setIntelligence(int Intelligence);
-
-      bool isIsDead() const;
-
-      void setIsDead(bool IsDead);
-
-      float getMagicResist() const;
-
-      void setMagicResist(float MagicResist);
-
-      float getPhysResist() const;
-
-      void setPhysResist(float PhysResist);
-
-      int getLevel() const;
-
-      void setLevel(int Level);
+    std::string SpellCast (std::string abilityDamage, Element* caster, Element* target);
+    std::string Attack (Element* caster, Element* target);
+    void TakeDamage (std::string damage, Element* target);
+    void Heal (int heal, Element* target);
+    int getHP ();
+    void setHP (int hp);
+    int getMP ();
+    void setMP (int mp);
+    int getMaxHP ();
+    void setMaxHP (int maxhp);
+    int getMaxMP ();
+    void setMaxMP (int maxmp);
+    int getStrength ();
+    void setStrength (int strength);
+    int getAgility ();
+    void setAgility (int agility);
+    int getIntelligence ();
+    void setIntelligence (int intelligence);
+    bool getIsDead ();
+    void setIsDead (bool isdead);
+    float getMagicResist ();
+    void setMagicResist (float magicresist);
+    float getPhysResist ();
+    void setPhysResist (float physresist);
+    int getLevel ();
+    void setLevel (int level);
+    std::map<std::string,bool> getAbilities ();
+    void setAbilities (std::map<std::string,bool> abilities);
   };
 
 };

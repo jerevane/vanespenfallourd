@@ -6,24 +6,36 @@
 
 namespace render {
   class Surface;
-  class ElementSet;
+  class ElementRenderSet;
+  class Animation;
 }
+
+#include "Animation.h"
+#include "ElementRenderSet.h"
+#include "Surface.h"
 
 namespace render {
 
   /// class Layer - 
   class Layer {
+    // Associations
     // Attributes
   protected:
     std::map<int, Animation*> animations;
     Surface* surface;
-    ElementSet* elementSet;
+    ElementRenderSet* elementRenderSet;
     // Operations
   public:
     Layer ();
     ~Layer ();
-    printText (int x, int y, const char* msg, int w, int h);
-    update (double time);
+    void printText (int x, int y, const char* msg, int w, int h);
+    void update (double time);
+    std::map<int,Animation*> getAnimations ();
+    void setAnimations (std::map<int,Animation*> animations);
+    Surface* getSurface ();
+    void setSurface (Surface* surface);
+    ElementRenderSet* getElementRenderSet ();
+    void setElementRenderSet (ElementRenderSet* elementrenderset);
   };
 
 };

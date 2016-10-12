@@ -31,32 +31,21 @@ namespace state {
     int PowerToOverdrive;
     // Operations
   public:
+    Character ();
     void LevelUp ();
     void GainXP (int xp);
     void UseItem (Item item);
-    Character ();
-
-    virtual std::string Overdrive (Element target) = 0;
-
-      const SphereGrid &getSphereGridInstance() const;
-
-      void setSphereGridInstance(const SphereGrid &SphereGridInstance);
-
-      const Weapon &getWeapon() const;
-
-      void setWeapon(const Weapon &weapon);
-
-      const Protection &getProtection() const;
-
-      void setProtection(const Protection &protection);
-
-      int getXPToNextLevel() const;
-
-      void setXPToNextLevel(int XPToNextLevel);
-
-      int getPowerToOverdrive() const;
-
-      void setPowerToOverdrive(int PowerToOverdrive);
+    virtual std::string Overdrive (Element* target) = 0;
+    SphereGrid getSphereGridInstance ();
+    void setSphereGridInstance (SphereGrid spheregridinstance);
+    Weapon getWeapon ();
+    void setWeapon (Weapon weapon);
+    Protection getProtection ();
+    void setProtection (Protection protection);
+    int getXpToNextLevel ();
+    void setXpToNextLevel (int xptonextlevel);
+    int getPowerToOverdrive ();
+    void setPowerToOverdrive (int powertooverdrive);
   };
 
 };

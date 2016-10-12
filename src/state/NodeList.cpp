@@ -13,13 +13,7 @@ namespace state {
 
 namespace state {
 
-    Node *NodeList::getCurrentNode() const {
-      return CurrentNode;
-    }
 
-    void NodeList::setCurrentNode(Node *CurrentNode) {
-      NodeList::CurrentNode = CurrentNode;
-    }
 
 };
 

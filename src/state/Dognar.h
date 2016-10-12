@@ -9,7 +9,6 @@ namespace state {
   class Boss;
 }
 
-#include "Element.h"
 #include "Boss.h"
 
 namespace state {
@@ -19,7 +18,8 @@ namespace state {
     // Operations
   public:
     Dognar ();
-    std::string Overdrive (Element target);
+    ~Dognar ();
+    std::string Overdrive (Element* target);
   };
 
 };

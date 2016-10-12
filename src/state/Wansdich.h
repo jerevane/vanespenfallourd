@@ -2,17 +2,25 @@
 #ifndef STATE__WANSDICH__H
 #define STATE__WANSDICH__H
 
+#include <string>
 
 namespace state {
+  class Element;
   class Boss;
 }
 
+#include "Element.h"
 #include "Boss.h"
 
 namespace state {
 
   /// class Wansdich - 
   class Wansdich : public state::Boss {
+    // Operations
+  public:
+    Wansdich ();
+    ~Wansdich ();
+    std::string Overdrive (Element target);
   };
 
 };

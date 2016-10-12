@@ -2,8 +2,10 @@
 #ifndef STATE__JENOVA__H
 #define STATE__JENOVA__H
 
+#include <string>
 
 namespace state {
+  class Element;
   class Boss;
 }
 
@@ -13,6 +15,11 @@ namespace state {
 
   /// class Jenova - 
   class Jenova : public state::Boss {
+    // Operations
+  public:
+    Jenova ();
+    ~Jenova ();
+    std::string Overdrive (Element* target);
   };
 
 };

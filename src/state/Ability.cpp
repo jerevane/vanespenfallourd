@@ -9,8 +9,6 @@ namespace state {
     class Element;
 }
 
-#include "Character.h"
-#include "Element.h"
 #include "Ability.h"
 
 namespace state {

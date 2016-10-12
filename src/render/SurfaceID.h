@@ -4,6 +4,12 @@
 
 
 namespace render {
+  class Surface;
+}
+
+#include "Surface.h"
+
+namespace render {
 
   enum SurfaceID {
     Town1_Surface      = 0,

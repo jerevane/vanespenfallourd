@@ -2,20 +2,29 @@
 #ifndef STATE__ELEMENTLIST__H
 #define STATE__ELEMENTLIST__H
 
+#include <vector>
 
 namespace state {
-  class Element;
   class State;
+  class ElementFactory;
+  class Element;
+  class Observable;
 }
 
+#include "Observable.h"
 #include "Element.h"
 #include "State.h"
 
 namespace state {
 
   /// class ElementList - 
-  class ElementList {
+  class ElementList : public state::Observable {
     // Associations
+    // Attributes
+  protected:
+    State* state;
+    ElementFactory* factory;
+    std::vector<Element*> element;
   };
 
 };

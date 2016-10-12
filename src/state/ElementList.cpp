@@ -8,15 +8,10 @@ namespace state {
   class State;
 }
 
-#include "Element.h"
-#include "State.h"
+#include "ElementList.h"
 
 namespace state {
 
-  /// class ElementList - 
-  class ElementList {
-    // Associations
-  };
 
 };
 

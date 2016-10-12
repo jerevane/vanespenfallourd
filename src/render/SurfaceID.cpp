@@ -2,6 +2,7 @@
 #ifndef RENDER__SURFACEID__C
 #define RENDER__SURFACEID__C
 
+#include "SurfaceID.h"
 
 namespace render {
 

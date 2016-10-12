@@ -2,6 +2,7 @@
 #ifndef STATE__MONSTERTYPEID__C
 #define STATE__MONSTERTYPEID__C
 
+#include "MonsterTypeID.h"
 
 namespace state {
 

@@ -2,7 +2,7 @@
 #ifndef RENDER__LAYER__C
 #define RENDER__LAYER__C
 
-#include <map>
+#include "Layer.h"
 
 namespace render {
   class Surface;

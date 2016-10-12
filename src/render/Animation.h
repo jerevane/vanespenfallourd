@@ -4,27 +4,42 @@
 
 
 namespace render {
-  class Element;
+  class ElementRender;
   class Surface;
 }
+
+#include "ElementRender.h"
 
 namespace render {
 
   /// class Animation - 
   class Animation {
+    // Associations
     // Attributes
   protected:
     int nbImage;
     int x;
     /// 	
     int y;
-    Element* element;
+    ElementRender* elementrender;
     float speed;
     double start;
     // Operations
   public:
-    Animation (int x, int y, Element* element);
-    update (double time, Surface* surface);
+    Animation (int x, int y, ElementRender* elementrender);
+    void update (double time, Surface* surface);
+    int getNbImage ();
+    void setNbImage (int nbimage);
+    int getX ();
+    void setX (int x);
+    int getY ();
+    void setY (int y);
+    ElementRender* getElementRender ();
+    void setElementRender (ElementRender* elementrender);
+    float getSpeed ();
+    void setSpeed (float speed);
+    double getStart ();
+    void setStart (double start);
   };
 
 };

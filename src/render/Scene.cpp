@@ -2,7 +2,7 @@
 #ifndef RENDER__SCENE__C
 #define RENDER__SCENE__C
 
-#include <vector>
+#include "Scene.h"
 
 namespace render {
   class Layer;

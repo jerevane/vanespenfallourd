@@ -23,16 +23,13 @@ namespace state {
     Node* CurrentNode;
     // Operations
   public:
+    NodeList ();
     /// Changes CurrentNode
     void NextNode ();
     void PreviousNode ();
-    NodeList ();
-
-      Node *getCurrentNode() const;
-
-      void setCurrentNode(Node *CurrentNode);
+    Node* getCurrentNode ();
+    void setCurrentNode (Node* currentnode);
   };
-
 
 };
 

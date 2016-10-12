@@ -9,7 +9,6 @@ namespace state {
   class Monster;
 }
 
-#include "Element.h"
 #include "Monster.h"
 
 namespace state {
@@ -22,7 +21,9 @@ namespace state {
     // Operations
   public:
     Boss ();
-    virtual std::string Overdrive (Element target) = 0;
+    virtual std::string Overdrive (Element* target) = 0;
+    int getPowerToOverdrive ();
+    void setPowerToOverdrive (int powertooverdrive);
   };
 
 };

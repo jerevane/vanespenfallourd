@@ -18,6 +18,7 @@ namespace state {
     // Operations
   public:
     Monster (int playerLevel, int monsterSeed);
+    ~Monster ();
   };
 
 };

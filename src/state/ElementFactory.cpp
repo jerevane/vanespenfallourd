@@ -2,7 +2,6 @@
 #ifndef STATE__ELEMENTFACTORY__C
 #define STATE__ELEMENTFACTORY__C
 
-#include <map>
 
 namespace state {
   class AElementAlloc;
@@ -13,13 +12,7 @@ namespace state {
 
 namespace state {
 
-    const std::map<char, AElementAlloc *> &ElementFactory::getList() const {
-      return list;
-    }
 
-    void ElementFactory::setList(const std::map<char, AElementAlloc *> &list) {
-      ElementFactory::list = list;
-    }
 };
 
 #endif

@@ -2,6 +2,7 @@
 #ifndef RENDER__SURFACE__C
 #define RENDER__SURFACE__C
 
+#include "Surface.h"
 
 namespace render {
 

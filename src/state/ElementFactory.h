@@ -25,12 +25,7 @@ namespace state {
     ~ElementFactory ();
     Element* const newInstance (char id);
     void registerType (AElementAlloc* a, char id);
-
-      const std::map<char, AElementAlloc *> &getList() const;
-
-      void setList(const std::map<char, AElementAlloc *> &list);
   };
-
 
 };
 

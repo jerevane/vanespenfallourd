@@ -4,13 +4,18 @@
 
 
 namespace render {
+  class Scene;
+}
+
+#include "Scene.h"
+
+namespace render {
 
   enum SceneLayer {
     BackGround_Layer     = 0,
     Character_Layer     = 1,
     Data_Character_Layer     = 2,
-    State_Layer     = 3,
-    Debug_Layer     = 4
+    State_Layer     = 3
   };
 
 };

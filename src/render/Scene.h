@@ -7,29 +7,34 @@
 namespace render {
   class Layer;
   class Surface;
+  class StateLayer;
+  class ElementListLayer;
 }
+
+#include "StateLayer.h"
+#include "ElementListLayer.h"
 
 namespace render {
 
   /// class Scene - 
   class Scene {
+    // Associations
     // Attributes
-  public:
-    std::vector<Layer*> layers;
   protected:
+    std::vector<Layer*> layers;
     int w;
     int h;
     // Operations
   public:
     Scene ();
     ~Scene ();
-    update (double time);
-    registerObservers (state::State* etat);
-    unregisterObservers (state::State* etat);
-    stateChanged (state::StateEvent* event);
+    void update (double time);
+    void registerObservers (state::State* etat);
+    void unregisterObservers (state::State* etat);
+    void stateChanged (state::StateEvent* event);
     int getLayerCount ();
-    setLayer (int id, Layer* layer);
-    setSurface (int id, Surface* surface);
+    void setLayer (int id, Layer* layer);
+    void setSurface (int id, Surface* surface);
   };
 
 };

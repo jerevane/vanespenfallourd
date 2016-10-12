@@ -25,6 +25,8 @@
 #include "state/Youenn.h"
 #include "state/ANodeAlloc.h"
 #include "state/NodeFactory.h"
+#include "state/StateObserver.h"
+#include "state/Observable.h"
 #include "state/State.h"
 #include "state/Node.h"
 #include "state/NodeList.h"
@@ -36,4 +38,6 @@
 #include "state/Wansdich.h"
 #include "state/Jenova.h"
 #include "state/NodeAlloc.h"
+#include "state/StateEventId.h"
+#include "state/StateEvent.h"
 #endif

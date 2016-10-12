@@ -9,7 +9,6 @@ namespace state {
   class Character;
 }
 
-#include "Element.h"
 #include "Character.h"
 
 namespace state {
@@ -19,7 +18,7 @@ namespace state {
     // Operations
   public:
     Youenn ();
-    std::string Overdrive (Element target);
+    std::string Overdrive (Element* target);
   };
 
 };

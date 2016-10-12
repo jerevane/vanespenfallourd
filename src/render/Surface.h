@@ -14,8 +14,10 @@ namespace render {
   public:
     Surface ();
     ~Surface ();
-    loadTexture (int IDsurface);
-    clear ();
+    void loadTexture (int IDsurface);
+    void clear ();
+    int getIDSurface ();
+    void setIDSurface (int idsurface);
   };
 
 };

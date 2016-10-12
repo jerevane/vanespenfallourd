@@ -22,12 +22,7 @@ namespace state {
   public:
     ElementAlloc (ID id);
     Element* newInstance ();
-
-      ID getId() const;
-
-      void setId(ID id);
   };
-
 
 };
 

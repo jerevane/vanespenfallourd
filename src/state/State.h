@@ -4,9 +4,27 @@
 
 
 namespace state {
+  class NodeList;
+  class ElementList;
+  class Observable;
+}
+
+#include "Observable.h"
+
+namespace state {
 
   /// class State - 
-  class State {
+  class State : public state::Observable {
+    // Attributes
+  protected:
+    NodeList* nodelist;
+    ElementList* elementlist;
+    // Operations
+  public:
+    NodeList* getNodeList ();
+    void setNodeList (NodeList* nodelist);
+    ElementList* getElementList ();
+    void setElementList (ElementList* elementlist);
   };
 
 };
