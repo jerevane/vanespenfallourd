@@ -8,6 +8,7 @@ namespace render {
 }
 
 #include "Layer.h"
+#include "../state.h"
 
 namespace render {
 

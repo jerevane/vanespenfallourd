@@ -28,7 +28,7 @@ file(GLOB_RECURSE main_sources src/*.cpp)
 
 
 # Executables
-add_executable(run ${main_sources} src/main.cpp)
+add_executable(run ${main_sources} src/main.cpp src/render/ElementListLayer.cpp src/render/ElementRender.cpp src/render/ElementRenderSet.cpp src/render/StateLayer.cpp)
 
 # SFML
 if(WIN32)
