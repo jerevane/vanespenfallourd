@@ -2,15 +2,12 @@
 #ifndef STATE__PROTECTION__C
 #define STATE__PROTECTION__C
 
-
-namespace state {
-    class Equipment;
-}
-
 #include "Protection.h"
 
 namespace state {
+    Protection::Protection() {
 
+    }
 };
 
 #endif

@@ -2,15 +2,12 @@
 #ifndef STATE__WEAPON__C
 #define STATE__WEAPON__C
 
-
-namespace state {
-    class Equipment;
-}
-
 #include "Weapon.h"
 
 namespace state {
+    Weapon::Weapon() {
 
+    }
 };
 
 #endif

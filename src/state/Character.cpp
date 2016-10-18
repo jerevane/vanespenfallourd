@@ -2,15 +2,92 @@
 #ifndef STATE__CHARACTER__C
 #define STATE__CHARACTER__C
 
-#include <string>
-
-namespace state {
-  class Element;
-}
-
 #include "Character.h"
 
 namespace state {
+
+    Character::Character() {
+        Element();
+        XPToNextLevel = 50;
+        PowerToOverdrive = 5;
+    }
+
+    void Character::LevelUp() {
+        setLevel(getLevel()+1);
+    }
+
+    void Character::GainXP(int xp) {
+        int xp_to_next = getXpToNextLevel();
+        int tab_xp[30];
+        int i;
+        // Tableau d'xp necessaire pour chaque level
+        for(i=0;i<30;i++){
+            tab_xp[i] = 100*i+50;
+        }
+        // Si il y a assez d'xp pour monter au niveau suppérieur
+        if(xp > xp_to_next){
+            LevelUp();
+            xp = xp - xp_to_next;
+            // Si il y a encore assez pour un second niveau
+            if(xp > tab_xp[getLevel()-1]) {
+                xp = xp - tab_xp[getLevel() - 1];
+                LevelUp();
+                setXpToNextLevel(tab_xp[getLevel() - 1] - xp);
+            }
+            else setXpToNextLevel(tab_xp[getLevel()-1]-xp);
+        }
+        else setXpToNextLevel(xp_to_next-xp);
+    }
+
+    void Character::UseItem(Item item) {
+        // Cette fonction implémente un switch case suivant les objets possiblement utilisées
+    }
+
+    SphereGrid Character::getSphereGridInstance() {
+        return SphereGridInstance;
+    }
+
+    void Character::setSphereGridInstance(SphereGrid spheregridinstance) {
+        SphereGridInstance = spheregridinstance;
+    }
+
+    Weapon Character::getWeapon() {
+        return weapon;
+    }
+
+    void Character::setWeapon(Weapon weapon) {
+        this->weapon = weapon;
+    }
+
+    Protection Character::getProtection() {
+        return protection;
+    }
+
+    void Character::setProtection(Protection protection) {
+        this->protection = protection;
+    }
+
+    int Character::getXpToNextLevel() {
+        return XPToNextLevel;
+    }
+
+    void Character::setXpToNextLevel(int xptonextlevel) {
+        XPToNextLevel = xptonextlevel;
+    }
+
+    int Character::getPowerToOverdrive() {
+        return PowerToOverdrive;
+    }
+
+    void Character::setPowerToOverdrive(int powertooverdrive) {
+        PowerToOverdrive = powertooverdrive;
+    }
+
+    void Character::managementOverdrive(std::string overdriveAbility) {
+        int power = getPowerToOverdrive();
+        if(power==0) setAbilities(overdriveAbility);
+        else setPowerToOverdrive(power -1);
+    }
 
 
 };

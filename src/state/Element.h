@@ -27,12 +27,14 @@ namespace state {
     float PhysResist;
     int Level;
     std::map<std::string, bool> abilities;
+    std::string Dot;
     // Operations
   public:
     Element ();
-    std::string SpellCast (std::string abilityDamage, Element* caster, Element* target);
-    std::string Attack (Element* caster, Element* target);
+    void SpellCast (std::string ability, Element* caster, Element* target);
+    void Attack (Element* caster, Element* target);
     void TakeDamage (std::string damage, Element* target);
+    std::string LaunchAbility (std::string ability, Element* caster);
     void Heal (int heal, Element* target);
     int getHP ();
     void setHP (int hp);
@@ -57,7 +59,9 @@ namespace state {
     int getLevel ();
     void setLevel (int level);
     std::map<std::string,bool> getAbilities ();
-    void setAbilities (std::map<std::string,bool> abilities);
+    void setAbilities (std::string ability);
+    std::string getDot ();
+    void setDot (std::string dot);
   };
 
 };

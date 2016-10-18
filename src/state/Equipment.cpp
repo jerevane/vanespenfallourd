@@ -3,14 +3,13 @@
 #define STATE__EQUIPMENT__C
 
 
-namespace state {
-  class Character;
-}
-
 #include "Equipment.h"
 
 namespace state {
 
+    Equipment::Equipment() {
+
+    }
 };
 
 #endif

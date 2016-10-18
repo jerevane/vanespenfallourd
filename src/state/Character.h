@@ -46,6 +46,7 @@ namespace state {
     void setXpToNextLevel (int xptonextlevel);
     int getPowerToOverdrive ();
     void setPowerToOverdrive (int powertooverdrive);
+    void managementOverdrive (std::string overdiveAbility);
   };
 
 };

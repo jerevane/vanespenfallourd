@@ -7,6 +7,201 @@
 
 namespace state {
   class Element;
+
+    Element::Element() {
+        HP = MaxHP = 50;
+        MP = MaxMP = 20;
+        Strength = Agility = Intelligence = 5;
+        MagicResist = PhysResist = 0;
+        Dot = "0_0";
+        IsDead = false;
+        Level = 1;
+    }
+
+    void Element::SpellCast(std::string ability, Element *caster, Element *target) {
+        std::string result;
+        result = LaunchAbility(ability, caster);
+        TakeDamage(result,target);
+    }
+
+    void Element::Attack(Element *caster, Element *target) {
+        std::string result = "P_";
+        int dmg;
+        dmg = caster->getStrength() *2;
+        result = result + std::to_string(dmg) + "_X_-";
+        TakeDamage(result, target);
+    }
+
+    void Element::TakeDamage(std::string damage, Element *target) {
+        std::string delimiter = "_";
+        std::string typedmg = damage.substr(0, damage.find(delimiter));
+        std::string dmg = damage.substr(1, damage.find(delimiter));
+        std::string dot = damage.substr(2, damage.find(delimiter));
+        std::string isHeal = damage.substr(3, damage.find(delimiter));
+        std::string dot_target = target->getDot();
+        int dot_target_dmg = stoi(dot_target.substr(0,dot_target.find(delimiter)));
+        int dot_target_turn = stoi(dot_target.substr(1,dot_target.find(delimiter)));
+        int temp = stoi(dmg);
+        // Si Soin
+        if(isHeal.compare("+")){
+            Heal(temp, target);
+        }
+            // Sinon damage
+        else{
+            // Prise en charge resistance + dot
+            if(typedmg.compare("M") ==0) {
+                temp = temp - (int) (temp * target->getMagicResist());
+            }
+            else {
+                temp = temp - (int) (temp * target->getPhysResist());
+            }
+            temp = target->getHP() - temp - stoi(dot_target.substr(0,dot_target.find(delimiter)));
+            if(temp<=0){
+                // Si mort alors reset dot et set IsDead
+                target->setIsDead(true);
+                target->setHP(0);
+                target->setDot("0_0");
+            }
+            else {
+                // Inflige les degats et prise en charge dot
+                target->setHP(temp);
+                // Si tech inflige dot
+                if (dot.compare("0") != 0) {
+                    target->setDot(dot + "4");
+                }
+                else{
+                    // Si dot enlève un tour au dot
+                    if(dot_target_turn !=0){
+                        dot_target_turn = dot_target_turn -1;
+                        target->setDot(std::to_string(dot_target_dmg)+std::to_string(dot_target_turn));
+                    }
+                    else target->setDot("0_0");
+                }
+            }
+        }
+    }
+
+    void Element::Heal(int heal, Element *target) {
+        int hp_target = target->getHP();
+        if(hp_target+heal>= target->getMaxHP()){
+            target->setHP(target->getMaxHP());
+        }
+        else target->setHP(hp_target+heal);
+    }
+
+    std::string Element::LaunchAbility(std::string ability, Element *caster) {
+        // Suppression de la class Ability et implémenter un switch case dans cette fonction pour chaque tech
+        return "M_50_0_-";
+    }
+
+    int Element::getHP() {
+        return HP;
+    }
+
+    void Element::setHP(int hp) {
+        if(hp <= MaxHP)
+            HP = hp;
+        else HP = MaxHP;
+    }
+
+    int Element::getMP() {
+        return MP;
+    }
+
+    void Element::setMP(int mp) {
+        if(mp <= MaxMP) MP = mp;
+        else MP = MaxMP;
+    }
+
+    int Element::getMaxHP() {
+        return MaxHP;
+    }
+
+    void Element::setMaxHP(int maxhp) {
+        MaxHP = maxhp;
+    }
+
+    int Element::getMaxMP() {
+        return MaxMP;
+    }
+
+    void Element::setMaxMP(int maxmp) {
+        MaxMP = maxmp;
+    }
+
+    int Element::getStrength() {
+        return Strength;
+    }
+
+    void Element::setStrength(int strength) {
+        Strength = strength;
+    }
+
+    int Element::getAgility() {
+        return Agility;
+    }
+
+    void Element::setAgility(int agility) {
+        Agility = agility;
+    }
+
+    int Element::getIntelligence() {
+        return Intelligence;
+    }
+
+    void Element::setIntelligence(int intelligence) {
+        Intelligence = intelligence;
+    }
+
+    bool Element::getIsDead() {
+        return IsDead;
+    }
+
+    void Element::setIsDead(bool isdead) {
+        IsDead = isdead;
+    }
+
+    float Element::getMagicResist() {
+        return MagicResist;
+    }
+
+    void Element::setMagicResist(float magicresist) {
+        MagicResist = magicresist;
+    }
+
+    float Element::getPhysResist() {
+        return PhysResist;
+    }
+
+    void Element::setPhysResist(float physresist) {
+        PhysResist = physresist;
+    }
+
+    int Element::getLevel() {
+        return Level;
+    }
+
+    void Element::setLevel(int level) {
+        Level = level;
+    }
+
+    std::map<std::string, bool> Element::getAbilities() {
+        return abilities;
+    }
+
+    void Element::setAbilities(std::string ability) {
+        abilities[ability]= true;
+    }
+
+    std::string Element::getDot() {
+        return Dot;
+    }
+
+    void Element::setDot(std::string dot) {
+        Dot = dot;
+    }
+
+
 }
 
 

@@ -5,7 +5,6 @@
 #include <string>
 
 namespace state {
-  class Character;
   class Element;
 }
 
@@ -14,13 +13,16 @@ namespace state {
 namespace state {
 
   /// class Ability - 
-  class Ability {
-    // Associations
+  class Ability : public state::Element {
     // Operations
   public:
-    Ability ();
-    void LearnAbility (Character& target, std::string learnedAbility);
-    std::string Brazier ();
+    std::string LaunchAbility (std::string ability, Element* caster);
+    std::string Fire ();
+    std::string Thunder ();
+    std::string H2O ();
+    std::string Blizzard ();
+    std::string Poison ();
+    std::string Heal ();
   };
 
 };
