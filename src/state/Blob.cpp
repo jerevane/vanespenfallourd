@@ -2,15 +2,13 @@
 #ifndef STATE__BLOB__C
 #define STATE__BLOB__C
 
-
-namespace state {
-  class Monster;
-}
-
 #include "Blob.h"
 
 namespace state {
 
+    Blob::Blob(int playerlevel) {
+        Monster(playerlevel, 0);
+    }
 
 };
 

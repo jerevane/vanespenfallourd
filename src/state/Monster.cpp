@@ -2,17 +2,38 @@
 #ifndef STATE__MONSTER__C
 #define STATE__MONSTER__C
 
-
-namespace state {
-  class Element;
-}
-
 #include "Monster.h"
 
 
 namespace state {
 
 
+    Monster::Monster(int playerLevel, int monsterSeed) {
+        //Implementer dans cette fonction switch case pour chaque monstre
+        Element();
+        switch (monsterSeed){
+            case 0:
+                PhysResist = 0.8;
+                break;
+
+            case 1:
+                MaxHP = HP = getMaxHP()+playerLevel*10;
+                Strength = getStrength()+playerLevel;
+                break;
+
+            default:break;
+        }
+
+
+    }
+
+    Monster::~Monster() {
+
+    }
+
+    Monster::Monster() {
+        Element();
+    }
 };
 
 #endif

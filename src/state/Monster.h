@@ -19,6 +19,7 @@ namespace state {
   public:
     Monster (int playerLevel, int monsterSeed);
     ~Monster ();
+    Monster ();
   };
 
 };

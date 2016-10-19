@@ -2,18 +2,19 @@
 #ifndef STATE__CLAUDE__C
 #define STATE__CLAUDE__C
 
-#include <string>
-
-namespace state {
-  class Element;
-  class Character;
-}
-
 #include "Claude.h"
 
 namespace state {
 
+    Claude::Claude() {
+        Element();
+        XPToNextLevel = 50;
+        PowerToOverdrive = 5;
+    }
 
+    std::string Claude::Overdrive() {
+        return "P_200_100_-";
+    }
 };
 
 #endif

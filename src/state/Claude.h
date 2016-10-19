@@ -5,7 +5,6 @@
 #include <string>
 
 namespace state {
-  class Element;
   class Character;
 }
 
@@ -18,7 +17,7 @@ namespace state {
     // Operations
   public:
     Claude ();
-    std::string Overdrive (Element* target);
+    std::string Overdrive ();
   };
 
 };
