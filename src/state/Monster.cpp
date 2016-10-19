@@ -7,6 +7,9 @@
 
 namespace state {
 
+    Monster::Monster() {
+        Element();
+    }
 
     Monster::Monster(int playerLevel, int monsterSeed) {
         //Implementer dans cette fonction switch case pour chaque monstre
@@ -31,9 +34,6 @@ namespace state {
 
     }
 
-    Monster::Monster() {
-        Element();
-    }
 };
 
 #endif

@@ -12,8 +12,20 @@ namespace state {
         PowerToOverdrive = 5;
     }
 
+    Character::Character(int characterID) {
+        Element();
+        XPToNextLevel = 50;
+        PowerToOverdrive = 5;
+        if(characterID==0){
+            SphereGridInstance = SphereGrid(0);
+        }
+        else SphereGridInstance = SphereGrid(1);
+    }
+
     void Character::LevelUp() {
         setLevel(getLevel()+1);
+        SphereGridInstance.setPosition(SphereGridInstance.getPosition()+1);
+        SphereGridInstance.LevelUp(SphereGridInstance.getId(), SphereGridInstance.getPosition());
     }
 
     void Character::GainXP(int xp) {
@@ -39,32 +51,12 @@ namespace state {
         else setXpToNextLevel(xp_to_next-xp);
     }
 
-    void Character::UseItem(Item item) {
-        // Cette fonction implémente un switch case suivant les objets possiblement utilisées
-    }
-
     SphereGrid Character::getSphereGridInstance() {
         return SphereGridInstance;
     }
 
     void Character::setSphereGridInstance(SphereGrid spheregridinstance) {
         SphereGridInstance = spheregridinstance;
-    }
-
-    Weapon Character::getWeapon() {
-        return weapon;
-    }
-
-    void Character::setWeapon(Weapon weapon) {
-        this->weapon = weapon;
-    }
-
-    Protection Character::getProtection() {
-        return protection;
-    }
-
-    void Character::setProtection(Protection protection) {
-        this->protection = protection;
     }
 
     int Character::getXpToNextLevel() {
@@ -85,9 +77,10 @@ namespace state {
 
     void Character::managementOverdrive(std::string overdriveAbility) {
         int power = getPowerToOverdrive();
-        if(power==0) setAbilities(overdriveAbility);
+        if(power==0) abilities.setAbility(overdriveAbility);
         else setPowerToOverdrive(power -1);
     }
+
 
 
 };

@@ -2,17 +2,26 @@
 #ifndef STATE__ABILITY__C
 #define STATE__ABILITY__C
 
-#include <string>
-
-namespace state {
-    class Character;
-    class Element;
-}
-
 #include "Ability.h"
 
 namespace state {
 
+    std::string Ability::LaunchAbility(std::string ability, Element *caster) {
+        // Implémenter un switch case dans cette fonction pour chaque tech
+        return "M_50_0_-";
+    }
+
+    std::map<std::string, bool> Ability::getAbility() {
+        return abilities;
+    }
+
+    void Ability::setAbility(std::string ability) {
+        abilities[ability]=true;
+    }
+
+    void Ability::unsetAbility(std::string ability) {
+        abilities[ability]=false;
+    }
 };
 
 #endif

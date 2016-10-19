@@ -12,7 +12,10 @@ namespace state {
     WATER_ELEMENTAL     = 3,
     ICE_ELEMENTAL     = 4,
     THUNDER_ELEMENTAL     = 5,
-    DOGNAR     = 6
+    DOGNAR     = 6,
+    Wansdich     = 7,
+    Varythrix     = 8,
+    Jenova     = 9
   };
 
 };

@@ -6,6 +6,24 @@
 
 namespace state {
 
+    Item::Item() {
+
+    }
+
+    Item::Item(int id ) {
+        Id = id;
+    }
+
+    std::string Item::UseItem() {
+        // Cette fonction implémente un switch case suivant les objets possiblement utilisées
+        return "M_50_0_+";
+    }
+
+    Item::~Item() {
+
+    }
+
+
 };
 
 #endif

@@ -3,10 +3,27 @@
 #define STATE__SPHEREGRID__H
 
 
+#include "SphereGridTypeID.h"
+
 namespace state {
 
   /// class SphereGrid - 
   class SphereGrid {
+    // Associations
+    // Attributes
+  protected:
+    int Id;
+    int Position;
+    // Operations
+  public:
+    SphereGrid ();
+    SphereGrid (int id);
+    ~SphereGrid ();
+    int getId ();
+    void setId (int id);
+    int getPosition ();
+    void setPosition (int position);
+    void LevelUp (int id, int position);
   };
 
 };

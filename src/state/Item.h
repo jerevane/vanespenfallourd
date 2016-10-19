@@ -2,11 +2,24 @@
 #ifndef STATE__ITEM__H
 #define STATE__ITEM__H
 
+#include <string>
+
+#include "ItemTypeID.h"
 
 namespace state {
 
   /// class Item - 
   class Item {
+    // Associations
+    // Attributes
+  public:
+    int Id;
+    // Operations
+  public:
+    Item ();
+    Item (int Id);
+    std::string UseItem ();
+    ~Item ();
   };
 
 };

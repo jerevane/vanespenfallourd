@@ -8,17 +8,17 @@ namespace state {
   class State;
   class ElementFactory;
   class Element;
-  class Observable;
+  class Observer;
 }
 
-#include "Observable.h"
+#include "Observer.h"
 #include "Element.h"
 #include "State.h"
 
 namespace state {
 
   /// class ElementList - 
-  class ElementList : public state::Observable {
+  class ElementList : public state::Observer {
     // Associations
     // Attributes
   protected:

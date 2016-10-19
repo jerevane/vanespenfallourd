@@ -3,20 +3,25 @@
 #define STATE__ABILITY__H
 
 #include <string>
+#include <map>
 
 namespace state {
   class Element;
 }
 
-#include "Element.h"
-
 namespace state {
 
   /// class Ability - 
-  class Ability : public state::Element {
+  class Ability {
+    // Attributes
+  public:
+    std::map<std::string,bool> abilities;
     // Operations
   public:
     std::string LaunchAbility (std::string ability, Element* caster);
+    std::map<std::string,bool> getAbility ();
+    void setAbility (std::string ability);
+    void unsetAbility (std::string ability);
     std::string Fire ();
     std::string Thunder ();
     std::string H2O ();

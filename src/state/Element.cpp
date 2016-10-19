@@ -20,7 +20,7 @@ namespace state {
 
     void Element::SpellCast(std::string ability, Element *caster, Element *target) {
         std::string result;
-        result = LaunchAbility(ability, caster);
+        result = caster->abilities.LaunchAbility(ability, caster);
         TakeDamage(result,target);
     }
 
@@ -87,11 +87,6 @@ namespace state {
             target->setHP(target->getMaxHP());
         }
         else target->setHP(hp_target+heal);
-    }
-
-    std::string Element::LaunchAbility(std::string ability, Element *caster) {
-        // Suppression de la class Ability et implémenter un switch case dans cette fonction pour chaque tech
-        return "M_50_0_-";
     }
 
     int Element::getHP() {
@@ -185,14 +180,6 @@ namespace state {
         Level = level;
     }
 
-    std::map<std::string, bool> Element::getAbilities() {
-        return abilities;
-    }
-
-    void Element::setAbilities(std::string ability) {
-        abilities[ability]= true;
-    }
-
     std::string Element::getDot() {
         return Dot;
     }
@@ -201,13 +188,6 @@ namespace state {
         Dot = dot;
     }
 
-
 }
-
-
-namespace state {
-
-
-};
 
 #endif

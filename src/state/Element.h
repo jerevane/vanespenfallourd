@@ -3,11 +3,13 @@
 #define STATE__ELEMENT__H
 
 #include <string>
-#include <map>
 
 namespace state {
+  class Ability;
   class Element;
 }
+
+#include "Ability.h"
 
 namespace state {
 
@@ -26,7 +28,7 @@ namespace state {
     float MagicResist;
     float PhysResist;
     int Level;
-    std::map<std::string, bool> abilities;
+    Ability abilities;
     std::string Dot;
     // Operations
   public:
@@ -34,7 +36,6 @@ namespace state {
     void SpellCast (std::string ability, Element* caster, Element* target);
     void Attack (Element* caster, Element* target);
     void TakeDamage (std::string damage, Element* target);
-    std::string LaunchAbility (std::string ability, Element* caster);
     void Heal (int heal, Element* target);
     int getHP ();
     void setHP (int hp);
@@ -58,8 +59,6 @@ namespace state {
     void setPhysResist (float physresist);
     int getLevel ();
     void setLevel (int level);
-    std::map<std::string,bool> getAbilities ();
-    void setAbilities (std::string ability);
     std::string getDot ();
     void setDot (std::string dot);
   };

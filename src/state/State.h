@@ -4,27 +4,34 @@
 
 
 namespace state {
-  class NodeList;
+  class Node;
   class ElementList;
-  class Observable;
+  class Observer;
 }
 
-#include "Observable.h"
+#include "Observer.h"
+#include "StateTypeID.h"
+#include "Node.h"
 
 namespace state {
 
   /// class State - 
-  class State : public state::Observable {
+  class State : public state::Observer {
+    // Associations
     // Attributes
   protected:
-    NodeList* nodelist;
+    Node* node;
     ElementList* elementlist;
+    int Id;
     // Operations
   public:
-    NodeList* getNodeList ();
-    void setNodeList (NodeList* nodelist);
+    Node* getNode ();
+    void setNode (Node* node);
     ElementList* getElementList ();
     void setElementList (ElementList* elementlist);
+    int getId ();
+    void setId (int id);
+    void run (int id);
   };
 
 };

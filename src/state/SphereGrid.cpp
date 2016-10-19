@@ -2,15 +2,46 @@
 #ifndef STATE__SPHEREGRID__C
 #define STATE__SPHEREGRID__C
 
-
-namespace state {
-  class Character;
-}
-
 #include "SphereGrid.h"
 
 namespace state {
 
-};
+    SphereGrid::SphereGrid() {
+
+    }
+
+    SphereGrid::SphereGrid(int id) {
+        Id = id;
+        Position =0;
+    }
+
+    SphereGrid::~SphereGrid() {
+
+    }
+
+    int SphereGrid::getId() {
+        return Id;
+    }
+
+    void SphereGrid::setId(int id) {
+        Id = id;
+    }
+
+    int SphereGrid::getPosition() {
+        return Position;
+    }
+
+    void SphereGrid::setPosition(int position) {
+        Position = position;
+    }
+
+    void SphereGrid::LevelUp(int id, int position) {
+        // Implementer un switch case pour chaque position de chaque SphereGrid
+    }
+
+
+}
+
+
 
 #endif
