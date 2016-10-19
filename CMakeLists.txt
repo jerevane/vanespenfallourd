@@ -20,8 +20,8 @@ ENDIF(CMAKE_COMPILER_IS_GNUCC)
 
 # Generate headers
 set(DIA2CODE "${PROJECT_SOURCE_DIR}/dia2code/bin/dia2code")
-exec_program(${DIA2CODE} ARGS -d ../src -t cpp ../src/state.dia)
-exec_program(${DIA2CODE} ARGS -d ../src -t cpp -cl Animation,ElementListLayer,ElementRender,ElementRenderSet,Layer,Scene,SceneLayer,StateLayer,Surface,SurfaceID ../src/render.dia)
+exec_program(${DIA2CODE} ARGS -d ../src -t cpp -cl Ability,SphereGrid,Weapon,Protection,Item,Character,Element,Equipment,Claude,Youenn,Monster,MonsterTypeID,Salamander,Elemental,Blob,ThunderElemental,FireElemental,IceElemental,WaterElemental,ElementFactory,AElementAlloc,Boss,Dognar,Wansdich,State,Observable,StateObserver,ElementList,NodeList,NodeFactory,ANodeAlloc,ElementAlloc,NodeAlloc,Node,StateEvent,StateEventId,Varythrix,Jenova ../src/state.dia)
+exec_program(${DIA2CODE} ARGS -d ../src -t cpp -cl Application,Screen,Intro,Fight,Worldmap,Inn ../src/instance.dia)
 
 # Sources
 file(GLOB_RECURSE main_sources src/*.cpp)

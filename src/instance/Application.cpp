@@ -17,12 +17,13 @@ namespace instance {
 }
 
 #include "Application.h"
+#include <iostream>
 
 namespace instance {
 
 
 
-    Application::Application() :    RenderWindow(sf::VideoMode(WINDOW_X, WINDOW_Y), "Final Fantastique",sf::Style::Titlebar | sf::Style::Close),
+    Application::Application() :    RenderWindow(sf::VideoMode(1600, 900), "Final Fantastique",sf::Style::Titlebar | sf::Style::Close),
                                     intro(&font,this),
                                     fight(&font,this),
                                     worldmap(&font,this),

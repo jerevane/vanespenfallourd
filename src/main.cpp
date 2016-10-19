@@ -13,10 +13,12 @@ void testSFML() {
 #include "state.hpp"
 
 using namespace std;
+using namespace instance;
 
 int main(int argc,char* argv[]) 
 {
-
+    Application* FinalFantastique = new Application();
+    FinalFantastique->play();
     cout << "It works !" << endl;
     cout << "Mon binome est trop fort <3" << endl;
     return 0;

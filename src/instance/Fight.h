@@ -2,6 +2,8 @@
 #ifndef INSTANCE__FIGHT__H
 #define INSTANCE__FIGHT__H
 
+#include "SFML/Graphics.hpp"
+#include "SFML/Audio.hpp"
 
 namespace sf {
   class RenderWindow;

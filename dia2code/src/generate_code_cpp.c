@@ -445,7 +445,9 @@ gen_decl (declaration *d)
                 continue;
             }
             name = d->u.this_class->key->name;
+	    
             print ("#include \"%s/%s.%s\"\n", nsname, name, file_ext);
+	    
             d = d->next;
         }
 #else
@@ -649,6 +651,7 @@ struct stdlib_includes {
    int array;   
    int thread;
    int mutex;
+   int sfml;
 };
 
 void print_include_stdlib(struct stdlib_includes* si,char* name) {
@@ -664,6 +667,11 @@ void print_include_stdlib(struct stdlib_includes* si,char* name) {
        ||  strstr(name,"uint64_t"))) {
            print ("#include <stdint.h>\n");
            si->stdint = 1;
+       }
+       if (!si->sfml && strstr(name,"sf::")) {
+           print ("#include \"SFML/Graphics.hpp\"\n");
+	   print ("#include \"SFML/Audio.hpp\"\n");
+           si->sfml = 1;
        }
        if (!si->stdlib && strstr(name,"size_t")) {
            print ("#include <stdlib.h>\n");
@@ -839,8 +847,10 @@ gen_namespace(batch *b,declaration *nsd)
                     }
                 }
                 else {
-                    print ("#include \"%s/%s.%s\"\n", incfile->package, incfile->name, file_ext);
-                }
+		    if (strcmp(incfile->package, "sf") != 0) {
+                        print ("#include \"%s/%s.%s\"\n", incfile->package, incfile->name, file_ext);
+                    }
+		}
             }
             else {
                 print ("#include \"%s.%s\"\n", incfile->name, file_ext);

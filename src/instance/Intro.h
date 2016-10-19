@@ -2,8 +2,11 @@
 #ifndef INSTANCE__INTRO__H
 #define INSTANCE__INTRO__H
 
+#include "SFML/Graphics.hpp"
+#include "SFML/Audio.hpp"
 
 namespace sf {
+  class Text;
   class RenderWindow;
 };
 namespace instance {
@@ -16,16 +19,17 @@ namespace instance {
 
   /// class Intro - Landing screen menu
   class Intro : public instance::Screen {
+    // Attributes
+  protected:
+    sf::Text pressanykey;
+    sf::Text title;
     // Operations
   public:
-      Intro (sf::Font* font, sf::RenderWindow* window);
-      virtual ~Intro ();
-      void render ();
-      void init ();
-      void eventHandler ();
-  protected:
-      sf::Text title;
-      sf::Text pressanykey;
+    Intro (sf::Font* font, sf::RenderWindow* window);
+    virtual ~Intro ();
+    void render ();
+    void init ();
+    void eventHandler ();
   };
 
 };

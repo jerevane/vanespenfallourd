@@ -2,6 +2,8 @@
 #ifndef INSTANCE__INN__H
 #define INSTANCE__INN__H
 
+#include "SFML/Graphics.hpp"
+#include "SFML/Audio.hpp"
 
 namespace sf {
   class RenderWindow;

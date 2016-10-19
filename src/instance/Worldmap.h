@@ -2,19 +2,21 @@
 #ifndef INSTANCE__WORLDMAP__H
 #define INSTANCE__WORLDMAP__H
 
+#include "SFML/Graphics.hpp"
+#include "SFML/Audio.hpp"
 
 namespace sf {
   class RenderWindow;
 };
-namespace state {
-  class Node;
-};
 namespace instance {
   class Screen;
+};
+namespace state {
+  class Node;
 }
 
-#include "state/Node.h"
 #include "Screen.h"
+#include "state/Node.h"
 
 namespace instance {
 

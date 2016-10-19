@@ -24,14 +24,14 @@ namespace instance {
         title.setFont(*font);
         title.setCharacterSize(80);
         title.setString("Final fantastique");
-        title.setPosition({ WINDOW_X/2, WINDOW_Y/4 });
+        title.setPosition({ 800, 225 });
         title.setOrigin(title.getLocalBounds().width/2, title.getLocalBounds().height/2);
 
 
         pressanykey.setFont(*font);
         pressanykey.setCharacterSize(20);
         pressanykey.setString("Press any key");
-        pressanykey.setPosition({ WINDOW_X/2, 3*WINDOW_Y/4 });
+        pressanykey.setPosition({ 800, 675 });
         pressanykey.setOrigin(pressanykey.getLocalBounds().width/2, pressanykey.getLocalBounds().height/2);
     }
 
