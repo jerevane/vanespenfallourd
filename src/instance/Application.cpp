@@ -23,7 +23,7 @@ namespace instance {
 
 
 
-    Application::Application() :    RenderWindow(sf::VideoMode(1600, 900), "Final Fantastique",sf::Style::Titlebar | sf::Style::Close),
+    Application::Application() :    RenderWindow(sf::VideoMode(800, 600), "Final Fantastique",sf::Style::Titlebar | sf::Style::Close | sf::Style::Resize),
                                     intro(&font,this),
                                     fight(&font,this),
                                     worldmap(&font,this),

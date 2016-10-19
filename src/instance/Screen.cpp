@@ -30,7 +30,7 @@ namespace instance {
         spriteScreen.setTexture(background);
 
         spriteScreen.setOrigin((int)background.getSize().x/2, (int)background.getSize().y/2);
-        spriteScreen.move(800, 450);
+        spriteScreen.move(400, 300);
     }
 
     void Screen::run()
