@@ -22,6 +22,8 @@ namespace state {
     void Ability::unsetAbility(std::string ability) {
         abilities[ability]=false;
     }
+
+
 };
 
 #endif
