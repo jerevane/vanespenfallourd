@@ -10,13 +10,9 @@ namespace sf {
 };
 namespace instance {
   class Screen;
-};
-namespace state {
-  class Node;
 }
 
 #include "Screen.h"
-#include "state/Node.h"
 
 namespace instance {
 

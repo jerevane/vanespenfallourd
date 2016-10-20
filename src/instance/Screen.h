@@ -9,8 +9,14 @@ namespace sf {
   class RenderWindow;
   class Sprite;
   class Texture;
+};
+namespace state {
+  class Element;
+  class State;
 }
 
+#include "state/Element.h"
+#include "state/State.h"
 
 namespace instance {
 

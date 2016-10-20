@@ -10,6 +10,7 @@ namespace sf {
 
 #include <iostream>
 #include "Screen.h"
+#include "../state/Element.h"
 
 namespace instance {
 
@@ -47,6 +48,7 @@ namespace instance {
                         std::cout << "System closed" << std::endl;
                         break;
                     }
+
                     eventHandler();
                 }
 

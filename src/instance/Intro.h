@@ -7,6 +7,12 @@
 
 namespace sf {
   class Text;
+  class Texture;
+};
+namespace state {
+  class Element;
+};
+namespace sf {
   class RenderWindow;
 };
 namespace instance {
@@ -23,6 +29,13 @@ namespace instance {
   protected:
     sf::Text pressanykey;
     sf::Text title;
+    /// Test texture for the test entity
+    sf::Texture* testtext;
+    /// test entity
+    state::Element* test;
+    bool spawnEntity;
+    bool isEntityCreated;
+    sf::Text stateExample;
     // Operations
   public:
     Intro (sf::Font* font, sf::RenderWindow* window);

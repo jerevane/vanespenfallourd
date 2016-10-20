@@ -10,7 +10,9 @@ namespace instance {
   class Screen;
 }
 
+#include <iostream>
 #include "Intro.h"
+#include "../state/Element.h"
 
 namespace instance {
 
@@ -30,20 +32,56 @@ namespace instance {
 
         pressanykey.setFont(*font);
         pressanykey.setCharacterSize(20);
-        pressanykey.setString("Press any key");
+        pressanykey.setString("Press P to spawn Fire Elemental");
         pressanykey.setPosition({ 400, 450 });
         pressanykey.setOrigin(pressanykey.getLocalBounds().width/2, pressanykey.getLocalBounds().height/2);
+
+
+        testtext = new sf::Texture;
+        test = new state::Element(testtext, 400, 300 );
     }
 
     void Intro::render() {
+        //Draw all elements of the Intro screen here, the last drawn element will appear on top
+
         window->draw(spriteScreen);
         window->draw(title);
         window->draw(pressanykey);
+        if (!isEntityCreated) {
+            if (!testtext->loadFromFile("../res/sprite_0.png")) {
+                std::cout << "La texture n'a pas pu charger !" << std::endl;
+            } else {
+                std::cout << "Texture chargée !" << std::endl;
+            }
+            stateExample.setFont(*font);
+            stateExample.setCharacterSize(20);
+            stateExample.setString("Entity HP :" + std::to_string(test->getHP()));
+            stateExample.setPosition({ 400, 300 });
+
+            test->setTexture(*testtext);
+            isEntityCreated = true;
+
+        }
+        if (spawnEntity) {
+
+            std::cout << "J'affiche l'entité" << std::endl;
+            window->draw(*test);
+            window->draw(stateExample);
+        }
     }
 
     Intro::~Intro() {}
 
     void Intro::eventHandler() {
+
+        if(event.type == sf::Event::KeyPressed)
+        {
+            if(event.key.code == sf::Keyboard::P)
+            {
+                spawnEntity = !spawnEntity;
+
+            }
+        }
 
     }
 
