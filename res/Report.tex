@@ -9,7 +9,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[cyr]{aeguill}
 \usepackage[francais]{babel}
-\graphicspath{ {images/} }
+\graphicspath{ {/images/} }
 \hypersetup{
     colorlinks,
     citecolor=black,
@@ -57,7 +57,7 @@ Voici les packages de notre projet :
 
 \begin{figure}
 \caption{Diagramme des packages}
-\includegraphics[width=0.80\textwidth]{lol.jpg}
+\includegraphics[width=0.80\textwidth]{Diagramme_packages.jpg}
 \end{figure}
 
 \chapter{Description et conception des \'{e}tats}
@@ -80,7 +80,7 @@ Les \'{e}l\'{e}ments non vivants sont au nombre de trois et ne portent aucune ca
 
 \textbf{Item.} Ce sont les objets utilisables par les h\'{e}ros. Ils peuvent changer leurs attributs (augmentation d'une caract\'{e}ristique ect...).
 
-\textbf{Equipment.} Ce sont les armes et protections que peuvent poss\`{e}der les h\'{e}ros. Leurs effets seront pris en compte dans la m\'{e}thode Takedomage() présent dans la class Element.   
+\textbf{SphereGrid.} C'est une table des compétences. Chaque niveaux suppl\'{e}mentaires permettra au character d'apprendre de nouvelles comp\'{e}tences et d'augmenter ces caract\'{e}ristiques. Il sera possible au joueur de choisir la personnalisation de son personnage car plusieurs table sont possible au cours du jeu.   
 
 \textbf{Node.} Ce sont les points clefs du jeu. Les h\'{e}ros pourront se d\'{e}placer sur une carte de noeud en noeud. Chaque noeud comporte des \'{e}v\`{e}nements al\'{e}atoires et non al\'{e}atoires. Les \'{e}l\'{e}ments al\'{e}atoires sont des combats contre des monstres al\'{e}atoires tandis que les non al\'{e}atoires sont des \'{e}l\`{e}ments de l'histoire. Cela peut \^{e}tre un simple dialogue ou un combat contre un boss. Il est possible uniquement de ce d\'{e}placer au noeud suivant ou au noeud pr\'{e}c\'{e}dent. Si ce noeud a d\'{e}j\`{a} \'{e}t\'{e} visit\'{e}, l'\'{e}v\`{e}nement non al\'{e}atoire n'aura plus lieu.
 
@@ -102,34 +102,52 @@ Les situations possibles dans lequelles se trouve le joueur sont au nombre de qu
 
 Dans cette section, nous expliciterons le diagrammes des classes pour les \'{e}tats pr\'{e}sent\'{e} en fin de chapitre. 
 
-\textbf{Classes Element.} Cette classe et ses classes filles contiennent tout les \'{e}l\'{e}ments vivants du jeu. Elle est intras\`{e}quement li\'{e}e aux classes Capacities, Equipment et Spherier qui viennent compl\`{e}ter la classe Character. 
+\textbf{Classes Element.} Cette classe et ses classes filles contiennent tout les \'{e}l\'{e}ments vivants du jeu. On distingue deux classes filles : Character et Monster. La classe Character possède des dépendances avec des classes comme SphereGrid et Item qui représentent l'\'{e}volution des personnages ainsi que les objets dont ils pourront faire l'usage. 
 
 \textbf{Fabrique d'\'{e}l\'{e}ments.} Cette classe a pour but de rendre plus facile la construction d'\'{e}l\'{e}ments vivants, notamment des monstres provenant d'un \'{e}v\`{e}nement al\'{e}atoire (consid\'{e}r\'{e} comme non boss).
 
 \textbf{Liste d'\'{e}l\'{e}ments.} Elle va contenir toute les informations sur l'ensemble des \'{e}l\'{e}ments pr\'{e}sent dans le jeu. 
 
-\textbf{Classes Node.} Cette classe permet de faire le lien entre l'apparition d'\'{e}v\`{e}nements et les \'{e}l\'{e}ments. C'est une liste chain\'{e}e dont le d\'{e}placement est bidirectionnel.
+\textbf{Classes Node.} Cette classe permet de faire le lien entre l'apparition d'\'{e}v\`{e}nements et les \'{e}l\'{e}ments. C'est une liste chain\'{e}e dont le d\'{e}placement est bidirectionnel. 
 
-\textbf{Fabrique de noeuds.} Nous reprenons le m\^{e}me sch\'{e}ma que la classe Element et les classes li\'{e}es \`{a} celle-ci. Ainsi la fabrique de noeuds permettra une mise en place plus facile des points clefs du jeu.
+\textbf{Classe State.} Cette classe contiendra toutes les informations li\'{e}es au noeud o\`{u} se trouve le joueur et aux \'{e}l\'{e}ments vivants / non vivants encore pr\'{e}sent.
 
-\textbf{Liste de noeuds.} Elle va contenir toute les informations sur l'ensemble des noeuds pr\'{e}sent dans le jeu. 
+\textbf{Observer.} Cette classe permettra de relever les changements d'\'{e}tats du jeu et de le transmettre aux autres packages.
 
-\textbf{Classe State.} Cette contiendra toutes les informations li\'{e}es aux noeuds et aux \'{e}l\'{e}ments vivants / non vivants.
+
+\chapter{Rendu : Strat\'{e}gie et Conception}
+\section{Strat\'{e}gie de rendu d'un état}
+Notre jeu \'{e}tant à temps discret, le rendu d'un \'{e}tat sera assez simple. Le tout étant de distinguer entre un changement d'\'{e}tat qui n'entra\^{i}ne pas un lourd besoin de rendu (ie. pendant un combat) et un changement d'\'{e}tat demandant un changement de sprites (ie. changer de ville).
+
+Pour se faire, nous introduisons le concept d'instance, offrant une classe par contexte (ie. Combat, Carte du monde, Menu d'intro...) g\'{e}rant la logique d'initialisation ainsi que le rendu de ce contexte utilisant les m\'{e}thodes de SFML.
+\section{Conception logiciel}
+Le diagramme des classes du package instance se trouve en fin de cette partie. Nous expliquerons le r\^{o}le de chaque classe dans ce diagramme.
+
+\textbf{Screen.} C'est la classe m\`{e}re du package. Elle fait le lien entre la classe Application, ses classes filles et le package state afin de lier l'\'{e}tat et le rendu.
+
+\textbf{Application.} Cette classe fait le lien entre la biblioth\`{e}que SFML et les diff\'{e}rents \'{e}tats du jeu. En effet \`{a} chaque nouvel \'{e}tat nous aurons \`{a} instancier de nouveaux sprites.
+
+\textbf{Info, Worldmap, Fight, Inn.} Les classes filles de Screen nous permette de mieux personaliser les rendus et sprites n\'{e}cessaires \`{a} chaque \'{e}tat.
 
 \begin{sidewaysfigure}[ht]
-\caption{Diagramme des classes du package State}
-\includegraphics[width=1.25\textwidth]{lol.jpg}
+\caption{Diagramme des classes du package instance}
+\includegraphics[width=1.25\textwidth]{instance.jpeg}
+\end{sidewaysfigure}
+ 
+\section{Exemple de rendu}
+
+Ecran d'acceuil du jeu avec la possibilité d'afficher une entité avec ses points de vie.
+
+\begin{sidewaysfigure}[ht]
+\caption{Ecran d'acceuil du jeu Final Fantastique}
+\includegraphics[width=1.25\textwidth]{Ecran_acceuil_ff.png}
 \end{sidewaysfigure}
 
+\begin{sidewaysfigure}[ht]
+\caption{Ecran d'acceuil avec l'elementaire de feu}
+\includegraphics[width=1.25\textwidth]{Ecran_acceuil_fire_elemental.png}
+\end{sidewaysfigure}
 
-\chapter{Rendu : Stratégie et Conception}
-\section{Stratégie de rendu d'un état}
-Notre jeu étant à temps discret, le rendu d'un état sera assez simple. Le tout étant de distinguer entre un changement d'état qui n'entraîne pas un lourd besoin de rendu (ie. pendant un combat) et un changement d'état demandant un changement de sprites (ie. changer de ville).
-
-Pour se faire, nous introduisons le concept d'instance, offrant une classe par contexte (ie. Combat, Carte du monde, Menu d'intro...) gérant la logique d'initialisation ainsi que le rendu de ce contexte utilisant les méthodes de SFML.
-\section{Conception logiciel}
-
-\section{Conception logiciel : extension pour les animations} 
 
 
 \end{document}
