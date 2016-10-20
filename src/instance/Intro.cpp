@@ -49,7 +49,10 @@ namespace instance {
         window->draw(pressanykey);
         if (!isEntityCreated) {
             if (!testtext->loadFromFile("../res/sprite_0.png")) {
-                std::cout << "La texture n'a pas pu charger !" << std::endl;
+                std::cout << "La texture n'a pas pu charger ! "
+                        "Assurez-vous que vous utilisez un IDE, "
+                        "make run depuis la command line ne trouve "
+                        "pas les ressources." << std::endl;
             } else {
                 std::cout << "Texture chargée !" << std::endl;
             }
