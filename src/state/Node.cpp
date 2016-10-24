@@ -7,6 +7,71 @@
 
 namespace state {
   class Node;
+
+    Node::Node(int id, int px, int py) {
+        Id = id;
+        WasVisited = false;
+        this->px = px;
+        this->py = py;
+        texture->loadFromFile("../res/red_circle.png");
+    }
+
+    Node::Node(Node* previousNode, int id, int px, int py) {
+        Id = id;
+        WasVisited = false;
+        Previous = previousNode;
+        this->px = px;
+        this->py = py;
+    }
+
+    void Node::RandomEvent() {
+
+    }
+
+    void Node::StoryEvent() {
+        //Switch case avec l'Id du noeud
+    }
+
+    int Node::getId() {
+        return Id;
+    }
+
+    void Node::setId(int id) {
+        Id = id;
+    }
+
+    bool Node::getWasVisited() {
+        return WasVisited;
+    }
+
+    void Node::setWasVisited(bool wasvisited) {
+        WasVisited = wasvisited;
+        if(wasvisited) texture->loadFromFile("../res/green_circle.png");
+    }
+
+    Node *Node::getPreviousNode() {
+        return Previous;
+    }
+
+    void Node::setPreviousNode(Node *previousnode) {
+        Previous = previousnode;
+    }
+
+    Node *Node::getNextNode() {
+        return Next;
+    }
+
+    void Node::setNextNode(Node *nextnode) {
+        Next = nextnode;
+    }
+
+    int Node::getPositionX() {
+        return px;
+    }
+
+    int Node::getPositionY() {
+        return py;
+    }
 }
 
 

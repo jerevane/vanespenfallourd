@@ -2,35 +2,70 @@
 #ifndef INSTANCE__WORLDMAP__C
 #define INSTANCE__WORLDMAP__C
 
-
-namespace sf {
-  class RenderWindow;
-};
-namespace state {
-  class Node;
-};
-namespace instance {
-  class Screen;
-}
-
 #include "Worldmap.h"
+#include "../state.hpp";
 
 namespace instance {
 
     Worldmap::Worldmap(sf::Font* f, sf::RenderWindow* w) : Screen(f,w) {
         background.loadFromFile("../res/mapbackground.png");
         setBackground();
-    }
-
-    void Worldmap::init() {
-       //Init node logic
-    }
-
-    void Worldmap::render() {
-        window->draw(spriteScreen);
+        this->state = state;
     }
 
     Worldmap::~Worldmap() {}
+
+    void Worldmap::init() {
+       //Init node logic
+        state::Node* Midgare = new state::Node(0, 150, 450);
+        state::Node* Nibelheim = new state::Node(Midgare, 1, 250, 350);
+        Midgare->setNextNode(Nibelheim);
+        state::Node* Besaid = new state::Node(Nibelheim, 2, 200, 300);
+        Nibelheim->setNextNode(Besaid);
+        state::Node* Gagazet= new state::Node(Besaid, 3, 100, 150);
+        Besaid->setNextNode(Gagazet);
+        state::Node* Winhill = new state::Node(Gagazet, 4, 300, 200);
+        Gagazet->setNextNode(Winhill);
+        state::Node* Terra = new state::Node(Winhill, 5, 550, 280);
+        Winhill->setNextNode(Terra);
+        state::Node* Kilika = new state::Node(Terra, 6, 650, 350);
+        Terra->setNextNode(Kilika);
+        state::Node* Lindblum = new state::Node(Kilika, 7, 750, 325);
+        Kilika->setNextNode(Lindblum);
+        state::Node* Zanarkand = new state::Node(Lindblum, 8, 700, 200);
+        Lindblum->setNextNode(Zanarkand);
+        state::Node* BITE = new state::Node(Zanarkand, 9, 350, 50);
+        Zanarkand->setNextNode(BITE);
+
+        tabNode[0]= Midgare;
+        tabNode[1]= Nibelheim;
+        tabNode[2]= Besaid;
+        tabNode[3]= Gagazet;
+        tabNode[4]= Winhill;
+        tabNode[5]= Terra;
+        tabNode[6]= Kilika;
+        tabNode[7]= Lindblum;
+        tabNode[8]= Zanarkand;
+        tabNode[9]= BITE;
+    }
+
+    void Worldmap::render() {
+        int i;
+
+        window->draw(spriteScreen);
+
+        tmap.setFont(*font);
+        tmap.setCharacterSize(80);
+        tmap.setString("World Map");
+        tmap.setPosition({ 400, 150 });
+        tmap.setOrigin(tmap.getLocalBounds().width/2, tmap.getLocalBounds().height/2);
+
+        for(i=0;i<10;i++){
+            tabNode[i]->setPosition({tabNode[i]->getPositionX(), tabNode[i]->getPositionY()});
+            window->draw(*tabNode[i]);
+        }
+
+    }
 
     void Worldmap::eventHandler() {
 

@@ -2,38 +2,48 @@
 #ifndef STATE__NODE__H
 #define STATE__NODE__H
 
-#include <string>
+#include "SFML/Graphics.hpp"
+#include "SFML/Audio.hpp"
 
 namespace state {
   class Node;
+};
+namespace sf {
+  class Texture;
+  class Sprite;
 }
 
 
 namespace state {
 
   /// class Node - 
-  class Node {
+  class Node : public sf::Sprite {
     // Associations
     // Attributes
   protected:
-    std::string NodeName;
+    int Id;
     bool WasVisited;
     Node* Previous;
     Node* Next;
+    int px;
+    int py;
+    sf::Texture* texture;
     // Operations
   public:
-    Node (std::string NodeName);
-    Node (Node previousNode, std::string NodeName);
+    Node (int id, int px, int py);
+    Node (Node* previousNode, int id, int px, int py);
     void RandomEvent ();
     void StoryEvent ();
-    std::string getNodeName ();
-    void setNodeName (std::string nodename);
+    int getId ();
+    void setId (int id);
     bool getWasVisited ();
     void setWasVisited (bool wasvisited);
     Node* getPreviousNode ();
     void setPreviousNode (Node* previousnode);
     Node* getNextNode ();
     void setNextNode (Node* nextnode);
+     int getPositionX();
+     int getPositionY();
   };
 
 };

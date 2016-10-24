@@ -19,6 +19,11 @@ namespace instance {
   /// class Worldmap - Worldmap logic and rendering
   class Worldmap : public instance::Screen {
     // Operations
+  protected:
+      state::State* state;
+      sf::Text tmap;
+  public:
+      std::vector<state::Node*> tabNode;
   public:
     Worldmap (sf::Font* font, sf::RenderWindow* window);
     virtual ~Worldmap ();

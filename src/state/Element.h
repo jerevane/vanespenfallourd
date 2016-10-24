@@ -43,6 +43,7 @@ namespace state {
     sf::Texture texture;
     float px;
     float py;
+    bool IsCharacter;
     // Operations
   public:
     Element ();
@@ -75,6 +76,8 @@ namespace state {
     void setLevel (int level);
     std::string getDot ();
     void setDot (std::string dot);
+    bool getIsCharacter ();
+    void setIsCharacter (bool ischaracter);
   };
 
 };
