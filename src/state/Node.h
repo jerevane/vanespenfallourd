@@ -42,8 +42,8 @@ namespace state {
     void setPreviousNode (Node* previousnode);
     Node* getNextNode ();
     void setNextNode (Node* nextnode);
-     int getPositionX();
-     int getPositionY();
+    int getPositionX ();
+    int getPositionY ();
   };
 
 };

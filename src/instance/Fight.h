@@ -2,6 +2,7 @@
 #ifndef INSTANCE__FIGHT__H
 #define INSTANCE__FIGHT__H
 
+#include <map>
 #include "SFML/Graphics.hpp"
 #include "SFML/Audio.hpp"
 
@@ -10,14 +11,21 @@ namespace sf {
 };
 namespace instance {
   class Screen;
+  class YouennUI;
+  class ClaudeUI;
 }
 
 #include "Screen.h"
+#include "YouennUI.h"
+#include "ClaudeUI.h"
 
 namespace instance {
 
   /// class Fight - Handles fights rendering and logic
   class Fight : public instance::Screen {
+    // Attributes
+  protected:
+    std::map<int, int> turnOrderMap;
     // Operations
   public:
     Fight (sf::Font* font, sf::RenderWindow* window);

@@ -45,6 +45,17 @@ namespace instance {
     void Application::play() {
         //What happens when the game is launched
         intro.run();
+        worldmap.init();
+        if (worldmap.run() == "fight")
+        {
+
+        } else if (worldmap.run() == "inn")
+        {
+
+        } else if (worldmap.run() == "intro")
+        {
+
+        }
 
     }
 

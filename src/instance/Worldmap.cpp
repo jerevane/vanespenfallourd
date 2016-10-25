@@ -3,7 +3,7 @@
 #define INSTANCE__WORLDMAP__C
 
 #include "Worldmap.h"
-#include "../state.hpp";
+#include "../state.hpp"
 
 namespace instance {
 
@@ -37,16 +37,16 @@ namespace instance {
         state::Node* BITE = new state::Node(Zanarkand, 9, 350, 50);
         Zanarkand->setNextNode(BITE);
 
-        tabNode[0]= Midgare;
-        tabNode[1]= Nibelheim;
-        tabNode[2]= Besaid;
-        tabNode[3]= Gagazet;
-        tabNode[4]= Winhill;
-        tabNode[5]= Terra;
-        tabNode[6]= Kilika;
-        tabNode[7]= Lindblum;
-        tabNode[8]= Zanarkand;
-        tabNode[9]= BITE;
+        tabNode.push_back(Midgare);
+        tabNode.push_back(Nibelheim);
+        tabNode.push_back(Besaid);
+        tabNode.push_back(Gagazet);
+        tabNode.push_back(Winhill);
+        tabNode.push_back(Terra);
+        tabNode.push_back(Kilika);
+        tabNode.push_back(Lindblum);
+        tabNode.push_back(Zanarkand);
+        tabNode.push_back(BITE);
     }
 
     void Worldmap::render() {
@@ -64,6 +64,8 @@ namespace instance {
             tabNode[i]->setPosition({tabNode[i]->getPositionX(), tabNode[i]->getPositionY()});
             window->draw(*tabNode[i]);
         }
+
+        window->draw(tmap);
 
     }
 

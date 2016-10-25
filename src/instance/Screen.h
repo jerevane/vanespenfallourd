@@ -4,11 +4,12 @@
 
 #include "SFML/Graphics.hpp"
 #include "SFML/Audio.hpp"
+#include <string>
 
 namespace sf {
+  class Texture;
   class RenderWindow;
   class Sprite;
-  class Texture;
 };
 namespace state {
   class Element;
@@ -23,14 +24,14 @@ namespace instance {
   /// class Screen - Wrapper for all screen logic and display
   class Screen {
     // Attributes
-  public:
-    sf::RenderWindow* window;
-    sf::Sprite spriteScreen;
   protected:
     sf::Texture background;
     sf::Font* font;
+    sf::RenderWindow* window;
     bool needScreenChange;
     sf::Event event;
+    sf::Sprite spriteScreen;
+    std::string nextScreen;
     // Operations
   public:
     Screen (sf::Font* font, sf::RenderWindow* rwindow);
@@ -39,7 +40,8 @@ namespace instance {
     virtual void render () = 0;
     void setBackground ();
     virtual void eventHandler () = 0;
-    void run ();
+    std::string run ();
+    void setNextScreen (std::string nScreen);
   };
 
 };

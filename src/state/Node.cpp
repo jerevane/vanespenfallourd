@@ -13,6 +13,7 @@ namespace state {
         WasVisited = false;
         this->px = px;
         this->py = py;
+        texture = new sf::Texture;
         texture->loadFromFile("../res/red_circle.png");
     }
 

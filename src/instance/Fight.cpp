@@ -11,26 +11,77 @@ namespace instance {
 }
 
 #include "Fight.h"
+#include <map>
+#include "../state/ElementList.h"
+#include "../state/Element.h"
 
-namespace instance {
+namespace instance
+{
 
-    Fight::Fight(sf::Font* f, sf::RenderWindow* w) : Screen(f,w) {
+    Fight::Fight(sf::Font* f, sf::RenderWindow* w) : Screen(f,w)
+    {
         background.loadFromFile("../res/fightbackground.jpg");
         setBackground();
     }
 
-    void Fight::init() {
-        //Init node logic
+    void Fight::init()
+    {
+        state::ElementList* eList = new state::ElementList;
+
+        for (auto i = 0; i <= eList->element.size();i++)
+        {
+            //Sort elements by agility to determine turn order.
+            turnOrderMap.insert(std::pair<int, int>(eList->element.at(i)->getAgility(),i));
+
+            if (eList->element.at(i)->getIsCharacter())
+            {
+                if (!eList->element.at(i)->getIsDead())
+                {
+                    //No use yet, just in case
+                } else
+                {
+                    //If character is dead, bring back to life with 1HP
+                    eList->element.at(i)->setIsDead(false);
+                    eList->element.at(i)->setHP(1);
+                }
+            }
+        }
     }
 
-    void Fight::render() {
+    void Fight::render()
+    {
         window->draw(spriteScreen);
     }
 
     Fight::~Fight() {}
 
-    void Fight::eventHandler() {
+    void Fight::eventHandler()
+    {
+        if(event.type == sf::Event::KeyPressed)
+        {
+            if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+            {
 
+            }
+            if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+            {
+
+            }
+            if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+            {
+
+            }
+            if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+            {
+
+            }
+            if(sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
+            {
+
+            }
+
+
+        }
     }
 
 };
