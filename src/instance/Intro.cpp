@@ -32,7 +32,7 @@ namespace instance {
 
         pressanykey.setFont(*font);
         pressanykey.setCharacterSize(20);
-        pressanykey.setString("Press P to spawn Fire Elemental");
+        pressanykey.setString("Press any key");
         pressanykey.setPosition({ 400, 450 });
         pressanykey.setOrigin(pressanykey.getLocalBounds().width/2, pressanykey.getLocalBounds().height/2);
 
@@ -47,30 +47,7 @@ namespace instance {
         window->draw(spriteScreen);
         window->draw(title);
         window->draw(pressanykey);
-        if (!isEntityCreated) {
-            if (!testtext->loadFromFile("../res/sprite_0.png")) {
-                std::cout << "La texture n'a pas pu charger ! "
-                        "Assurez-vous que vous utilisez un IDE, "
-                        "make run depuis la command line ne trouve "
-                        "pas les ressources." << std::endl;
-            } else {
-                std::cout << "Texture chargée !" << std::endl;
-            }
-            stateExample.setFont(*font);
-            stateExample.setCharacterSize(20);
-            stateExample.setString("Entity HP :" + std::to_string(test->getHP()));
-            stateExample.setPosition({ 400, 300 });
 
-            test->setTexture(*testtext);
-            isEntityCreated = true;
-
-        }
-        if (spawnEntity) {
-
-            std::cout << "J'affiche l'entité" << std::endl;
-            window->draw(*test);
-            window->draw(stateExample);
-        }
     }
 
     Intro::~Intro() {}
@@ -79,11 +56,10 @@ namespace instance {
 
         if(event.type == sf::Event::KeyPressed)
         {
-            if(event.key.code == sf::Keyboard::P)
-            {
-                spawnEntity = !spawnEntity;
 
-            }
+            needScreenChange = true;
+
+
         }
 
     }

@@ -10,12 +10,14 @@ namespace state {
         Element();
         XPToNextLevel = 50;
         PowerToOverdrive = 5;
+        IsCharacter = true;
     }
 
     Character::Character(int characterID) {
         Element();
         XPToNextLevel = 50;
         PowerToOverdrive = 5;
+        IsCharacter = true;
         if(characterID==0){
             SphereGridInstance = SphereGrid(0);
         }

@@ -5,9 +5,9 @@
 #include <vector>
 
 namespace state {
+  class Element;
   class State;
   class ElementFactory;
-  class Element;
   class Observer;
 }
 
@@ -21,10 +21,11 @@ namespace state {
   class ElementList : public state::Observer {
     // Associations
     // Attributes
+  public:
+    std::vector<Element*> element;
   protected:
     State* state;
     ElementFactory* factory;
-    std::vector<Element*> element;
   };
 
 };

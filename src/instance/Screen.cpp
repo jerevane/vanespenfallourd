@@ -34,15 +34,16 @@ namespace instance {
         spriteScreen.move(400, 300);
     }
 
-    void Screen::run()
+    std::string Screen::run()
     {
-        if(window->isOpen()){
-            while(!needScreenChange) {
-
-
+        if(window->isOpen())
+        {
+            while(!needScreenChange)
+            {
                 while (window->pollEvent(event))
                 {
-                    if (event.type == sf::Event::Closed || sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+                    if (event.type == sf::Event::Closed || sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+                    {
                         needScreenChange = true;
                         window->close();
                         std::cout << "System closed" << std::endl;
@@ -56,6 +57,7 @@ namespace instance {
                 render();
                 window->display();
             }
+            return nextScreen;
         }
 
     }

@@ -2,9 +2,16 @@
 #ifndef INSTANCE__WORLDMAP__H
 #define INSTANCE__WORLDMAP__H
 
+#include <vector>
 #include "SFML/Graphics.hpp"
 #include "SFML/Audio.hpp"
 
+namespace sf {
+  class Text;
+};
+namespace state {
+  class State;
+};
 namespace sf {
   class RenderWindow;
 };
@@ -18,6 +25,12 @@ namespace instance {
 
   /// class Worldmap - Worldmap logic and rendering
   class Worldmap : public instance::Screen {
+    // Attributes
+  public:
+    std::vector<state::Node*> tabNode;
+  protected:
+    sf::Text tmap;
+    state::State* state;
     // Operations
   public:
     Worldmap (sf::Font* font, sf::RenderWindow* window);
