@@ -14,7 +14,7 @@ namespace render {
 
 namespace render {
 
-    FightRenderer::FightRenderer(sf::Font *font, sf::RenderWindow *window) : Renderer(font, window)
+    FightRenderer::FightRenderer(sf::RenderWindow *window) : Renderer(window)
     {
         background.loadFromFile("../res/fightbackground.jpg");
         setBackground();
@@ -34,6 +34,10 @@ namespace render {
 
         spriteScreen.setOrigin((int)background.getSize().x/2, (int)background.getSize().y/2);
         spriteScreen.move(400, 300);
+    }
+
+    void FightRenderer::initRender() {
+
     }
 
 };

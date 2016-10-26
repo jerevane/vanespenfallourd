@@ -10,7 +10,7 @@ namespace sf {
 namespace render {
   class Renderer;
 
-    IntroRenderer::IntroRenderer(sf::Font *font, sf::RenderWindow *rwindow,) {
+    IntroRenderer::IntroRenderer(sf::RenderWindow *rwindow) : Renderer(rwindow) {
         background.loadFromFile("../res/introbackground.png");
         setBackground();
     }
@@ -36,14 +36,16 @@ namespace render {
 
     void IntroRenderer::initRender() {
 
-        title.setFont(*font);
+        font.loadFromFile("../res/Square.ttf");
+
+        title.setFont(font);
         title.setCharacterSize(80);
         title.setString("Final fantastique");
         title.setPosition({ 400, 150 });
         title.setOrigin(title.getLocalBounds().width/2, title.getLocalBounds().height/2);
 
 
-        pressAnyKey.setFont(*font);
+        pressAnyKey.setFont(font);
         pressAnyKey.setCharacterSize(20);
         pressAnyKey.setString("Press any key");
         pressAnyKey.setPosition({ 400, 450 });

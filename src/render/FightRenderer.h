@@ -9,19 +9,24 @@ namespace render {
   class Renderer;
   class YouennUI;
   class ClaudeUI;
+};
+namespace instance {
+  class Fight;
 }
 
 #include "Renderer.h"
 #include "YouennUI.h"
 #include "ClaudeUI.h"
+#include "instance/Fight.h"
 
 namespace render {
 
   /// class FightRenderer - 
   class FightRenderer : public render::Renderer {
+    // Associations
     // Operations
   public:
-    FightRenderer (sf::Font* font, sf::RenderWindow* window);
+    FightRenderer (sf::RenderWindow* window);
     virtual ~FightRenderer ();
     void render ();
     void setBackground ();

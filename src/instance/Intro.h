@@ -8,6 +8,9 @@
 namespace sf {
   class RenderWindow;
 };
+namespace render {
+  class Renderer;
+};
 namespace instance {
   class Screen;
 }
@@ -20,7 +23,7 @@ namespace instance {
   class Intro : public instance::Screen {
     // Operations
   public:
-    Intro (sf::RenderWindow* window);
+    Intro (sf::RenderWindow* window, render::Renderer* renderer);
     virtual ~Intro ();
     void init ();
     void eventHandler ();

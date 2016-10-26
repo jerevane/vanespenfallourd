@@ -3,20 +3,10 @@
 #define STATE__ELEMENT__H
 
 #include <string>
-#include "SFML/Graphics.hpp"
-#include "SFML/Audio.hpp"
 
 namespace state {
   class Ability;
-};
-namespace sf {
-  class Texture;
-};
-namespace state {
   class Element;
-};
-namespace sf {
-  class Sprite;
 }
 
 #include "Ability.h"
@@ -24,7 +14,7 @@ namespace sf {
 namespace state {
 
   /// class Element - 
-  class Element : public sf::Sprite {
+  class Element {
     // Attributes
   protected:
     int HP;
@@ -40,14 +30,11 @@ namespace state {
     int Level;
     Ability abilities;
     std::string Dot;
-    sf::Texture texture;
-    float px;
-    float py;
+    std::string name;
     bool IsCharacter;
     // Operations
   public:
     Element ();
-    Element (sf::Texture* texture, float posx, float posy);
     void SpellCast (std::string ability, Element* caster, Element* target);
     void Attack (Element* caster, Element* target);
     void TakeDamage (std::string damage, Element* target);

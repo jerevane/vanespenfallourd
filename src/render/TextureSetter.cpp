@@ -4,6 +4,7 @@
 
 #include "TextureSetter.h"
 #include <map>
+#include <iostream>
 
 namespace sf {
   class Texture;
@@ -31,6 +32,8 @@ namespace render {
         for(auto i : nodeTextureMap)
         {
             i.second->loadFromFile("../res/red_circle.png");
+
+            std::cout << "prout" << std::endl;
         }
 
         elementTextureMap.insert(std::pair<std::string, sf::Texture*>("0_Claude_0_0", new sf::Texture));
@@ -42,7 +45,8 @@ namespace render {
 
     }
 
-    sf::Texture TextureSetter::getTexture(state::Element elem) {
+    sf::Texture TextureSetter::getTexture(state::ElementList* eList) {
+
         return sf::Texture();
     }
 };

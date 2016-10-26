@@ -18,16 +18,20 @@ namespace instance {
 
 #include "Application.h"
 #include <iostream>
+#include <render/IntroRenderer.h>
+#include <render/WorldmapRenderer.h>
+#include <render/FightRenderer.h>
+#include <render/InnRenderer.h>
 
 namespace instance {
 
 
 
     Application::Application() :    RenderWindow(sf::VideoMode(800, 600), "Final Fantastique",sf::Style::Titlebar | sf::Style::Close | sf::Style::Resize),
-                                    intro(&font,this),
-                                    fight(&font,this),
-                                    worldmap(&font,this),
-                                    inn(&font,this){
+                                    intro(this, new render::IntroRenderer(this)),
+                                    fight(this, new render::FightRenderer(this)),
+                                    worldmap(this, new render::WorldmapRenderer(this)),
+                                    inn(this, new render::InnRenderer(this)){
 
       std::cout << "Starting game" << std::endl;
 
@@ -37,15 +41,15 @@ namespace instance {
       std::cout << "SFML window created" << std::endl;
 
       font.loadFromFile("../res/Square.ttf");
-
+      intro.renderer->initRender();
       intro.init();
 
     }
 
-    void Application::play() {
+    void Application::play(state::State* state) {
         //What happens when the game is launched
         intro.run();
-        worldmap.init();
+        worldmap.init(state);
         if (worldmap.run() == "fight")
         {
 

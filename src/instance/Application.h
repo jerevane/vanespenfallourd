@@ -11,11 +11,11 @@ namespace instance {
   class Fight;
   class Inn;
 };
-namespace sf {
-  class RenderWindow;
-};
 namespace state {
   class State;
+};
+namespace sf {
+  class RenderWindow;
 };
 namespace instance {
   class Screen;
@@ -41,7 +41,7 @@ namespace instance {
     Inn inn;
     // Operations
   public:
-    void play ();
+    void play (state::State* state);
     ~Application ();
     Application ();
   };

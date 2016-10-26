@@ -2,23 +2,35 @@
 #ifndef INSTANCE__WORLDMAP__C
 #define INSTANCE__WORLDMAP__C
 
+#include <render/WorldmapRenderer.h>
 #include "Worldmap.h"
 #include "../state.hpp"
 
 namespace instance {
 
-    Worldmap::Worldmap(sf::RenderWindow* w) : Screen(w) {
+    Worldmap::Worldmap(sf::RenderWindow* w, render::Renderer* rd) : Screen(w, rd) {
     }
 
     Worldmap::~Worldmap() {}
 
     void Worldmap::init(state::State* state) {
         this->state = state;
+
+        renderer->initRender();
+
     }
 
 
     void Worldmap::eventHandler() {
 
+    }
+
+    void Worldmap::setState(state::State *state) {
+        this->state = state;
+    }
+
+    void Worldmap::init() {
+        //unused, refer to init(state)
     }
 };
 

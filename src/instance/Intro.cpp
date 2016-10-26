@@ -16,17 +16,13 @@ namespace instance {
 
 namespace instance {
 
-    Intro::Intro( sf::RenderWindow* w) : Screen(w) {
+    Intro::Intro(sf::RenderWindow* w, render::Renderer* rd) : Screen(w, rd) {
     }
 
     void Intro::init() {
 
     }
 
-    void Intro::render() {
-
-
-    }
 
     Intro::~Intro() {}
 

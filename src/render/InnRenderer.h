@@ -7,17 +7,22 @@
 
 namespace render {
   class Renderer;
+};
+namespace instance {
+  class Inn;
 }
 
 #include "Renderer.h"
+#include "instance/Inn.h"
 
 namespace render {
 
   /// class InnRenderer - 
   class InnRenderer : public render::Renderer {
+    // Associations
     // Operations
   public:
-    InnRenderer (sf::Font* font, sf::RenderWindow* rwindow);
+    InnRenderer (sf::RenderWindow* rwindow);
     ~InnRenderer ();
     void render ();
     void setBackground ();

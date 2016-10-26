@@ -13,6 +13,18 @@ namespace state {
 };
 namespace render {
   class TextureSetter;
+
+    Renderer::Renderer(sf::RenderWindow* rwindow) {
+        window = rwindow;
+    }
+
+    Renderer::~Renderer() {
+
+    }
+
+    void Renderer::setFont(sf::Font font) {
+        this->font = font;
+    }
 }
 
 #include "TextureSetter.h"

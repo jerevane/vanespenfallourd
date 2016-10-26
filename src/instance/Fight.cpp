@@ -18,7 +18,7 @@ namespace instance {
 namespace instance
 {
 
-    Fight::Fight(sf::RenderWindow* w) : Screen(w) { }
+    Fight::Fight(sf::RenderWindow* w, render::Renderer* rd) : Screen(w, rd) { }
 
     void Fight::init()
     {

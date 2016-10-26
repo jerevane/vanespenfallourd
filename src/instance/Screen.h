@@ -6,6 +6,9 @@
 #include "SFML/Audio.hpp"
 #include <string>
 
+namespace render {
+  class Renderer;
+};
 namespace sf {
   class RenderWindow;
 };
@@ -16,12 +19,15 @@ namespace state {
 
 #include "state/Element.h"
 #include "state/State.h"
+#include "render/Renderer.h"
 
 namespace instance {
 
   /// class Screen - Wrapper for all screen logic and display
   class Screen {
     // Attributes
+  public:
+    render::Renderer* renderer;
   protected:
     sf::RenderWindow* window;
     bool needScreenChange;
@@ -29,7 +35,7 @@ namespace instance {
     std::string nextScreen;
     // Operations
   public:
-    Screen (sf::RenderWindow* rwindow);
+    Screen (sf::RenderWindow* rwindow, render::Renderer* renderer);
     virtual ~Screen ();
     virtual void init () = 0;
     virtual void eventHandler () = 0;

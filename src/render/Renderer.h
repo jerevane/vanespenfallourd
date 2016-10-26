@@ -27,18 +27,19 @@ namespace render {
     // Attributes
   protected:
     sf::Texture background;
-    sf::Font* font;
+    sf::Font font;
     sf::RenderWindow* window;
     sf::Sprite spriteScreen;
     state::State* state;
-    TextureSetter texturesetter;
+    TextureSetter* texturesetter;
     // Operations
   public:
-    Renderer (sf::Font* font, sf::RenderWindow* rwindow);
+    Renderer (sf::RenderWindow* rwindow);
     virtual ~Renderer ();
     virtual void render () = 0;
     virtual void setBackground () = 0;
     virtual void initRender () = 0;
+    void setFont (sf::Font font);
   };
 
 };

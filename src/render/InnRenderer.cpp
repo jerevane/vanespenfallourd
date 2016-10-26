@@ -15,7 +15,7 @@ namespace render {
 
 
 
-    InnRenderer::InnRenderer(sf::Font *font, sf::RenderWindow *rwindow) : Renderer(font, rwindow) {
+    InnRenderer::InnRenderer(sf::RenderWindow *rwindow) : Renderer(rwindow) {
         background.loadFromFile("../res/innbackground.jpg");
         setBackground();
     }
@@ -33,6 +33,10 @@ namespace render {
 
         spriteScreen.setOrigin((int)background.getSize().x/2, (int)background.getSize().y/2);
         spriteScreen.move(400, 300);
+    }
+
+    void InnRenderer::initRender() {
+
     }
 };
 

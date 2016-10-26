@@ -9,6 +9,9 @@
 namespace sf {
   class RenderWindow;
 };
+namespace render {
+  class Renderer;
+};
 namespace instance {
   class Screen;
 }
@@ -24,7 +27,7 @@ namespace instance {
     std::map<int, int> turnOrderMap;
     // Operations
   public:
-    Fight (sf::RenderWindow* window);
+    Fight (sf::RenderWindow* window, render::Renderer* renderer);
     virtual ~Fight ();
     void init ();
     void eventHandler ();

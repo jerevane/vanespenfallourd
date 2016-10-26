@@ -8,28 +8,34 @@
 
 namespace sf {
   class Text;
-  class Sprite;
 };
 namespace render {
+  class NodeSprite;
   class Renderer;
+};
+namespace instance {
+  class Worldmap;
 }
 
 #include "Renderer.h"
+#include "instance/Worldmap.h"
+#include "NodeSprite.h"
 
 namespace render {
 
   /// class WorldmapRenderer - 
   class WorldmapRenderer : public render::Renderer {
+    // Associations
     // Attributes
   protected:
     sf::Text tmap;
-    std::vector<sf::Sprite*> tabNodeSprite;
+    std::vector<render::NodeSprite*> tabNodeSprite;
     // Operations
   public:
-    WorldmapRenderer (sf::Font* font, sf::RenderWindow* rwindow);
+    WorldmapRenderer (sf::RenderWindow* rwindow);
     ~WorldmapRenderer ();
     void render ();
-    void renderNodes (std::vector<sf::Sprite*> tabNode);
+    void renderNodes (std::vector<render::NodeSprite*> tabNode);
     void setBackground ();
     void initRender ();
   };

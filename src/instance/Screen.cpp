@@ -19,9 +19,10 @@ namespace instance {
         //dtor
     }
 
-    Screen::Screen(sf::RenderWindow* r){
+    Screen::Screen(sf::RenderWindow* rw, render::Renderer* rd){
 
-        window = r;
+        window = rw;
+        renderer = rd;
 
     }
 
@@ -47,11 +48,15 @@ namespace instance {
                 }
 
                 window->clear(sf::Color(0,0,0,255));
-                //Call renderer here, init before
+                renderer->render();
                 window->display();
             }
             return nextScreen;
         }
+
+    }
+
+    void Screen::setNextScreen(std::string nScreen) {
 
     }
 };

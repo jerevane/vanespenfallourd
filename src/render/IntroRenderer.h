@@ -10,14 +10,19 @@ namespace sf {
 };
 namespace render {
   class Renderer;
+};
+namespace instance {
+  class Intro;
 }
 
 #include "Renderer.h"
+#include "instance/Intro.h"
 
 namespace render {
 
   /// class IntroRenderer - 
   class IntroRenderer : public render::Renderer {
+    // Associations
     // Attributes
   protected:
     sf::Text pressAnyKey;
@@ -26,7 +31,7 @@ namespace render {
   public:
     void render ();
     void setBackground ();
-    IntroRenderer (sf::Font* font, sf::RenderWindow* rwindow);
+    IntroRenderer (sf::RenderWindow* rwindow);
     ~IntroRenderer ();
     void initRender ();
   };

@@ -28,7 +28,7 @@ namespace render {
   public:
     TextureSetter ();
     ~TextureSetter ();
-    sf::Texture getTexture (state::Element elem);
+    sf::Texture getTexture (state::ElementList* eList);
   };
 
 };

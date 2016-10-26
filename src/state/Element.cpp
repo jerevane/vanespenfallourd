@@ -19,16 +19,6 @@ namespace state {
         IsCharacter = false;
     }
 
-    Element::Element(sf::Texture *texture, float posx, float posy) : texture(*texture), px(posx), py(posy) {
-        HP = MaxHP = 50;
-        MP = MaxMP = 20;
-        Strength = Agility = Intelligence = 5;
-        MagicResist = PhysResist = 0;
-        Dot = "0_0";
-        IsDead = false;
-        Level = 1;
-        IsCharacter = false;
-    }
 
     void Element::SpellCast(std::string ability, Element *caster, Element *target) {
         std::string result;

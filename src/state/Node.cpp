@@ -8,21 +8,15 @@
 namespace state {
   class Node;
 
-    Node::Node(int id, int px, int py) {
+    Node::Node(int id) {
         Id = id;
         WasVisited = false;
-        this->px = px;
-        this->py = py;
-        texture = new sf::Texture;
-        texture->loadFromFile("../res/red_circle.png");
     }
 
-    Node::Node(Node* previousNode, int id, int px, int py) {
+    Node::Node(Node* previousNode, int id) {
         Id = id;
         WasVisited = false;
         Previous = previousNode;
-        this->px = px;
-        this->py = py;
     }
 
     void Node::RandomEvent() {
@@ -47,7 +41,6 @@ namespace state {
 
     void Node::setWasVisited(bool wasvisited) {
         WasVisited = wasvisited;
-        if(wasvisited) texture->loadFromFile("../res/green_circle.png");
     }
 
     Node *Node::getPreviousNode() {
@@ -66,13 +59,7 @@ namespace state {
         Next = nextnode;
     }
 
-    int Node::getPositionX() {
-        return px;
-    }
 
-    int Node::getPositionY() {
-        return py;
-    }
 }
 
 
