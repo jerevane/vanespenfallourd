@@ -23,6 +23,8 @@ namespace state {
         Previous = previousNode;
         this->px = px;
         this->py = py;
+        texture = new sf::Texture;
+        texture->loadFromFile("../res/red_circle.png");
     }
 
     void Node::RandomEvent() {

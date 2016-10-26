@@ -6,6 +6,45 @@
 
 namespace state {
 
+    State::State() {
+
+    }
+
+    State::State(ElementList *elementList,state::Node *node, int id) {
+        Elementlist = elementList;
+        this->node = node;
+        Id = id;
+    }
+
+    State::~State() {
+
+    }
+
+    void State::setNode(state::Node *node) {
+        this->node = node;
+    }
+
+    state::Node *State::getNode() {
+        return node;
+    }
+
+
+    ElementList *State::getElementList() {
+        return Elementlist;
+    }
+
+    void State::setElementList(ElementList *elementlist) {
+        Elementlist = elementlist;
+    }
+
+    int State::getId() {
+        return Id;
+    }
+
+    void State::setId(int id) {
+        Id = id;
+    }
+
 
 };
 

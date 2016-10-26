@@ -6,9 +6,9 @@
 
 namespace state {
   class Element;
-  class State;
   class ElementFactory;
   class Observer;
+  class State;
 }
 
 #include "Observer.h"
@@ -24,8 +24,9 @@ namespace state {
   public:
     std::vector<Element*> element;
   protected:
-    State* state;
     ElementFactory* factory;
+  public:
+      ElementList();
   };
 
 };

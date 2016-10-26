@@ -3,15 +3,12 @@
 #define STATE__ELEMENTLIST__C
 
 
-namespace state {
-  class Element;
-  class State;
-}
-
 #include "ElementList.h"
 
 namespace state {
+    ElementList::ElementList() {
 
+    }
 
 };
 

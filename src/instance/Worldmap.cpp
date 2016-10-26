@@ -15,26 +15,27 @@ namespace instance {
 
     Worldmap::~Worldmap() {}
 
-    void Worldmap::init() {
+    void Worldmap::init(state::State* state) {
        //Init node logic
-        state::Node* Midgare = new state::Node(0, 150, 450);
+        state::Node* Midgare = new state::Node(0, 175, 450);
+       // Test green color Midgare->setWasVisited(true);
         state::Node* Nibelheim = new state::Node(Midgare, 1, 250, 350);
         Midgare->setNextNode(Nibelheim);
-        state::Node* Besaid = new state::Node(Nibelheim, 2, 200, 300);
+        state::Node* Besaid = new state::Node(Nibelheim, 2, 150, 280);
         Nibelheim->setNextNode(Besaid);
-        state::Node* Gagazet= new state::Node(Besaid, 3, 100, 150);
+        state::Node* Gagazet= new state::Node(Besaid, 3, 25, 100);
         Besaid->setNextNode(Gagazet);
-        state::Node* Winhill = new state::Node(Gagazet, 4, 300, 200);
+        state::Node* Winhill = new state::Node(Gagazet, 4, 450, 200);
         Gagazet->setNextNode(Winhill);
-        state::Node* Terra = new state::Node(Winhill, 5, 550, 280);
+        state::Node* Terra = new state::Node(Winhill, 5, 525, 280);
         Winhill->setNextNode(Terra);
-        state::Node* Kilika = new state::Node(Terra, 6, 650, 350);
+        state::Node* Kilika = new state::Node(Terra, 6, 725, 300);
         Terra->setNextNode(Kilika);
-        state::Node* Lindblum = new state::Node(Kilika, 7, 750, 325);
+        state::Node* Lindblum = new state::Node(Kilika, 7, 700, 125);
         Kilika->setNextNode(Lindblum);
-        state::Node* Zanarkand = new state::Node(Lindblum, 8, 700, 200);
+        state::Node* Zanarkand = new state::Node(Lindblum, 8, 525, 160);
         Lindblum->setNextNode(Zanarkand);
-        state::Node* BITE = new state::Node(Zanarkand, 9, 350, 50);
+        state::Node* BITE = new state::Node(Zanarkand, 9, 350, 25);
         Zanarkand->setNextNode(BITE);
 
         tabNode.push_back(Midgare);
@@ -47,6 +48,10 @@ namespace instance {
         tabNode.push_back(Lindblum);
         tabNode.push_back(Zanarkand);
         tabNode.push_back(BITE);
+
+        state->setNode(Nibelheim);
+        setState(state);
+
     }
 
     void Worldmap::render() {
@@ -55,21 +60,35 @@ namespace instance {
         window->draw(spriteScreen);
 
         tmap.setFont(*font);
-        tmap.setCharacterSize(80);
+        tmap.setCharacterSize(50);
         tmap.setString("World Map");
-        tmap.setPosition({ 400, 150 });
+        tmap.setPosition({ 600, 500 });
         tmap.setOrigin(tmap.getLocalBounds().width/2, tmap.getLocalBounds().height/2);
 
         for(i=0;i<10;i++){
-            tabNode[i]->setPosition({tabNode[i]->getPositionX(), tabNode[i]->getPositionY()});
-            window->draw(*tabNode[i]);
+            tabNode.at(i)->setPosition({(float)tabNode.at(i)->getPositionX(), (float)tabNode.at(i)->getPositionY()});
+            tabNode.at(i)->setTexture(*tabNode.at(i)->texture);
+            window->draw(*tabNode.at(i));
         }
 
         window->draw(tmap);
 
+        state->getElementList()->element.at(0)->setTexture(*state->getElementList()->element.at(0)->texture);
+        state->getElementList()->element.at(0)->setPosition({(float)state->getNode()->getPositionX(),
+                                                             (float)state->getNode()->getPositionY()});
+
+        window->draw(*state->getElementList()->element.at(0));
     }
 
     void Worldmap::eventHandler() {
+
+    }
+
+    void Worldmap::setState(state::State *state) {
+        this->state = state;
+    }
+
+    void Worldmap::init() {
 
     }
 };

@@ -40,10 +40,11 @@ namespace state {
     int Level;
     Ability abilities;
     std::string Dot;
-    sf::Texture texture;
     float px;
     float py;
     bool IsCharacter;
+  public:
+      sf::Texture* texture;
     // Operations
   public:
     Element ();

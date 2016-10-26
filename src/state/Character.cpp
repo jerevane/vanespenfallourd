@@ -18,10 +18,16 @@ namespace state {
         XPToNextLevel = 50;
         PowerToOverdrive = 5;
         IsCharacter = true;
+        texture = new sf::Texture;
         if(characterID==0){
             SphereGridInstance = SphereGrid(0);
+            texture->loadFromFile("../res/Claude_64x64/Claude014.png");
         }
-        else SphereGridInstance = SphereGrid(1);
+        else {
+            SphereGridInstance = SphereGrid(1);
+            texture->loadFromFile("../res/Youenn_64x64/Youenn014.png");
+        }
+
     }
 
     void Character::LevelUp() {

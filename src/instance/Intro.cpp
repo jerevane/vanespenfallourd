@@ -12,7 +12,7 @@ namespace instance {
 
 #include <iostream>
 #include "Intro.h"
-#include "../state/Element.h"
+
 
 namespace instance {
 
@@ -36,9 +36,11 @@ namespace instance {
         pressanykey.setPosition({ 400, 450 });
         pressanykey.setOrigin(pressanykey.getLocalBounds().width/2, pressanykey.getLocalBounds().height/2);
 
+        // Création d'un fire element avec text sur l'écran d'acceuil
+        // testtext = new sf::Texture;
+        // test = new state::Element(testtext, 400, 300 );
 
-        testtext = new sf::Texture;
-        test = new state::Element(testtext, 400, 300 );
+
     }
 
     void Intro::render() {

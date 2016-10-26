@@ -32,11 +32,12 @@ namespace instance {
   protected:
     sf::Font font;
     Intro intro;
-    Worldmap worldmap;
+
     Fight fight;
     Inn inn;
     // Operations
   public:
+      Worldmap worldmap;
     void play ();
     ~Application ();
     Application ();

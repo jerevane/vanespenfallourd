@@ -35,7 +35,9 @@ namespace instance {
   public:
     Worldmap (sf::Font* font, sf::RenderWindow* window);
     virtual ~Worldmap ();
-    void init ();
+      void setState(state::State* state);
+    void init();
+      void init (state::State* state);
     void render ();
     void eventHandler ();
   };

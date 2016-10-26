@@ -19,7 +19,7 @@ namespace state {
         IsCharacter = false;
     }
 
-    Element::Element(sf::Texture *texture, float posx, float posy) : texture(*texture), px(posx), py(posy) {
+    Element::Element(sf::Texture *texture, float posx, float posy) : texture(texture), px(posx), py(posy) {
         HP = MaxHP = 50;
         MP = MaxMP = 20;
         Strength = Agility = Intelligence = 5;

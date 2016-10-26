@@ -17,7 +17,9 @@ namespace instance {
 }
 
 #include "Application.h"
+#include "../state.hpp"
 #include <iostream>
+#include <state/ElementList.h>
 
 namespace instance {
 
@@ -44,8 +46,17 @@ namespace instance {
 
     void Application::play() {
         //What happens when the game is launched
+
+        state::ElementList *elementlist = new state::ElementList();
+        state::Character *Claude = new state::Character(0);
+        state::Character *Youenn = new state::Character(1);
+        elementlist->element.push_back(Claude);
+        elementlist->element.push_back(Youenn);
+        state::Node *temp_node = new state::Node(0,0,0);
+        state::State *Etat = new state::State(elementlist, temp_node, 0);
+
         intro.run();
-        worldmap.init();
+        worldmap.init(Etat);
         if (worldmap.run() == "fight")
         {
 

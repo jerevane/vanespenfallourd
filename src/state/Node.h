@@ -5,11 +5,13 @@
 #include "SFML/Graphics.hpp"
 #include "SFML/Audio.hpp"
 
+namespace sf {
+  class Texture;
+};
 namespace state {
   class Node;
 };
 namespace sf {
-  class Texture;
   class Sprite;
 }
 
@@ -20,6 +22,8 @@ namespace state {
   class Node : public sf::Sprite {
     // Associations
     // Attributes
+  public:
+    sf::Texture* texture;
   protected:
     int Id;
     bool WasVisited;
@@ -27,7 +31,6 @@ namespace state {
     Node* Next;
     int px;
     int py;
-    sf::Texture* texture;
     // Operations
   public:
     Node (int id, int px, int py);
