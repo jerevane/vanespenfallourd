@@ -6,9 +6,6 @@
 #include "SFML/Graphics.hpp"
 #include "SFML/Audio.hpp"
 
-namespace sf {
-  class Text;
-};
 namespace state {
   class State;
 };
@@ -29,15 +26,14 @@ namespace instance {
   public:
     std::vector<state::Node*> tabNode;
   protected:
-    sf::Text tmap;
     state::State* state;
     // Operations
   public:
-    Worldmap (sf::Font* font, sf::RenderWindow* window);
+    Worldmap (sf::RenderWindow* window);
     virtual ~Worldmap ();
-    void init ();
-    void render ();
+    void init (state::State* state);
     void eventHandler ();
+    void setState (state::State* state);
   };
 
 };

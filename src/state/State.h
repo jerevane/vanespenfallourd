@@ -2,15 +2,20 @@
 #ifndef STATE__STATE__H
 #define STATE__STATE__H
 
+#include <vector>
 
 namespace state {
   class Node;
   class ElementList;
   class Observer;
+};
+namespace instance {
+  class Screen;
 }
 
 #include "Observer.h"
 #include "StateTypeID.h"
+#include "instance/Screen.h"
 #include "Node.h"
 
 namespace state {
@@ -19,6 +24,8 @@ namespace state {
   class State : public state::Observer {
     // Associations
     // Attributes
+  public:
+    std::vector<state::Node*> tabNode;
   protected:
     Node* node;
     ElementList* elementlist;

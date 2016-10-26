@@ -14,6 +14,9 @@ namespace instance {
 namespace sf {
   class RenderWindow;
 };
+namespace state {
+  class State;
+};
 namespace instance {
   class Screen;
 }
@@ -22,6 +25,7 @@ namespace instance {
 #include "Worldmap.h"
 #include "Fight.h"
 #include "Inn.h"
+#include "state/State.h"
 #include "Screen.h"
 
 namespace instance {

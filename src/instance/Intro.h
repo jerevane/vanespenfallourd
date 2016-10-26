@@ -6,13 +6,6 @@
 #include "SFML/Audio.hpp"
 
 namespace sf {
-  class Text;
-  class Texture;
-};
-namespace state {
-  class Element;
-};
-namespace sf {
   class RenderWindow;
 };
 namespace instance {
@@ -25,22 +18,10 @@ namespace instance {
 
   /// class Intro - Landing screen menu
   class Intro : public instance::Screen {
-    // Attributes
-  protected:
-    sf::Text pressanykey;
-    sf::Text title;
-    /// Test texture for the test entity
-    sf::Texture* testtext;
-    /// test entity
-    state::Element* test;
-    bool spawnEntity;
-    bool isEntityCreated;
-    sf::Text stateExample;
     // Operations
   public:
-    Intro (sf::Font* font, sf::RenderWindow* window);
+    Intro (sf::RenderWindow* window);
     virtual ~Intro ();
-    void render ();
     void init ();
     void eventHandler ();
   };

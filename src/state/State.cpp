@@ -7,6 +7,33 @@
 namespace state {
 
 
+    Node *State::getNode() {
+        return nullptr;
+    }
+
+    void State::setNode(Node *node) {
+
+    }
+
+    state::ElementList *State::getElementList() {
+        return nullptr;
+    }
+
+    void State::setElementList(ElementList *elementlist) {
+
+    }
+
+    int State::getId() {
+        return 0;
+    }
+
+    void State::setId(int id) {
+
+    }
+
+    void State::run(int id) {
+
+    }
 };
 
 #endif

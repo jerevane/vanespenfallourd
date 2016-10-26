@@ -20,10 +20,9 @@ namespace instance {
   class Inn : public instance::Screen {
     // Operations
   public:
-    Inn (sf::Font* font, sf::RenderWindow* window);
+    Inn (sf::RenderWindow* window);
     virtual ~Inn ();
     void init ();
-    void render ();
     void eventHandler ();
   };
 

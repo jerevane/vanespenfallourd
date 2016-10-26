@@ -19,20 +19,13 @@ namespace instance {
         //dtor
     }
 
-    Screen::Screen(sf::Font* f,sf::RenderWindow* r){
+    Screen::Screen(sf::RenderWindow* r){
 
-        font = f;
         window = r;
 
     }
 
-    void Screen::setBackground()
-    {
-        spriteScreen.setTexture(background);
 
-        spriteScreen.setOrigin((int)background.getSize().x/2, (int)background.getSize().y/2);
-        spriteScreen.move(400, 300);
-    }
 
     std::string Screen::run()
     {
@@ -54,7 +47,7 @@ namespace instance {
                 }
 
                 window->clear(sf::Color(0,0,0,255));
-                render();
+                //Call renderer here, init before
                 window->display();
             }
             return nextScreen;

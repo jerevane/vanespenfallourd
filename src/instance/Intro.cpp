@@ -16,37 +16,15 @@ namespace instance {
 
 namespace instance {
 
-    Intro::Intro(sf::Font* f, sf::RenderWindow* w) : Screen(f,w) {
-        background.loadFromFile("../res/introbackground.png");
-        setBackground();
+    Intro::Intro( sf::RenderWindow* w) : Screen(w) {
     }
 
     void Intro::init() {
 
-        title.setFont(*font);
-        title.setCharacterSize(80);
-        title.setString("Final fantastique");
-        title.setPosition({ 400, 150 });
-        title.setOrigin(title.getLocalBounds().width/2, title.getLocalBounds().height/2);
-
-
-        pressanykey.setFont(*font);
-        pressanykey.setCharacterSize(20);
-        pressanykey.setString("Press any key");
-        pressanykey.setPosition({ 400, 450 });
-        pressanykey.setOrigin(pressanykey.getLocalBounds().width/2, pressanykey.getLocalBounds().height/2);
-
-
-        testtext = new sf::Texture;
-        test = new state::Element(testtext, 400, 300 );
     }
 
     void Intro::render() {
-        //Draw all elements of the Intro screen here, the last drawn element will appear on top
 
-        window->draw(spriteScreen);
-        window->draw(title);
-        window->draw(pressanykey);
 
     }
 

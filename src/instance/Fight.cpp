@@ -18,11 +18,7 @@ namespace instance {
 namespace instance
 {
 
-    Fight::Fight(sf::Font* f, sf::RenderWindow* w) : Screen(f,w)
-    {
-        background.loadFromFile("../res/fightbackground.jpg");
-        setBackground();
-    }
+    Fight::Fight(sf::RenderWindow* w) : Screen(w) { }
 
     void Fight::init()
     {
@@ -48,10 +44,6 @@ namespace instance
         }
     }
 
-    void Fight::render()
-    {
-        window->draw(spriteScreen);
-    }
 
     Fight::~Fight() {}
 

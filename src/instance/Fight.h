@@ -11,13 +11,9 @@ namespace sf {
 };
 namespace instance {
   class Screen;
-  class YouennUI;
-  class ClaudeUI;
 }
 
 #include "Screen.h"
-#include "YouennUI.h"
-#include "ClaudeUI.h"
 
 namespace instance {
 
@@ -28,10 +24,9 @@ namespace instance {
     std::map<int, int> turnOrderMap;
     // Operations
   public:
-    Fight (sf::Font* font, sf::RenderWindow* window);
+    Fight (sf::RenderWindow* window);
     virtual ~Fight ();
     void init ();
-    void render ();
     void eventHandler ();
   };
 

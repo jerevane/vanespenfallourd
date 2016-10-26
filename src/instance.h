@@ -8,6 +8,4 @@
 #include "instance/Fight.h"
 #include "instance/Inn.h"
 #include "instance/Application.h"
-#include "instance/ClaudeUI.h"
-#include "instance/YouennUI.h"
 #endif

@@ -14,17 +14,12 @@ namespace instance {
 
 namespace instance {
 
-    Inn::Inn(sf::Font* f, sf::RenderWindow* w) : Screen(f,w) {
-        background.loadFromFile("../res/innbackground.jpg");
-        setBackground();
+    Inn::Inn(sf::RenderWindow* w) : Screen(w) {
+
     }
 
     void Inn::init() {
         //Init node logic
-    }
-
-    void Inn::render() {
-        window->draw(spriteScreen);
     }
 
     Inn::~Inn() {}
