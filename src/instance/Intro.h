@@ -4,6 +4,7 @@
 
 #include "SFML/Graphics.hpp"
 #include "SFML/Audio.hpp"
+#include "render/Renderer.h"
 
 namespace sf {
   class RenderWindow;

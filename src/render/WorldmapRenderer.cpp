@@ -34,7 +34,7 @@ namespace render {
 
     void WorldmapRenderer::setBackground() {
         spriteScreen.setTexture(background);
-        spriteScreen.setScale(0.65, 0.65);
+        spriteScreen.setScale(0.60, 0.65);
         spriteScreen.setOrigin((int)background.getSize().x/2, (int)background.getSize().y/2);
         spriteScreen.move(400, 300);
     }

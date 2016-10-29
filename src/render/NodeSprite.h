@@ -17,6 +17,8 @@ namespace render {
   /// class NodeSprite - 
   class NodeSprite : public sf::Sprite {
     // Attributes
+  public:
+    sf::Texture* texture;
   protected:
     float py;
     float px;
@@ -24,7 +26,6 @@ namespace render {
     int id;
     // Operations
   public:
-    sf::Texture* texture;
     NodeSprite (sf::Texture* texture, float px, float py, std::string name, int id);
     ~NodeSprite ();
     float getPositionY ();

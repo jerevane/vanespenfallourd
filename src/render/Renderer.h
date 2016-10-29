@@ -14,10 +14,14 @@ namespace state {
 };
 namespace render {
   class TextureSetter;
+};
+namespace instance {
+  class Screen;
 }
 
-#include "TextureSetter.h"
 #include "state/State.h"
+#include "instance/Screen.h"
+#include "TextureSetter.h"
 
 namespace render {
 

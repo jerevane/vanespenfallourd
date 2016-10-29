@@ -2,6 +2,7 @@
 #ifndef INSTANCE__SCREEN__H
 #define INSTANCE__SCREEN__H
 
+#include "render/Renderer.h"
 #include "SFML/Graphics.hpp"
 #include "SFML/Audio.hpp"
 #include <string>
@@ -19,7 +20,6 @@ namespace state {
 
 #include "state/Element.h"
 #include "state/State.h"
-#include "render/Renderer.h"
 
 namespace instance {
 
