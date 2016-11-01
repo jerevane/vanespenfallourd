@@ -6,11 +6,13 @@
 #include "SFML/Audio.hpp"
 #include <vector>
 
+namespace render {
+  class ElemSprite;
+};
 namespace sf {
   class Text;
 };
 namespace render {
-  class NodeSprite;
   class Renderer;
 };
 namespace instance {
@@ -19,7 +21,7 @@ namespace instance {
 
 #include "Renderer.h"
 #include "instance/Worldmap.h"
-#include "NodeSprite.h"
+#include "ElemSprite.h"
 
 namespace render {
 
@@ -27,17 +29,20 @@ namespace render {
   class WorldmapRenderer : public render::Renderer {
     // Associations
     // Attributes
+  public:
+    render::ElemSprite* charSprite;
   protected:
     sf::Text tmap;
-    std::vector<render::NodeSprite*> tabNodeSprite;
+    std::vector<render::ElemSprite*> tabNodeSprite;
     // Operations
   public:
     WorldmapRenderer (sf::RenderWindow* rwindow);
     ~WorldmapRenderer ();
     void render ();
-    void renderNodes (std::vector<render::NodeSprite*> tabNode);
+    void renderNodes (std::vector<render::ElemSprite*> tabNode);
     void setBackground ();
     void initRender ();
+    void renderNodeChange (render::ElemSprite* n1, render::ElemSprite* n2);
   };
 
 };

@@ -2,7 +2,7 @@
 #ifndef RENDER__NODESPRITE__C
 #define RENDER__NODESPRITE__C
 
-#include "NodeSprite.h"
+#include "ElemSprite.h"
 
 namespace sf {
   class Texture;
@@ -13,29 +13,29 @@ namespace sf {
 namespace render {
 
 
-    NodeSprite::NodeSprite(sf::Texture *texture, float px, float py, std::string name, int id) : px(px),
+    ElemSprite::ElemSprite(sf::Texture *texture, float px, float py, std::string name, int id) : px(px),
                                                                                                  py(py),
                                                                                                  texture(texture),
                                                                                                  name(name),
                                                                                                  id(id){ }
 
-    NodeSprite::~NodeSprite() {
+    ElemSprite::~ElemSprite() {
 
     }
 
-    float NodeSprite::getPositionY() {
+    float ElemSprite::getPositionY() {
         return py;
     }
 
-    float NodeSprite::getPositionX() {
+    float ElemSprite::getPositionX() {
         return px;
     }
 
-    int NodeSprite::getId() {
+    int ElemSprite::getId() {
         return id;
     }
 
-    std::string NodeSprite::getName() {
+    std::string ElemSprite::getName() {
         return name;
     }
 };

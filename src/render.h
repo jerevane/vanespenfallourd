@@ -10,5 +10,5 @@
 #include "render/ClaudeUI.h"
 #include "render/YouennUI.h"
 #include "render/TextureSetter.h"
-#include "render/NodeSprite.h"
+#include "render/ElemSprite.h"
 #endif

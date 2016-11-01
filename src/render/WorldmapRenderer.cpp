@@ -30,6 +30,13 @@ namespace render {
         window->draw(tmap);
         renderNodes(tabNodeSprite);
 
+        //render character sprite
+        charSprite->setTexture(*charSprite->texture);
+        charSprite->setOrigin((int)charSprite->getTexture()->getSize().x/2, (int)charSprite->getTexture()->getSize().y);
+        charSprite->setPosition({charSprite->getPositionX(),
+                                          charSprite->getPositionY()});
+        window->draw(*charSprite);
+
     }
 
     void WorldmapRenderer::setBackground() {
@@ -68,7 +75,7 @@ namespace render {
                 tempArray.push_back(tempChar);
             }
             assert(tempArray.size() == 4);
-            tabNodeSprite.push_back(new render::NodeSprite(i.second,
+            tabNodeSprite.push_back(new render::ElemSprite(i.second,
                                                            std::stof(tempArray.at(2)),
                                                            std::stof(tempArray.at(3)),
                                                            tempArray.at(1),
@@ -83,17 +90,53 @@ namespace render {
                                               tabNodeSprite.at(i)->getPositionY()});
             tabNodeSprite.at(i)->setTexture(*tabNodeSprite.at(i)->texture);
         }
+
+        for(auto i : tSetter->elementTextureMap)
+        {
+            std::string tempStr;
+            tempStr = i.first;
+            for (int j=0; j<i.first.size(); j++)
+            {
+                if (tempStr[j] == '_') {
+                    tempStr[j] = ' ';
+                }
+            }
+
+            std::stringstream ss(tempStr);
+            std::string tempChar;
+            while (ss >> tempChar) {
+                tempArray.push_back(tempChar);
+            }
+            assert(tempArray.size() == 4);
+
+            charSprite = new render::ElemSprite(i.second,
+                                                std::stof(tempArray.at(2)),
+                                                std::stof(tempArray.at(3)),
+                                                tempArray.at(1),
+                                                std::stoi(tempArray.at(0)));
+
+            tempArray.clear();
+        }
+
     }
 
-    void WorldmapRenderer::renderNodes(std::vector<render::NodeSprite *> tabNode) {
+    void WorldmapRenderer::renderNodes(std::vector<render::ElemSprite *> tabNode) {
 
         for(auto i = 0; i < tabNode.size(); i++)
         {
 
+            tabNode.at(i)->setOrigin((int)tabNode.at(i)->getTexture()->getSize().x/2,
+                                     (int)tabNode.at(i)->getTexture()->getSize().y/2);
             window->draw(*tabNode.at((unsigned long) i));
             //std::cout << "Drawing a node" + std::to_string(tabNode.at(i)->getPositionX())
                        //  + std::to_string(tabNode.at(i)->getPositionY()) << std::endl;
         }
+
+    }
+
+    void WorldmapRenderer::renderNodeChange(render::ElemSprite *n1, render::ElemSprite *n2) {
+
+
 
     }
 
