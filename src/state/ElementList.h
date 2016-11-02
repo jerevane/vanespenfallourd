@@ -26,6 +26,9 @@ namespace state {
   protected:
     State* state;
     ElementFactory* factory;
+    // Operations
+  public:
+    ElementList ();
   };
 
 };

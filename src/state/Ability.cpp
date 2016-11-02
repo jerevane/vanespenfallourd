@@ -6,21 +6,129 @@
 
 namespace state {
 
-    std::string Ability::LaunchAbility(std::string ability, Element *caster) {
+    std::string Ability::LaunchAbility(int ability, Element *caster) {
         // Implémenter un switch case dans cette fonction pour chaque tech
-        return "M_50_0_-";
+        switch(ability){
+            case BRazier :
+                return Brazier();
+
+            case POISON :
+                return Poison();
+
+            case FLare :
+                return Flare();
+
+            case FAstHeal :
+                return FastHeal();
+
+            case REsurrection :
+                return Resurrection();
+
+            case HAste :
+                return Haste();
+
+            case DEfender :
+                return Defender();
+
+            case COunterAttack :
+                return CounterAttack();
+
+            case BAttleCries :
+                return BattleCries();
+
+            case BLeeding :
+                return Bleeding();
+
+            case TRipleAttack :
+                return TripleAttack();
+
+            case DOubleUse :
+                return DoubleUse();
+
+            case MUltipleArrow :
+                return MultipleArrow();
+
+            case POisonArrow :
+                return PoisonArrow();
+
+            case PIercingArrow :
+                return PiercingArrow();
+
+            default:break;
+        }
+        return "error";
     }
 
-    std::map<std::string, bool> Ability::getAbility() {
+    std::map<int, bool> Ability::getAbility() {
         return abilities;
     }
 
-    void Ability::setAbility(std::string ability) {
+    void Ability::setAbility(int ability) {
         abilities[ability]=true;
     }
 
-    void Ability::unsetAbility(std::string ability) {
+    void Ability::unsetAbility(int ability) {
         abilities[ability]=false;
+    }
+
+    std::string Ability::Brazier() {
+        return std::__cxx11::string();
+    }
+
+    std::string Ability::Poison() {
+        return std::__cxx11::string();
+    }
+
+    std::string Ability::Flare() {
+        return std::__cxx11::string();
+    }
+
+    std::string Ability::FastHeal() {
+        return std::__cxx11::string();
+    }
+
+    std::string Ability::Resurrection() {
+        return std::__cxx11::string();
+    }
+
+    std::string Ability::Haste() {
+        return std::__cxx11::string();
+    }
+
+    std::string Ability::Defender() {
+        return std::__cxx11::string();
+    }
+
+    std::string Ability::CounterAttack() {
+        return std::__cxx11::string();
+    }
+
+    std::string Ability::BattleCries() {
+        return std::__cxx11::string();
+    }
+
+    std::string Ability::Bleeding() {
+        return std::__cxx11::string();
+    }
+
+    std::string Ability::TripleAttack() {
+        return std::__cxx11::string();
+    }
+
+    std::string Ability::DoubleUse() {
+        return std::__cxx11::string();
+    }
+
+    std::string Ability::MultipleArrow() {
+        return std::__cxx11::string();
+    }
+
+    std::string Ability::PoisonArrow() {
+        return std::__cxx11::string();
+    }
+
+    std::string Ability::PiercingArrow() {
+        return std::__cxx11::string();
     }
 
 

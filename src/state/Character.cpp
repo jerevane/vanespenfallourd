@@ -6,28 +6,30 @@
 
 namespace state {
 
-    Character::Character() {
+    Character::Character(std::string name) {
         Element();
+        setName(name);
         XPToNextLevel = 50;
         PowerToOverdrive = 5;
         IsCharacter = true;
     }
 
-    Character::Character(int characterID) {
+    Character::Character(int characterID, std::string name) {
         Element();
+        setName(name);
         XPToNextLevel = 50;
         PowerToOverdrive = 5;
         IsCharacter = true;
         if(characterID==0){
-            SphereGridInstance = SphereGrid(0);
+            SphereGridInstance = new SphereGrid(0, this);
         }
-        else SphereGridInstance = SphereGrid(1);
+        else SphereGridInstance = new SphereGrid(1, this);
     }
 
     void Character::LevelUp() {
         setLevel(getLevel()+1);
-        SphereGridInstance.setPosition(SphereGridInstance.getPosition()+1);
-        SphereGridInstance.LevelUp(SphereGridInstance.getId(), SphereGridInstance.getPosition());
+        SphereGridInstance->setPosition(SphereGridInstance->getPosition()+1);
+        SphereGridInstance->LevelUp();
     }
 
     void Character::GainXP(int xp) {
@@ -53,11 +55,11 @@ namespace state {
         else setXpToNextLevel(xp_to_next-xp);
     }
 
-    SphereGrid Character::getSphereGridInstance() {
+    SphereGrid* Character::getSphereGridInstance() {
         return SphereGridInstance;
     }
 
-    void Character::setSphereGridInstance(SphereGrid spheregridinstance) {
+    void Character::setSphereGridInstance(SphereGrid* spheregridinstance) {
         SphereGridInstance = spheregridinstance;
     }
 
@@ -77,7 +79,7 @@ namespace state {
         PowerToOverdrive = powertooverdrive;
     }
 
-    void Character::managementOverdrive(std::string overdriveAbility) {
+    void Character::managementOverdrive(int overdriveAbility) {
         int power = getPowerToOverdrive();
         if(power==0) abilities.setAbility(overdriveAbility);
         else setPowerToOverdrive(power -1);

@@ -35,7 +35,7 @@ namespace state {
     // Operations
   public:
     Element ();
-    void SpellCast (std::string ability, Element* caster, Element* target);
+    void SpellCast (int ability, Element* caster, Element* target);
     void Attack (Element* caster, Element* target);
     void TakeDamage (std::string damage, Element* target);
     void Heal (int heal, Element* target);
@@ -65,6 +65,8 @@ namespace state {
     void setDot (std::string dot);
     bool getIsCharacter ();
     void setIsCharacter (bool ischaracter);
+    void setName (std::string name);
+    Ability getAbility ();
   };
 
 };

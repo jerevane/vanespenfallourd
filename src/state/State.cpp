@@ -7,33 +7,45 @@
 namespace state {
 
 
-    Node *State::getNode() {
-        return nullptr;
-    }
-
-    void State::setNode(Node *node) {
+    State::State() {
 
     }
 
-    state::ElementList *State::getElementList() {
-        return nullptr;
+    State::State(ElementList *elementList,state::Node *node, int id) {
+        this->elementlist = elementList;
+        this->node = node;
+        Id = id;
+    }
+
+    State::~State() {
+
+    }
+
+    void State::setNode(state::Node *node) {
+        this->node = node;
+    }
+
+    state::Node *State::getNode() {
+        return node;
+    }
+
+
+    ElementList *State::getElementList() {
+        return elementlist;
     }
 
     void State::setElementList(ElementList *elementlist) {
-
+        this->elementlist = elementlist;
     }
 
     int State::getId() {
-        return 0;
+        return Id;
     }
 
     void State::setId(int id) {
-
+        Id = id;
     }
 
-    void State::run(int id) {
-
-    }
 };
 
 #endif

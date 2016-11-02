@@ -2,32 +2,44 @@
 #ifndef STATE__ABILITY__H
 #define STATE__ABILITY__H
 
-#include <string>
 #include <map>
+#include <string>
 
 namespace state {
   class Element;
 }
 
+#include "AbilityTypeID.h"
+
 namespace state {
 
   /// class Ability - 
   class Ability {
+    // Associations
     // Attributes
   public:
-    std::map<std::string,bool> abilities;
+    std::map<int,bool> abilities;
     // Operations
   public:
-    std::string LaunchAbility (std::string ability, Element* caster);
-    std::map<std::string,bool> getAbility ();
-    void setAbility (std::string ability);
-    void unsetAbility (std::string ability);
-    std::string Fire ();
-    std::string Thunder ();
-    std::string H2O ();
-    std::string Blizzard ();
+    std::string LaunchAbility (int ability, Element* caster);
+    std::map<int,bool> getAbility ();
+    void setAbility (int ability);
+    void unsetAbility (int ability);
+    std::string Brazier ();
     std::string Poison ();
-    std::string Heal ();
+    std::string Flare ();
+    std::string FastHeal ();
+    std::string Resurrection ();
+    std::string Haste ();
+    std::string Defender ();
+    std::string CounterAttack ();
+    std::string BattleCries ();
+    std::string Bleeding ();
+    std::string TripleAttack ();
+    std::string DoubleUse ();
+    std::string MultipleArrow ();
+    std::string PoisonArrow ();
+    std::string PiercingArrow ();
   };
 
 };

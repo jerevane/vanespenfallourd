@@ -2,7 +2,14 @@
 #ifndef STATE__SPHEREGRID__H
 #define STATE__SPHEREGRID__H
 
+#include <vector>
+#include <string>
 
+namespace state {
+  class Character;
+}
+
+#include "Character.h"
 #include "SphereGridTypeID.h"
 
 namespace state {
@@ -12,18 +19,22 @@ namespace state {
     // Associations
     // Attributes
   protected:
-    int Id;
+    std::vector<int> tab_comp;
     int Position;
+    Character* character;
+    int Id;
     // Operations
   public:
     SphereGrid ();
-    SphereGrid (int id);
+    SphereGrid (int id, Character* character);
     ~SphereGrid ();
-    int getId ();
-    void setId (int id);
+    std::vector<int> getTab ();
+    void setTab (std::vector<int> tab);
     int getPosition ();
     void setPosition (int position);
-    void LevelUp (int id, int position);
+    void LevelUp ();
+    std::vector<int> CreateTab (int id);
+    std::string SwitchTab ();
   };
 
 };

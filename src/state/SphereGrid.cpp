@@ -10,21 +10,16 @@ namespace state {
 
     }
 
-    SphereGrid::SphereGrid(int id) {
-        Id = id;
+    SphereGrid::SphereGrid(int id, Character* character) {
         Position =0;
+        Id = id;
+        tab_comp = CreateTab(id);
+        this->character = character;
+
     }
 
     SphereGrid::~SphereGrid() {
 
-    }
-
-    int SphereGrid::getId() {
-        return Id;
-    }
-
-    void SphereGrid::setId(int id) {
-        Id = id;
     }
 
     int SphereGrid::getPosition() {
@@ -35,8 +30,186 @@ namespace state {
         Position = position;
     }
 
-    void SphereGrid::LevelUp(int id, int position) {
-        // Implementer un switch case pour chaque position de chaque SphereGrid
+    void SphereGrid::LevelUp() {
+        switch(tab_comp[Position]) {
+            case HP :
+                character->setMaxHP(character->getMaxHP()+100);
+                character->setHP(character->getHP()+100);
+                break;
+
+            case MP :
+                character->setMaxMP(character->getMaxMP()+20);
+                character->setMP(character->getMP()+20);
+                break;
+
+            case Int :
+                character->setIntelligence(character->getIntelligence()+5);
+                break;
+
+            case Agi :
+                character->setAgility(character->getAgility()+5);
+                break;
+
+            case Ad :
+                character->setStrength(character->getStrength()+5);
+                break;
+
+            case Comp :
+                switch(Id){
+                    case BlackMage :
+                        if(Position==2) character->getAbility().setAbility(BRazier);
+                        else if(Position==5) character->getAbility().setAbility(POISON);
+                        else if(Position==12) character->getAbility().setAbility(FLare);
+                        break;
+
+                    case WhiteMage :
+                        if(Position==2) character->getAbility().setAbility(FAstHeal);
+                        else if(Position==5) character->getAbility().setAbility(REsurrection);
+                        else if(Position==12) character->getAbility().setAbility(HAste);
+                        break;
+
+                    case War :
+                        if(Position==2) character->getAbility().setAbility(DEfender);
+                        else if(Position==5) character->getAbility().setAbility(COunterAttack);
+                        else if(Position==12) character->getAbility().setAbility(BAttleCries);
+                        break;
+
+                    case Rogue :
+                        if(Position==2) character->getAbility().setAbility(BLeeding);
+                        else if(Position==5) character->getAbility().setAbility(TRipleAttack);
+                        else if(Position==12) character->getAbility().setAbility(DOubleUse);
+                        break;
+
+                    case Hunt :
+                        if(Position==2) character->getAbility().setAbility(MUltipleArrow);
+                        else if(Position==5) character->getAbility().setAbility(POisonArrow);
+                        else if(Position==12) character->getAbility().setAbility(PIercingArrow);
+                        break;
+
+                    default:break;
+                }
+
+            case End :
+                SwitchTab();
+                LevelUp();
+                break;
+
+            default:break;
+        }
+    }
+
+    std::vector<int> SphereGrid::CreateTab(int id) {
+        std::vector<int> tab;
+        tab.clear();
+        switch(id) {
+            case BlackMage :
+                tab.at(0) = HP;
+                tab.push_back(Int);
+                tab.push_back(Comp); // Brazier
+                tab.push_back(MP);
+                tab.push_back(Int);
+                tab.push_back(Comp); // Poison
+                tab.push_back(HP);
+                tab.push_back(Int);
+                tab.push_back(Agi);
+                tab.push_back(MP);
+                tab.push_back(Int);
+                tab.push_back(Int);
+                tab.push_back(Comp); // Atominum
+                tab.push_back(End);
+                break;
+
+            case WhiteMage :
+                tab.at(0) = Int;
+                tab.push_back(HP);
+                tab.push_back(Comp); // Fast Heal
+                tab.push_back(MP);
+                tab.push_back(Int);
+                tab.push_back(Comp); // Resurrection
+                tab.push_back(MP);
+                tab.push_back(Agi);
+                tab.push_back(HP);
+                tab.push_back(Int);
+                tab.push_back(MP);
+                tab.push_back(Int);
+                tab.push_back(Comp); // Haste
+                tab.push_back(End);
+                break;
+
+            case War :
+                tab.at(0) =MP;
+                tab.push_back(HP);
+                tab.push_back(Comp); // Defender
+                tab.push_back(HP);
+                tab.push_back(Ad);
+                tab.push_back(Comp); // Counter attack
+                tab.push_back(HP);
+                tab.push_back(Agi);
+                tab.push_back(HP);
+                tab.push_back(MP);
+                tab.push_back(Ad);
+                tab.push_back(HP);
+                tab.push_back(Comp); // Battle cries
+                tab.push_back(End);
+                break;
+
+            case Rogue :
+                tab.at(0)=HP;
+                tab.push_back(MP);
+                tab.push_back(Comp); // Bleeding
+                tab.push_back(Agi);
+                tab.push_back(Ad);
+                tab.push_back(Comp); // Triple attack
+                tab.push_back(Agi);
+                tab.push_back(Ad);
+                tab.push_back(HP);
+                tab.push_back(Ad);
+                tab.push_back(MP);
+                tab.push_back(Agi);
+                tab.push_back(Comp); // Double use
+                tab.push_back(End);
+                break;
+
+            case Hunt :
+                tab.at(0)=Int;
+                tab.push_back(Ad);
+                tab.push_back(Comp); // Multiple arrow
+                tab.push_back(MP);
+                tab.push_back(Agi);
+                tab.push_back(Comp); // Poison arrow
+                tab.push_back(Int);
+                tab.push_back(HP);
+                tab.push_back(Ad);
+                tab.push_back(MP);
+                tab.push_back(Agi);
+                tab.push_back(Ad);
+                tab.push_back(Comp); // Piercing arrow
+                tab.push_back(End);
+                break;
+
+            default:break;
+        }
+
+
+        return tab;
+    }
+
+    std::string SphereGrid::SwitchTab() {
+        // Demander à l'utilisateur quelle classe son personnage souhaite se spécialiser
+        switch(Id){
+            case BlackMage :
+                return "White Mage_Rogue_War";
+            case WhiteMage :
+                return "Black Mage_War_Hunt";
+            case War :
+                return "Black Mage_White Mage";
+            case Rogue :
+                return "Black Mage_Hunt";
+            case Hunt :
+                return "Black Mage_White Mage_War_Rogue";
+            default:break;
+        }
+        return "error";
     }
 
 

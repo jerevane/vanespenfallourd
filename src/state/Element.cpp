@@ -19,8 +19,7 @@ namespace state {
         IsCharacter = false;
     }
 
-
-    void Element::SpellCast(std::string ability, Element *caster, Element *target) {
+    void Element::SpellCast(int ability, Element *caster, Element *target) {
         std::string result;
         result = caster->abilities.LaunchAbility(ability, caster);
         TakeDamage(result,target);
@@ -196,6 +195,14 @@ namespace state {
 
     void Element::setIsCharacter(bool ischaracter) {
         IsCharacter = ischaracter;
+    }
+
+    void Element::setName(std::string name) {
+        this->name = name;
+    }
+
+    Ability Element::getAbility() {
+        return abilities;
     }
 
 

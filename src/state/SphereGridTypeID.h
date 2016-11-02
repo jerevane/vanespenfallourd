@@ -10,7 +10,14 @@ namespace state {
     WhiteMage     = 1,
     War     = 2,
     Rogue     = 3,
-    Hunt     = 4
+    Hunt     = 4,
+    HP     = 5,
+    MP     = 6,
+    Int     = 7,
+    Agi     = 8,
+    Ad     = 9,
+    Comp     = 10,
+    End     = 11
   };
 
 };

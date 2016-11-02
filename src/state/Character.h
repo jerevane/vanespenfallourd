@@ -10,9 +10,9 @@ namespace state {
   class Item;
 }
 
-#include "SphereGrid.h"
 #include "Element.h"
 #include "Item.h"
+#include "SphereGrid.h"
 #include "CharacterTypeID.h"
 
 namespace state {
@@ -22,22 +22,22 @@ namespace state {
     // Associations
     // Attributes
   protected:
-    SphereGrid SphereGridInstance;
+    SphereGrid* SphereGridInstance;
     int XPToNextLevel;
     int PowerToOverdrive;
     // Operations
   public:
-    Character ();
-    Character (int characterID);
+    Character (std::string name);
+    Character (int characterID, std::string name);
     void LevelUp ();
     void GainXP (int xp);
-    SphereGrid getSphereGridInstance ();
-    void setSphereGridInstance (SphereGrid spheregridinstance);
+    SphereGrid* getSphereGridInstance ();
+    void setSphereGridInstance (SphereGrid* spheregridinstance);
     int getXpToNextLevel ();
     void setXpToNextLevel (int xptonextlevel);
     int getPowerToOverdrive ();
     void setPowerToOverdrive (int powertooverdrive);
-    void managementOverdrive (std::string overdiveAbility);
+    void managementOverdrive (int overdiveAbility);
   };
 
 };

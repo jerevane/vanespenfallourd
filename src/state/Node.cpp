@@ -19,14 +19,6 @@ namespace state {
         Previous = previousNode;
     }
 
-    void Node::RandomEvent() {
-
-    }
-
-    void Node::StoryEvent() {
-        //Switch case avec l'Id du noeud
-    }
-
     int Node::getId() {
         return Id;
     }
@@ -58,7 +50,6 @@ namespace state {
     void Node::setNextNode(Node *nextnode) {
         Next = nextnode;
     }
-
 
 }
 

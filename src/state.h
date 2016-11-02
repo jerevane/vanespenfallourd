@@ -20,4 +20,5 @@
 #include "state/CharacterTypeID.h"
 #include "state/ItemTypeID.h"
 #include "state/SphereGridTypeID.h"
+#include "state/AbilityTypeID.h"
 #endif

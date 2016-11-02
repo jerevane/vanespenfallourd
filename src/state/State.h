@@ -32,6 +32,9 @@ namespace state {
     int Id;
     // Operations
   public:
+    State ();
+    State (ElementList* elementlist, Node* node, int id);
+    ~State ();
     Node* getNode ();
     void setNode (Node* node);
     ElementList* getElementList ();

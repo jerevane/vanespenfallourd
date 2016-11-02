@@ -23,8 +23,6 @@ namespace state {
   public:
     Node (int id);
     Node (Node* previousNode, int id);
-    void RandomEvent ();
-    void StoryEvent ();
     int getId ();
     void setId (int id);
     bool getWasVisited ();

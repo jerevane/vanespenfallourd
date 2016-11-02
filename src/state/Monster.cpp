@@ -15,11 +15,11 @@ namespace state {
         //Implementer dans cette fonction switch case pour chaque monstre
         Element();
         switch (monsterSeed){
-            case 0:
+            case BLOB:
                 PhysResist = 0.8;
                 break;
 
-            case 1:
+            case SALAMANDER:
                 MaxHP = HP = getMaxHP()+playerLevel*10;
                 Strength = getStrength()+playerLevel;
                 break;
