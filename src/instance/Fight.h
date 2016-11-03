@@ -2,7 +2,7 @@
 #ifndef INSTANCE__FIGHT__H
 #define INSTANCE__FIGHT__H
 
-#include "render/FightRenderer.h"
+#include "render/Renderer.h"
 #include <map>
 #include "SFML/Graphics.hpp"
 #include "SFML/Audio.hpp"
