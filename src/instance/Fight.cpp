@@ -12,13 +12,14 @@ namespace instance {
 
 #include "Fight.h"
 #include <map>
+#include <render/FightRenderer.h>
 #include "../state/ElementList.h"
 #include "../state/Element.h"
 
 namespace instance
 {
 
-    Fight::Fight(sf::RenderWindow* w, render::Renderer* rd) : Screen(w, rd) { }
+    Fight::Fight(sf::RenderWindow* w, render::FightRenderer* rd) : Screen(w), renderer(rd) { }
 
     void Fight::init()
     {

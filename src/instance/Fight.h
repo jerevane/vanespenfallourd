@@ -2,33 +2,37 @@
 #ifndef INSTANCE__FIGHT__H
 #define INSTANCE__FIGHT__H
 
+#include "render/FightRenderer.h"
 #include <map>
 #include "SFML/Graphics.hpp"
 #include "SFML/Audio.hpp"
-#include "render/Renderer.h"
 
+namespace render {
+  class FightRenderer;
+};
 namespace sf {
   class RenderWindow;
-};
-namespace render {
-  class Renderer;
 };
 namespace instance {
   class Screen;
 }
 
 #include "Screen.h"
+#include "render/FightRenderer.h"
 
 namespace instance {
 
   /// class Fight - Handles fights rendering and logic
   class Fight : public instance::Screen {
+    // Associations
     // Attributes
+  public:
+    render::FightRenderer* renderer;
   protected:
     std::map<int, int> turnOrderMap;
     // Operations
   public:
-    Fight (sf::RenderWindow* window, render::Renderer* renderer);
+    Fight (sf::RenderWindow* window, render::FightRenderer* renderer);
     virtual ~Fight ();
     void init ();
     void eventHandler ();

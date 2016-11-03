@@ -2,9 +2,9 @@
 #ifndef RENDER__WORLDMAPRENDERER__H
 #define RENDER__WORLDMAPRENDERER__H
 
+#include <vector>
 #include "SFML/Graphics.hpp"
 #include "SFML/Audio.hpp"
-#include <vector>
 
 namespace render {
   class ElemSprite;
@@ -30,10 +30,10 @@ namespace render {
     // Associations
     // Attributes
   public:
-    render::ElemSprite* charSprite;
+    std::vector<render::ElemSprite*> tabNodeSprite;
   protected:
     sf::Text tmap;
-    std::vector<render::ElemSprite*> tabNodeSprite;
+    render::ElemSprite* charSprite;
     // Operations
   public:
     WorldmapRenderer (sf::RenderWindow* rwindow);

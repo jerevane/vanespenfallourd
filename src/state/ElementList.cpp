@@ -3,11 +3,12 @@
 #define STATE__ELEMENTLIST__C
 
 #include "ElementList.h"
+#include "Character.h"
 
 namespace state {
 
     ElementList::ElementList() {
-
+        element.push_back(new state::Character("Claude"));
     }
 
 };

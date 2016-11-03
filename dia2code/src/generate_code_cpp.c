@@ -652,7 +652,10 @@ struct stdlib_includes {
    int thread;
    int mutex;
    int sfml;
-   int rend;
+   int introrend;
+   int fightrend;
+   int wmrend;
+   int innrend;
 };
 
 void print_include_stdlib(struct stdlib_includes* si,char* name) {
@@ -674,9 +677,21 @@ void print_include_stdlib(struct stdlib_includes* si,char* name) {
 	   print ("#include \"SFML/Audio.hpp\"\n");
            si->sfml = 1;
        }
-       if (!si->rend && strstr(name,"Renderer")) {
-           print ("#include \"render/Renderer.h\"\n");
-           si->rend = 1;
+       if (!si->introrend && strstr(name,"IntroRenderer")) {
+           print ("#include \"render/IntroRenderer.h\"\n");
+           si->introrend = 1;
+       }
+	if (!si->fightrend && strstr(name,"FightRenderer")) {
+           print ("#include \"render/FightRenderer.h\"\n");
+           si->fightrend = 1;
+       }
+	if (!si->wmrend && strstr(name,"WorldmapRenderer")) {
+           print ("#include \"render/WorldmapRenderer.h\"\n");
+           si->wmrend = 1;
+       }
+	if (!si->innrend && strstr(name,"InnRenderer")) {
+           print ("#include \"render/InnRenderer.h\"\n");
+           si->innrend = 1;
        }
        if (!si->stdlib && strstr(name,"size_t")) {
            print ("#include <stdlib.h>\n");

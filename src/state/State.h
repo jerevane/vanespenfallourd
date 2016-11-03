@@ -15,6 +15,7 @@ namespace instance {
 
 #include "Observer.h"
 #include "StateTypeID.h"
+#include "ElementList.h"
 #include "instance/Screen.h"
 #include "Node.h"
 

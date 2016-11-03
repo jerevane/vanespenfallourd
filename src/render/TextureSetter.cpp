@@ -33,13 +33,11 @@ namespace render {
         {
             i.second->loadFromFile("../res/red_circle.png");
 
-
-            std::cout << "prout" << std::endl;
         }
 
         sf::Texture* tTemp = new sf::Texture;
         elementTextureMap.insert(std::pair<std::string, sf::Texture*>("0_Claude_150_450", tTemp));
-        tTemp->loadFromFile("../res/green_circle.png");
+        tTemp->loadFromFile("../res/Claude_64x64/Claude014.png");
         //elementTextureMap.insert(std::pair<std::string, sf::Texture*>("1_Youenn_0_0", new sf::Texture));
         //Add rest of monsters etc
     }

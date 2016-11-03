@@ -2,35 +2,39 @@
 #ifndef INSTANCE__WORLDMAP__H
 #define INSTANCE__WORLDMAP__H
 
+#include "render/WorldmapRenderer.h"
 #include "SFML/Graphics.hpp"
 #include "SFML/Audio.hpp"
-#include "render/Renderer.h"
 
+namespace render {
+  class WorldmapRenderer;
+};
 namespace state {
   class State;
 };
 namespace sf {
   class RenderWindow;
 };
-namespace render {
-  class Renderer;
-};
 namespace instance {
   class Screen;
 }
 
 #include "Screen.h"
+#include "render/WorldmapRenderer.h"
 
 namespace instance {
 
   /// class Worldmap - Worldmap logic and rendering
   class Worldmap : public instance::Screen {
+    // Associations
     // Attributes
+  public:
+    render::WorldmapRenderer* renderer;
   protected:
     state::State* state;
     // Operations
   public:
-    Worldmap (sf::RenderWindow* window, render::Renderer* renderer);
+    Worldmap (sf::RenderWindow* window, render::WorldmapRenderer* renderer);
     virtual ~Worldmap ();
     void init (state::State* state);
     void eventHandler ();

@@ -11,12 +11,13 @@ namespace instance {
 }
 
 #include <iostream>
+#include <render/IntroRenderer.h>
 #include "Intro.h"
 #include "../state/Element.h"
 
 namespace instance {
 
-    Intro::Intro(sf::RenderWindow* w, render::Renderer* rd) : Screen(w, rd) {
+    Intro::Intro(sf::RenderWindow* w, render::IntroRenderer* rd) : Screen(w), renderer(rd)  {
     }
 
     void Intro::init() {

@@ -3,12 +3,13 @@
 #define INSTANCE__WORLDMAP__C
 
 #include <render/WorldmapRenderer.h>
+#include <iostream>
 #include "Worldmap.h"
 #include "../state.hpp"
 
 namespace instance {
 
-    Worldmap::Worldmap(sf::RenderWindow* w, render::Renderer* rd) : Screen(w, rd) {
+    Worldmap::Worldmap(sf::RenderWindow* w, render::WorldmapRenderer* rd) : Screen(w), renderer(rd) {
     }
 
     Worldmap::~Worldmap() {}
@@ -22,7 +23,40 @@ namespace instance {
 
 
     void Worldmap::eventHandler() {
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+        {
 
+        }
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+        {
+
+        }
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+        {
+            if (!(state->getNode()->getId() <= 0)) {
+                renderer->renderNodeChange(renderer->tabNodeSprite.at((state->getNode()->getId())),
+                                           renderer->tabNodeSprite.at((state->getNode()->getId() - 1)));
+                state->setNode(state->getNode()->getPreviousNode());
+            }
+
+        }
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+        {
+            if (!(state->getNode()->getId() >= 9)) {
+                renderer->renderNodeChange(renderer->tabNodeSprite.at((state->getNode()->getId())),
+                                           renderer->tabNodeSprite.at((state->getNode()->getId() + 1)));
+                state->setNode(state->getNode()->getNextNode());
+            }
+
+
+
+        }
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
+        {
+            //TODO: Launch event
+            //Switch case depending on node id, launch a different fight/event
+            std::cout << "Fight would start if it was implemented" << std::endl;
+        }
     }
 
     void Worldmap::setState(state::State *state) {

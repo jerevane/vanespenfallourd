@@ -19,16 +19,15 @@ namespace instance {
         //dtor
     }
 
-    Screen::Screen(sf::RenderWindow* rw, render::Renderer* rd){
+    Screen::Screen(sf::RenderWindow* rw){
 
         window = rw;
-        renderer = rd;
 
     }
 
 
 
-    std::string Screen::run()
+    std::string Screen::run(render::Renderer* renderer)
     {
         if(window->isOpen())
         {

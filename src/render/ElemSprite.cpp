@@ -13,11 +13,19 @@ namespace sf {
 namespace render {
 
 
-    ElemSprite::ElemSprite(sf::Texture *texture, float px, float py, std::string name, int id) : px(px),
+    ElemSprite::ElemSprite(state::Element* element, sf::Texture *texture, float px, float py, std::string name, int id) : px(px),
                                                                                                  py(py),
+                                                                                                 element(element),
                                                                                                  texture(texture),
                                                                                                  name(name),
                                                                                                  id(id){ }
+
+    ElemSprite::ElemSprite(state::Node *node, sf::Texture *texture, float px, float py, std::string name, int id) : px(px),
+                                                                                                                    py(py),
+                                                                                                                    node(node),
+                                                                                                                    texture(texture),
+                                                                                                                    name(name),
+                                                                                                                    id(id){ }
 
     ElemSprite::~ElemSprite() {
 
@@ -38,6 +46,15 @@ namespace render {
     std::string ElemSprite::getName() {
         return name;
     }
+
+    void ElemSprite::setPositionX(float x) {
+        px = x;
+    }
+
+    void ElemSprite::setPositionY(float y) {
+        py = y;
+    }
+
 };
 
 #endif

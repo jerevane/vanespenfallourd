@@ -29,7 +29,6 @@ namespace instance {
 
     Application::Application() :    RenderWindow(sf::VideoMode(800, 600), "Final Fantastique",sf::Style::Titlebar | sf::Style::Close | sf::Style::Resize),
                                     intro(this, new render::IntroRenderer(this)),
-                                    fight(this, new render::FightRenderer(this)),
                                     worldmap(this, new render::WorldmapRenderer(this)),
                                     inn(this, new render::InnRenderer(this)){
 
@@ -48,15 +47,15 @@ namespace instance {
 
     void Application::play(state::State* state) {
         //What happens when the game is launched
-        intro.run();
+        intro.run(intro.renderer);
         worldmap.init(state);
-        if (worldmap.run() == "fight")
+        if (worldmap.run(worldmap.renderer) == "fight")
         {
 
-        } else if (worldmap.run() == "inn")
+        } else if (worldmap.run(worldmap.renderer) == "inn")
         {
 
-        } else if (worldmap.run() == "intro")
+        } else if (worldmap.run(worldmap.renderer) == "intro")
         {
 
         }

@@ -9,8 +9,12 @@
 namespace sf {
   class Texture;
   class Sprite;
+};
+namespace state {
+  class State;
 }
 
+#include "state/State.h"
 
 namespace render {
 
@@ -19,6 +23,8 @@ namespace render {
     // Attributes
   public:
     sf::Texture* texture;
+    state::Element* element;
+    state::Node* node;
   protected:
     float py;
     float px;
@@ -26,10 +32,13 @@ namespace render {
     int id;
     // Operations
   public:
-    ElemSprite (sf::Texture* texture, float px, float py, std::string name, int id);
+    ElemSprite (state::Element* element, sf::Texture* texture, float px, float py, std::string name, int id);
+    ElemSprite (state::Node* node, sf::Texture* texture, float px, float py, std::string name, int id);
     ~ElemSprite ();
-    float getPositionY ();
     float getPositionX ();
+    float getPositionY ();
+    void setPositionX (float x);
+    void setPositionY (float y);
     int getId ();
     std::string getName ();
   };

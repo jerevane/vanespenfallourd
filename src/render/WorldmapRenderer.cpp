@@ -7,6 +7,7 @@
 #include <sstream>
 #include <iostream>
 #include <assert.h>
+#include <state/Character.h>
 
 namespace sf {
   class Text;
@@ -58,6 +59,8 @@ namespace render {
         tmap.setPosition({ 400, 150 });
         tmap.setOrigin(tmap.getLocalBounds().width/2, tmap.getLocalBounds().height/2);
         
+        //state::Node* currentNode = state->getNode();
+
         for(auto i : tSetter->nodeTextureMap)
         {
             std::string tempStr;
@@ -75,11 +78,14 @@ namespace render {
                 tempArray.push_back(tempChar);
             }
             assert(tempArray.size() == 4);
-            tabNodeSprite.push_back(new render::ElemSprite(i.second,
+            tabNodeSprite.push_back(new render::ElemSprite(new state::Node(0),
+                                                           i.second,
                                                            std::stof(tempArray.at(2)),
                                                            std::stof(tempArray.at(3)),
                                                            tempArray.at(1),
                                                            std::stoi(tempArray.at(0))));
+
+            //currentNode = currentNode->getNextNode();
 
             tempArray.clear();
         }
@@ -109,7 +115,8 @@ namespace render {
             }
             assert(tempArray.size() == 4);
 
-            charSprite = new render::ElemSprite(i.second,
+            charSprite = new render::ElemSprite(new state::Character("Claude"),
+                                                i.second,
                                                 std::stof(tempArray.at(2)),
                                                 std::stof(tempArray.at(3)),
                                                 tempArray.at(1),
@@ -135,7 +142,8 @@ namespace render {
     }
 
     void WorldmapRenderer::renderNodeChange(render::ElemSprite *n1, render::ElemSprite *n2) {
-
+        charSprite->setPositionX(n2->getPositionX());
+        charSprite->setPositionY(n2->getPositionY());
 
 
     }

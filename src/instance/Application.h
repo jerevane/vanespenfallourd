@@ -8,7 +8,6 @@
 namespace instance {
   class Intro;
   class Worldmap;
-  class Fight;
   class Inn;
 };
 namespace state {
@@ -23,7 +22,6 @@ namespace instance {
 
 #include "Intro.h"
 #include "Worldmap.h"
-#include "Fight.h"
 #include "Inn.h"
 #include "state/State.h"
 #include "Screen.h"
@@ -37,7 +35,6 @@ namespace instance {
     sf::Font font;
     Intro intro;
     Worldmap worldmap;
-    Fight fight;
     Inn inn;
     // Operations
   public:

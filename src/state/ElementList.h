@@ -13,7 +13,6 @@ namespace state {
 
 #include "Observer.h"
 #include "Element.h"
-#include "State.h"
 
 namespace state {
 

@@ -2,29 +2,34 @@
 #ifndef INSTANCE__INTRO__H
 #define INSTANCE__INTRO__H
 
+#include "render/IntroRenderer.h"
 #include "SFML/Graphics.hpp"
 #include "SFML/Audio.hpp"
-#include "render/Renderer.h"
 
+namespace render {
+  class IntroRenderer;
+};
 namespace sf {
   class RenderWindow;
-};
-namespace render {
-  class Renderer;
 };
 namespace instance {
   class Screen;
 }
 
 #include "Screen.h"
+#include "render/IntroRenderer.h"
 
 namespace instance {
 
   /// class Intro - Landing screen menu
   class Intro : public instance::Screen {
+    // Associations
+    // Attributes
+  public:
+    render::IntroRenderer* renderer;
     // Operations
   public:
-    Intro (sf::RenderWindow* window, render::Renderer* renderer);
+    Intro (sf::RenderWindow* window, render::IntroRenderer* renderer);
     virtual ~Intro ();
     void init ();
     void eventHandler ();

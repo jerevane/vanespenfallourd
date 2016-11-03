@@ -10,11 +10,12 @@ namespace instance {
   class Screen;
 }
 
+#include <render/InnRenderer.h>
 #include "Inn.h"
 
 namespace instance {
 
-    Inn::Inn(sf::RenderWindow* w, render::Renderer* rd) : Screen(w, rd) {
+    Inn::Inn(sf::RenderWindow* w, render::InnRenderer* rd) : Screen(w), renderer(rd)  {
 
     }
 
