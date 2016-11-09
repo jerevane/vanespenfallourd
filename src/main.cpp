@@ -25,8 +25,9 @@ int main(int argc,char* argv[])
     n6->setNextNode(n7);
     state::Node* n8 = new state::Node(n7, 7);
     n7->setNextNode(n8);
-    n8->setNextNode(n8);
-
+    state::Node* n9 = new state::Node(n8, 8);
+    n8->setNextNode(n9);
+    n9->setNextNode(n9);
 
     //Init ElementList
     state::ElementList* e1 = new state::ElementList();

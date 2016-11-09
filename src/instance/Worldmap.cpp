@@ -42,7 +42,7 @@ namespace instance {
         }
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
         {
-            if (!(state->getNode()->getId() >= 9)) {
+            if (!(state->getNode()->getId() >= 8)) {
                 renderer->renderNodeChange(renderer->tabNodeSprite.at((state->getNode()->getId())),
                                            renderer->tabNodeSprite.at((state->getNode()->getId() + 1)));
                 state->setNode(state->getNode()->getNextNode());
@@ -56,6 +56,10 @@ namespace instance {
             //TODO: Launch event
             //Switch case depending on node id, launch a different fight/event
             std::cout << "Fight would start if it was implemented" << std::endl;
+            render::FightRenderer* fightR = new render::FightRenderer(window);
+            Fight* f1 = new Fight(window, fightR, state);
+            f1->init();
+            f1->run(fightR);
         }
     }
 

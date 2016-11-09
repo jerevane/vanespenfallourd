@@ -3,9 +3,11 @@
 #define STATE__STATE__H
 
 #include <vector>
+#include <map>
 
 namespace state {
   class Node;
+  class Element;
   class ElementList;
   class Observer;
 };
@@ -27,10 +29,14 @@ namespace state {
     // Attributes
   public:
     std::vector<state::Node*> tabNode;
+    std::map<int,int> turnOrderMap;
+    Element* currentTurn;
+      std::map <int, int>::reverse_iterator iter;
   protected:
     Node* node;
     ElementList* elementlist;
     int Id;
+    bool playerFinishedTurn;
     // Operations
   public:
     State ();
@@ -43,6 +49,9 @@ namespace state {
     int getId ();
     void setId (int id);
     void run (int id);
+    void playTurn (Element* element);
+    bool getPlayerFinishedTurn ();
+    void setPlayerFinishedTurn (bool pft);
   };
 
 };

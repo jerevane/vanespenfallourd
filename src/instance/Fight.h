@@ -2,13 +2,16 @@
 #ifndef INSTANCE__FIGHT__H
 #define INSTANCE__FIGHT__H
 
-#include "render/Renderer.h"
-#include <map>
+#include "render/FightRenderer.h"
+#include <string>
 #include "SFML/Graphics.hpp"
 #include "SFML/Audio.hpp"
 
 namespace render {
   class FightRenderer;
+};
+namespace state {
+  class State;
 };
 namespace sf {
   class RenderWindow;
@@ -29,10 +32,11 @@ namespace instance {
   public:
     render::FightRenderer* renderer;
   protected:
-    std::map<int, int> turnOrderMap;
+    std::string currentAction;
+    state::State* state;
     // Operations
   public:
-    Fight (sf::RenderWindow* window, render::FightRenderer* renderer);
+    Fight (sf::RenderWindow* window, render::FightRenderer* renderer, state::State* state);
     virtual ~Fight ();
     void init ();
     void eventHandler ();

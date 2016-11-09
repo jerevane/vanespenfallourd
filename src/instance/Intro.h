@@ -2,7 +2,7 @@
 #ifndef INSTANCE__INTRO__H
 #define INSTANCE__INTRO__H
 
-#include "render/Renderer.h"
+#include "render/IntroRenderer.h"
 #include "SFML/Graphics.hpp"
 #include "SFML/Audio.hpp"
 

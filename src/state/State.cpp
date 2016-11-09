@@ -46,6 +46,32 @@ namespace state {
         Id = id;
     }
 
+    void State::playTurn(Element *element) {
+
+        setPlayerFinishedTurn(false);
+
+        if (element->getIsCharacter())
+        {
+            //Tour du joueur
+            while(!getPlayerFinishedTurn())
+            {
+                //Waits for keyboard presses
+            }
+        } else
+        {
+            //IA, soit l'appeller soit appeller les méthodes
+        }
+
+    }
+
+    bool State::getPlayerFinishedTurn() {
+        return playerFinishedTurn;
+    }
+
+    void State::setPlayerFinishedTurn(bool pft) {
+        playerFinishedTurn = pft;
+    }
+
 };
 
 #endif

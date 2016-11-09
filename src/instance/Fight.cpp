@@ -19,30 +19,38 @@ namespace instance {
 namespace instance
 {
 
-    Fight::Fight(sf::RenderWindow* w, render::FightRenderer* rd) : Screen(w), renderer(rd) { }
+    Fight::Fight(sf::RenderWindow* w, render::FightRenderer* rd, state::State* state) : Screen(w),
+                                                                                        renderer(rd),
+                                                                                        state(state) 
+    {
+        state->playTurn(state->getElementList()->element.at(state->iter->second));
+        ++state->iter;
+    }
 
     void Fight::init()
     {
-        state::ElementList* eList = new state::ElementList;
+        
 
-        for (auto i = 0; i <= eList->element.size();i++)
+        for (auto i = 0; i <= state->getElementList()->element.size();i++)
         {
             //Sort elements by agility to determine turn order.
-            turnOrderMap.insert(std::pair<int, int>(eList->element.at(i)->getAgility(),i));
+            state->turnOrderMap.insert(std::pair<int, int>(state->getElementList()->element.at(i)->getAgility(),i));
 
-            if (eList->element.at(i)->getIsCharacter())
+            if (state->getElementList()->element.at(i)->getIsCharacter())
             {
-                if (!eList->element.at(i)->getIsDead())
+                if (!state->getElementList()->element.at(i)->getIsDead())
                 {
                     //No use yet, just in case
                 } else
                 {
                     //If character is dead, bring back to life with 1HP
-                    eList->element.at(i)->setIsDead(false);
-                    eList->element.at(i)->setHP(1);
+                    state->getElementList()->element.at(i)->setIsDead(false);
+                    state->getElementList()->element.at(i)->setHP(1);
                 }
             }
         }
+        //Sets the iterator to loop through the map following the turn order
+        state->iter = state->turnOrderMap.rbegin();
     }
 
 
@@ -50,27 +58,78 @@ namespace instance
 
     void Fight::eventHandler()
     {
-        if(event.type == sf::Event::KeyPressed)
+        if((event.type == sf::Event::KeyPressed)&(state->currentTurn->getIsCharacter()))
         {
             if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
             {
-
+                if (currentAction == "attack")
+                {
+                    currentAction = "overdrive";
+                    //update UI
+                }
+                if (currentAction == "spell")
+                {
+                    currentAction = "item";
+                    //update UI
+                }
             }
             if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
             {
-
+                if (currentAction == "item")
+                {
+                    currentAction = "spell";
+                    //update UI
+                }
+                if (currentAction == "overdrive")
+                {
+                    currentAction = "attack";
+                    //update UI
+                }
             }
             if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
             {
-
+                if (currentAction == "item")
+                {
+                    currentAction = "overdrive";
+                    //update UI
+                }
+                if (currentAction == "spell")
+                {
+                    currentAction = "attack";
+                    //update UI
+                }
             }
             if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
             {
-
+                if (currentAction == "attack")
+                {
+                    currentAction = "spell";
+                    //update UI
+                }
+                if (currentAction == "overdrive")
+                {
+                    currentAction = "item";
+                    //update UI
+                }
             }
             if(sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
             {
+                if (currentAction == "item")
+                {
 
+                }
+                if (currentAction == "overdrive")
+                {
+
+                }
+                if (currentAction == "spell")
+                {
+
+                }
+                if (currentAction == "attack")
+                {
+
+                }
             }
 
 
