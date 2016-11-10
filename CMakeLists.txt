@@ -21,12 +21,12 @@ ENDIF(CMAKE_COMPILER_IS_GNUCC)
 # Generate headers
 set(DIA2CODE "${PROJECT_SOURCE_DIR}/dia2code/bin/dia2code")
 exec_program(${DIA2CODE} ARGS -d ../src -t cpp -cl Ability,AbilityTypeID,SphereGrid,Item,Character,Element,Monster,ItemTypeID,CharacterTypeID,SphereGridTypeID,MonsterTypeID,ElementFactory,AElementAlloc,State,Observer,ElementList,ElementAlloc,Node,StateTypeID ../src/state.dia)
-exec_program(${DIA2CODE} ARGS -d ../src -t cpp -cl Application,Screen,Intro,Fight,Worldmap,Inn ../src/instance.dia)
+exec_program(${DIA2CODE} ARGS -d ../src -t cpp -cl Application,Screen,Intro,Fight,Worldmap,Inn,Rules,Action ../src/instance.dia)
 exec_program(${DIA2CODE} ARGS -d ../src -t cpp -cl Renderer,ClaudeUI,YouennUI,IntroRenderer,FightRenderer,WorldmapRenderer,ElemSprite,InnRenderer,TextureSetter ../src/render.dia)
+exec_program(${DIA2CODE} ARGS -d ../src -t cpp -cl AI,RandomChoice ../src/ai.dia)
 
 # Sources
 file(GLOB_RECURSE main_sources src/*.cpp)
-
 
 # Executables
 add_executable(run ${main_sources})

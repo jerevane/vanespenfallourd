@@ -31,7 +31,7 @@ namespace state {
     std::vector<state::Node*> tabNode;
     std::map<int,int> turnOrderMap;
     Element* currentTurn;
-      std::map <int, int>::reverse_iterator iter;
+    std::map<int,int>::reverse_iterator iter;
   protected:
     Node* node;
     ElementList* elementlist;

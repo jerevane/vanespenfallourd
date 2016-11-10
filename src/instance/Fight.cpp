@@ -136,6 +136,18 @@ namespace instance
         }
     }
 
+    state::State *Fight::getState() {
+        return state;
+    }
+
+    Rules *Fight::getRules() {
+        return rules;
+    }
+
+    void Fight::setRules(Rules *rules) {
+        this->rules = rules;
+    }
+
 };
 
 #endif

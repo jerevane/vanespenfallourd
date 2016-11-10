@@ -3,10 +3,10 @@
 #define STATE__ELEMENT__H
 
 #include <string>
+#include <vector>
 
 namespace state {
   class Ability;
-  class Element;
 }
 
 #include "Ability.h"
@@ -30,15 +30,11 @@ namespace state {
     int Level;
     Ability abilities;
     std::string Dot;
-    std::string name;
     bool IsCharacter;
+    std::string name;
     // Operations
   public:
     Element ();
-    void SpellCast (int ability, Element* caster, Element* target);
-    void Attack (Element* caster, Element* target);
-    void TakeDamage (std::string damage, Element* target);
-    void Heal (int heal, Element* target);
     int getHP ();
     void setHP (int hp);
     int getMP ();
@@ -67,6 +63,7 @@ namespace state {
     void setIsCharacter (bool ischaracter);
     void setName (std::string name);
     Ability getAbility ();
+    std::vector<int> CanUse ();
   };
 
 };

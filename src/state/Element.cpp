@@ -19,76 +19,6 @@ namespace state {
         IsCharacter = false;
     }
 
-    void Element::SpellCast(int ability, Element *caster, Element *target) {
-        std::string result;
-        result = caster->abilities.LaunchAbility(ability, caster);
-        TakeDamage(result,target);
-    }
-
-    void Element::Attack(Element *caster, Element *target) {
-        std::string result = "P_";
-        int dmg;
-        dmg = caster->getStrength() *2;
-        result = result + std::to_string(dmg) + "_X_-";
-        TakeDamage(result, target);
-    }
-
-    void Element::TakeDamage(std::string damage, Element *target) {
-        std::string delimiter = "_";
-        std::string typedmg = damage.substr(0, damage.find(delimiter));
-        std::string dmg = damage.substr(1, damage.find(delimiter));
-        std::string dot = damage.substr(2, damage.find(delimiter));
-        std::string isHeal = damage.substr(3, damage.find(delimiter));
-        std::string dot_target = target->getDot();
-        int dot_target_dmg = stoi(dot_target.substr(0,dot_target.find(delimiter)));
-        int dot_target_turn = stoi(dot_target.substr(1,dot_target.find(delimiter)));
-        int temp = stoi(dmg);
-        // Si Soin
-        if(isHeal.compare("+")){
-            Heal(temp, target);
-        }
-            // Sinon damage
-        else{
-            // Prise en charge resistance + dot
-            if(typedmg.compare("M") ==0) {
-                temp = temp - (int) (temp * target->getMagicResist());
-            }
-            else {
-                temp = temp - (int) (temp * target->getPhysResist());
-            }
-            temp = target->getHP() - temp - stoi(dot_target.substr(0,dot_target.find(delimiter)));
-            if(temp<=0){
-                // Si mort alors reset dot et set IsDead
-                target->setIsDead(true);
-                target->setHP(0);
-                target->setDot("0_0");
-            }
-            else {
-                // Inflige les degats et prise en charge dot
-                target->setHP(temp);
-                // Si tech inflige dot
-                if (dot.compare("0") != 0) {
-                    target->setDot(dot + "4");
-                }
-                else{
-                    // Si dot enlève un tour au dot
-                    if(dot_target_turn !=0){
-                        dot_target_turn = dot_target_turn -1;
-                        target->setDot(std::to_string(dot_target_dmg)+std::to_string(dot_target_turn));
-                    }
-                    else target->setDot("0_0");
-                }
-            }
-        }
-    }
-
-    void Element::Heal(int heal, Element *target) {
-        int hp_target = target->getHP();
-        if(hp_target+heal>= target->getMaxHP()){
-            target->setHP(target->getMaxHP());
-        }
-        else target->setHP(hp_target+heal);
-    }
 
     int Element::getHP() {
         return HP;
@@ -203,6 +133,22 @@ namespace state {
 
     Ability Element::getAbility() {
         return abilities;
+    }
+
+    std::vector<int> Element::CanUse() {
+        std::map<int,bool> tab_abilities = abilities.getAbility();
+        std::vector<int> tab_final ;
+        tab_final.clear();
+        for(int i =0; i<15;++i){
+            if(tab_abilities[i]==true){
+                if(getMP()>=10){
+                    tab_final.push_back(i);
+                }
+            }
+
+        }
+
+        return tab_final;
     }
 
 

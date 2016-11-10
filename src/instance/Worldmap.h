@@ -2,7 +2,7 @@
 #ifndef INSTANCE__WORLDMAP__H
 #define INSTANCE__WORLDMAP__H
 
-#include "render/WorldmapRenderer.h"
+#include "render/Renderer.h"
 #include "SFML/Graphics.hpp"
 #include "SFML/Audio.hpp"
 

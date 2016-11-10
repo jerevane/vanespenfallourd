@@ -17,7 +17,7 @@ namespace state {
   class Ability {
     // Associations
     // Attributes
-  public:
+  protected:
     std::map<int,bool> abilities;
     // Operations
   public:
