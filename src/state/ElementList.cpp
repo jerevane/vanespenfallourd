@@ -4,11 +4,14 @@
 
 #include "ElementList.h"
 #include "Character.h"
+#include "Monster.h"
 
 namespace state {
 
     ElementList::ElementList() {
         element.push_back(new state::Character("Claude"));
+        element.push_back(new state::Monster());
+        element.push_back(new state::Monster());
     }
 
 };

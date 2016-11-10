@@ -49,14 +49,17 @@ namespace instance {
         //What happens when the game is launched
         intro.run(intro.renderer);
         worldmap.init(state);
-        if (worldmap.run(worldmap.renderer) == "fight")
+        while(1)
         {
+            std::string tempstr = worldmap.run(worldmap.renderer);
 
-        } else if (worldmap.run(worldmap.renderer) == "inn")
-        {
-
-        } else if (worldmap.run(worldmap.renderer) == "intro")
-        {
+            if (tempstr == "fight")
+            {
+                render::FightRenderer* fightR = new render::FightRenderer(this);
+                Fight* f1 = new Fight(this, fightR, state);
+                f1->init();
+                f1->run(fightR);
+            }
 
         }
 

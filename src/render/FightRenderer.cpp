@@ -27,17 +27,21 @@ namespace render {
     void FightRenderer::render()
     {
         window->draw(spriteScreen);
+        ui->display();
     }
 
     void FightRenderer::setBackground() {
         spriteScreen.setTexture(background);
-
+        spriteScreen.setScale(0.60, 0.65);
         spriteScreen.setOrigin((int)background.getSize().x/2, (int)background.getSize().y/2);
         spriteScreen.move(400, 300);
     }
 
     void FightRenderer::initRender() {
-
+        ui = new FightUI(window);
+        sf::Text temptxt;
+        temptxt.setString(std::to_string(state->currentTurn->getHP()));
+        ui->setHp(temptxt);
     }
 
 };

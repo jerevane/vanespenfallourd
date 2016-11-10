@@ -6,17 +6,15 @@
 #include "SFML/Audio.hpp"
 
 namespace render {
+  class FightUI;
   class Renderer;
-  class YouennUI;
-  class ClaudeUI;
 };
 namespace instance {
   class Fight;
 }
 
 #include "Renderer.h"
-#include "YouennUI.h"
-#include "ClaudeUI.h"
+#include "FightUI.h"
 #include "instance/Fight.h"
 
 namespace render {
@@ -24,6 +22,9 @@ namespace render {
   /// class FightRenderer - 
   class FightRenderer : public render::Renderer {
     // Associations
+    // Attributes
+  public:
+    FightUI* ui;
     // Operations
   public:
     FightRenderer (sf::RenderWindow* window);

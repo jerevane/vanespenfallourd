@@ -3,7 +3,6 @@
 #define STATE__STATE__H
 
 #include <vector>
-#include <map>
 
 namespace state {
   class Node;
@@ -29,9 +28,7 @@ namespace state {
     // Attributes
   public:
     std::vector<state::Node*> tabNode;
-    std::map<int,int> turnOrderMap;
     Element* currentTurn;
-    std::map<int,int>::reverse_iterator iter;
   protected:
     Node* node;
     ElementList* elementlist;

@@ -7,8 +7,7 @@
 #include "render/InnRenderer.h"
 #include "render/IntroRenderer.h"
 #include "render/FightRenderer.h"
-#include "render/ClaudeUI.h"
-#include "render/YouennUI.h"
+#include "render/FightUI.h"
 #include "render/TextureSetter.h"
 #include "render/ElemSprite.h"
 #endif

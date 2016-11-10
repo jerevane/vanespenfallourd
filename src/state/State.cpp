@@ -48,6 +48,7 @@ namespace state {
 
     void State::playTurn(Element *element) {
 
+        currentTurn = element;
         setPlayerFinishedTurn(false);
 
         if (element->getIsCharacter())

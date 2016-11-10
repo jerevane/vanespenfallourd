@@ -56,10 +56,8 @@ namespace instance {
             //TODO: Launch event
             //Switch case depending on node id, launch a different fight/event
             std::cout << "Fight would start if it was implemented" << std::endl;
-            render::FightRenderer* fightR = new render::FightRenderer(window);
-            Fight* f1 = new Fight(window, fightR, state);
-            f1->init();
-            f1->run(fightR);
+            nextScreen = "fight";
+            needScreenChange = true;
         }
     }
 

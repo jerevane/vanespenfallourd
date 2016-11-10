@@ -23,18 +23,21 @@ namespace instance
                                                                                         renderer(rd),
                                                                                         state(state) 
     {
-        state->playTurn(state->getElementList()->element.at(state->iter->second));
-        ++state->iter;
+        //state->playTurn(state->getElementList()->element.at(state->iter->second));
+        //++state->iter;
     }
 
     void Fight::init()
     {
-        
 
-        for (auto i = 0; i <= state->getElementList()->element.size();i++)
+        setRules(new Rules(state, false, true));
+        rules->init();
+        state->playTurn(rules->getTurnList().at(0));
+
+        for (auto i = 0; i < state->getElementList()->element.size();i++)
         {
             //Sort elements by agility to determine turn order.
-            state->turnOrderMap.insert(std::pair<int, int>(state->getElementList()->element.at(i)->getAgility(),i));
+            //state->turnOrderMap.insert(std::pair<int, int>(state->getElementList()->element.at(i)->getAgility(),i));
 
             if (state->getElementList()->element.at(i)->getIsCharacter())
             {
@@ -50,7 +53,7 @@ namespace instance
             }
         }
         //Sets the iterator to loop through the map following the turn order
-        state->iter = state->turnOrderMap.rbegin();
+        //state->iter = state->turnOrderMap.rbegin();
     }
 
 
