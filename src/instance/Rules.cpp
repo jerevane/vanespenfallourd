@@ -61,7 +61,7 @@ namespace instance {
         }
 
         i=0;j=1;
-        while(i<state->getElementList()->element.size()){
+        while(i<state->getElementList()->element.size()-1){
             if(tab_agi_element[i]<tab_agi_element[j]){
                 std::swap(tab_agi_element[i],tab_agi_element[j]);
                 std::swap(tab_temp[i], tab_temp[j]);
