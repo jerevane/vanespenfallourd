@@ -9,11 +9,14 @@
 namespace render {
   class WorldmapRenderer;
 };
+namespace sf {
+  class RenderWindow;
+};
 namespace state {
   class State;
 };
-namespace sf {
-  class RenderWindow;
+namespace engine {
+  class Engine;
 };
 namespace instance {
   class Screen;
@@ -30,13 +33,10 @@ namespace instance {
     // Attributes
   public:
     render::WorldmapRenderer* renderer;
-  protected:
-    state::State* state;
     // Operations
   public:
-    Worldmap (sf::RenderWindow* window, render::WorldmapRenderer* renderer);
+    Worldmap (sf::RenderWindow* window, render::WorldmapRenderer* renderer, state::State* state, engine::Engine* engine);
     virtual ~Worldmap ();
-    void init (state::State* state);
     void eventHandler ();
     void setState (state::State* state);
     void init ();

@@ -8,6 +8,4 @@
 #include "instance/Fight.h"
 #include "instance/Inn.h"
 #include "instance/Application.h"
-#include "instance/Rules.h"
-#include "instance/Action.h"
 #endif

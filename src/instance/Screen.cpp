@@ -19,25 +19,28 @@ namespace instance {
         //dtor
     }
 
-    Screen::Screen(sf::RenderWindow* rw){
+    Screen::Screen(sf::RenderWindow* rw, state::State* state, engine::Engine* engine){
 
+        this->engine = engine;
+        this->state = state;
         window = rw;
 
     }
 
 
 
-    std::string Screen::run(render::Renderer* renderer)
+    std::string Screen::run(render::Renderer* renderer, state::State* state)
     {
         if(window->isOpen())
         {
-            while(!needScreenChange)
+            while(!state->needScreenChange)
             {
                 while (window->pollEvent(event))
                 {
                     if (event.type == sf::Event::Closed || sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
                     {
-                        needScreenChange = true;
+
+                        state->needScreenChange = true;
                         window->close();
                         std::cout << "System closed" << std::endl;
                         break;
@@ -50,7 +53,7 @@ namespace instance {
                 renderer->render();
                 window->display();
             }
-            return nextScreen;
+            return state->nextScreen;
         }
 
     }

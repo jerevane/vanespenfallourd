@@ -5,12 +5,12 @@
 #include "SFML/Graphics.hpp"
 #include "SFML/Audio.hpp"
 
+namespace state {
+  class State;
+};
 namespace sf {
   class Texture;
   class Sprite;
-};
-namespace state {
-  class State;
 };
 namespace render {
   class TextureSetter;
@@ -29,12 +29,13 @@ namespace render {
   class Renderer {
     // Associations
     // Attributes
+  public:
+    state::State* state;
   protected:
     sf::Texture background;
     sf::Font font;
     sf::RenderWindow* window;
     sf::Sprite spriteScreen;
-    state::State* state;
     TextureSetter* texturesetter;
     // Operations
   public:

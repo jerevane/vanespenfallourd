@@ -27,10 +27,10 @@ namespace instance {
 
 
 
-    Application::Application() :    RenderWindow(sf::VideoMode(800, 600), "Final Fantastique",sf::Style::Titlebar | sf::Style::Close | sf::Style::Resize),
-                                    intro(this, new render::IntroRenderer(this)),
-                                    worldmap(this, new render::WorldmapRenderer(this)),
-                                    inn(this, new render::InnRenderer(this)){
+    Application::Application(state::State* state, engine::Engine* engine) :    RenderWindow(sf::VideoMode(800, 600), "Final Fantastique",sf::Style::Titlebar | sf::Style::Close | sf::Style::Resize),
+                                    intro(this, new render::IntroRenderer(this), state, engine),
+                                    worldmap(this, new render::WorldmapRenderer(this), state, engine),
+                                    inn(this, new render::InnRenderer(this), state, engine){
 
       std::cout << "Starting game" << std::endl;
 
@@ -45,20 +45,21 @@ namespace instance {
 
     }
 
-    void Application::play(state::State* state) {
+    void Application::play(state::State* state, engine::Engine* engine) {
         //What happens when the game is launched
-        intro.run(intro.renderer);
-        worldmap.init(state);
+        intro.run(intro.renderer, state);
+        worldmap.init();
         while(1)
         {
-            std::string tempstr = worldmap.run(worldmap.renderer);
+            std::string tempstr = worldmap.run(worldmap.renderer, state);
 
             if (tempstr == "fight")
             {
                 render::FightRenderer* fightR = new render::FightRenderer(this);
-                Fight* f1 = new Fight(this, fightR, state);
+                fightR->state = state;
+                Fight* f1 = new Fight(this, fightR, state, engine);
                 f1->init();
-                f1->run(fightR);
+                f1->run(fightR, state);
             }
 
         }

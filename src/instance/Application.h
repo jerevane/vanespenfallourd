@@ -13,6 +13,9 @@ namespace instance {
 namespace state {
   class State;
 };
+namespace engine {
+  class Engine;
+};
 namespace sf {
   class RenderWindow;
 };
@@ -23,6 +26,7 @@ namespace instance {
 #include "Intro.h"
 #include "Worldmap.h"
 #include "Inn.h"
+#include "engine/Engine.h"
 #include "state/State.h"
 #include "Screen.h"
 
@@ -38,9 +42,9 @@ namespace instance {
     Inn inn;
     // Operations
   public:
-    void play (state::State* state);
+    void play (state::State* state, engine::Engine* engine);
     ~Application ();
-    Application ();
+    Application (state::State* state, engine::Engine* engine);
   };
 
 };

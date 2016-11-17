@@ -24,6 +24,8 @@ exec_program(${DIA2CODE} ARGS -d ../src -t cpp -cl Ability,AbilityTypeID,SphereG
 exec_program(${DIA2CODE} ARGS -d ../src -t cpp -cl Application,Screen,Intro,Fight,Worldmap,Inn,Rules,Action ../src/instance.dia)
 exec_program(${DIA2CODE} ARGS -d ../src -t cpp -cl Renderer,IntroRenderer,FightRenderer,WorldmapRenderer,FightUI,ElemSprite,InnRenderer,TextureSetter ../src/render.dia)
 exec_program(${DIA2CODE} ARGS -d ../src -t cpp -cl AI,RandomChoice ../src/ai.dia)
+exec_program(${DIA2CODE} ARGS -d ../src -t cpp -cl Rules,Command,Action,MoveInUI,Engine ../src/engine.dia)
+
 
 # Sources
 file(GLOB_RECURSE main_sources src/*.cpp)

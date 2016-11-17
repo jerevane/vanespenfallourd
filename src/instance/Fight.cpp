@@ -13,26 +13,25 @@ namespace instance {
 #include "Fight.h"
 #include <map>
 #include <render/FightRenderer.h>
+#include <iostream>
 #include "../state/ElementList.h"
 #include "../state/Element.h"
 
 namespace instance
 {
 
-    Fight::Fight(sf::RenderWindow* w, render::FightRenderer* rd, state::State* state) : Screen(w),
-                                                                                        renderer(rd),
-                                                                                        state(state) 
+    Fight::Fight(sf::RenderWindow* w, render::FightRenderer* rd,
+                 state::State* state, engine::Engine* engine) : Screen(w, state, engine), renderer(rd)
     {
-        //state->playTurn(state->getElementList()->element.at(state->iter->second));
+        //state->turnInit(state->getElementList()->element.at(state->iter->second));
         //++state->iter;
     }
 
     void Fight::init()
     {
-
-        setRules(new Rules(state, false, true));
-        rules->init();
-        state->playTurn(rules->getTurnList().at(0));
+        state->needScreenChange = false;
+        std::cout << std::to_string(engine->getRules().getTurnList().size()) << std::endl;
+        engine->turnInit(state->getElementList()->element.at(0));
 
         for (auto i = 0; i < state->getElementList()->element.size();i++)
         {
@@ -65,72 +64,84 @@ namespace instance
         {
             if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
             {
-                if (currentAction == "attack")
+                if (state->currentAction == "attack")
                 {
-                    currentAction = "overdrive";
+                    engine::MoveInUI* cmd = new engine::MoveInUI();
+                    cmd->setChange("overdrive");
                     //update UI
                 }
-                if (currentAction == "spell")
+                if (state->currentAction == "spell")
                 {
-                    currentAction = "item";
+                    engine::MoveInUI* cmd = new engine::MoveInUI();
+                    cmd->setChange("item");
                     //update UI
                 }
             }
             if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
             {
-                if (currentAction == "item")
+                if (state->currentAction == "item")
                 {
-                    currentAction = "spell";
+                    engine::MoveInUI* cmd = new engine::MoveInUI();
+                    cmd->setChange("spell");
                     //update UI
                 }
-                if (currentAction == "overdrive")
+                if (state->currentAction == "overdrive")
                 {
-                    currentAction = "attack";
+                    engine::MoveInUI* cmd = new engine::MoveInUI();
+                    cmd->setChange("attack");
                     //update UI
                 }
             }
             if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
             {
-                if (currentAction == "item")
+                if (state->currentAction == "item")
                 {
-                    currentAction = "overdrive";
+                    engine::MoveInUI* cmd = new engine::MoveInUI();
+                    cmd->setChange("overdrive");
                     //update UI
                 }
-                if (currentAction == "spell")
+                if (state->currentAction == "spell")
                 {
-                    currentAction = "attack";
+                    engine::MoveInUI* cmd = new engine::MoveInUI();
+                    cmd->setChange("attack");
                     //update UI
                 }
             }
             if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
             {
-                if (currentAction == "attack")
+                if (state->currentAction == "attack")
                 {
-                    currentAction = "spell";
+                    engine::MoveInUI* cmd = new engine::MoveInUI();
+                    cmd->setChange("spell");
                     //update UI
                 }
-                if (currentAction == "overdrive")
+                if (state->currentAction == "overdrive")
                 {
-                    currentAction = "item";
+                    engine::MoveInUI* cmd = new engine::MoveInUI();
+                    cmd->setChange("item");
                     //update UI
                 }
             }
             if(sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
             {
-                if (currentAction == "item")
+                if (state->currentAction == "item")
                 {
+                    state->setPlayerFinishedTurn(true);
+                }
+                if (state->currentAction == "overdrive")
+                {
+                    state->setPlayerFinishedTurn(true);
 
                 }
-                if (currentAction == "overdrive")
+                if (state->currentAction == "spell")
                 {
+                    state->setPlayerFinishedTurn(true);
 
                 }
-                if (currentAction == "spell")
+                if (state->currentAction == "attack")
                 {
 
-                }
-                if (currentAction == "attack")
-                {
+                    state->setPlayerFinishedTurn(true);
 
                 }
             }
@@ -141,14 +152,6 @@ namespace instance
 
     state::State *Fight::getState() {
         return state;
-    }
-
-    Rules *Fight::getRules() {
-        return rules;
-    }
-
-    void Fight::setRules(Rules *rules) {
-        this->rules = rules;
     }
 
 };

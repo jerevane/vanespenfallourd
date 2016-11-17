@@ -6,6 +6,12 @@
 #include "SFML/Audio.hpp"
 #include <string>
 
+namespace engine {
+  class Engine;
+};
+namespace state {
+  class State;
+};
 namespace sf {
   class RenderWindow;
 };
@@ -14,11 +20,19 @@ namespace render {
 };
 namespace state {
   class Element;
-  class State;
+};
+namespace engine {
+  class Command;
+  class MoveInUI;
+  class Action;
 }
 
+#include "engine/Engine.h"
 #include "state/Element.h"
 #include "state/State.h"
+#include "engine/Command.h"
+#include "engine/MoveInUI.h"
+#include "engine/Action.h"
 #include "render/Renderer.h"
 
 namespace instance {
@@ -27,18 +41,19 @@ namespace instance {
   class Screen {
     // Associations
     // Attributes
+  public:
+    engine::Engine* engine;
+    state::State* state;
   protected:
     sf::RenderWindow* window;
-    bool needScreenChange;
     sf::Event event;
-    std::string nextScreen;
     // Operations
   public:
-    Screen (sf::RenderWindow* rwindow);
+    Screen (sf::RenderWindow* rwindow, state::State* state, engine::Engine* engine);
     virtual ~Screen ();
     virtual void init () = 0;
     virtual void eventHandler () = 0;
-    std::string run (render::Renderer* rd);
+    std::string run (render::Renderer* rd, state::State* state);
     void setNextScreen (std::string nScreen);
   };
 

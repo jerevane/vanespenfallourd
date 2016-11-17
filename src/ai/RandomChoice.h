@@ -16,12 +16,15 @@ namespace ai {
 
   /// class RandomChoice - 
   class RandomChoice : public ai::AI {
+    // Attributes
+  public:
+    engine::Engine* engine;
     // Operations
   public:
     RandomChoice ();
     ~RandomChoice ();
     void run ();
-    RandomChoice (instance::Fight* fight);
+    RandomChoice (instance::Fight* fight, engine::Engine* engine);
   };
 
 };
