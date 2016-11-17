@@ -36,7 +36,7 @@ namespace instance {
         std::string result = "P_";
         int dmg;
         dmg = caster->getStrength() *2;
-        result = result + std::to_string(dmg) + "_X_-";
+        result = result + std::to_string(dmg) + "_0_-";
         TakeDamage(result, target);
     }
 

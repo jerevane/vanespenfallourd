@@ -2,7 +2,12 @@
 #ifndef STATE__ITEM__H
 #define STATE__ITEM__H
 
+#include <map>
 #include <string>
+
+namespace state {
+  class Element;
+}
 
 #include "ItemTypeID.h"
 
@@ -12,14 +17,18 @@ namespace state {
   class Item {
     // Associations
     // Attributes
-  public:
-    int Id;
+  protected:
+    std::map<int, int> items;
     // Operations
   public:
-    Item ();
-    Item (int Id);
-    std::string UseItem ();
-    ~Item ();
+    void AddItem (int Id);
+    std::string UseItem (Element* target, int id);
+    std::map<int,int> getItem ();
+    std::string POtion (Element* target);
+    std::string SUperPotion (Element* target);
+    std::string REvive (Element* target);
+    std::string ETher (Element* target);
+    void init ();
   };
 
 };

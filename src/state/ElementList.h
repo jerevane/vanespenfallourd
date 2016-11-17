@@ -6,7 +6,6 @@
 
 namespace state {
   class Element;
-  class State;
   class ElementFactory;
   class Observer;
 }
@@ -23,7 +22,6 @@ namespace state {
   public:
     std::vector<Element*> element;
   protected:
-    State* state;
     ElementFactory* factory;
     // Operations
   public:

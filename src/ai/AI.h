@@ -5,8 +5,15 @@
 
 namespace instance {
   class Fight;
+};
+namespace state {
+  class Element;
+};
+namespace ai {
+  class ChoiceList;
 }
 
+#include "ChoiceList.h"
 #include "instance/Fight.h"
 
 namespace ai {
@@ -21,6 +28,7 @@ namespace ai {
     int Id;
     bool Notify;
     state::Element* ChoiceTarget;
+    ChoiceList* choiceList;
     // Operations
   public:
     AI ();

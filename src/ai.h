@@ -4,4 +4,6 @@
 
 #include "ai/AI.h"
 #include "ai/RandomChoice.h"
+#include "ai/ChoiceList.h"
+#include "ai/RandomGoodChoice.h"
 #endif
