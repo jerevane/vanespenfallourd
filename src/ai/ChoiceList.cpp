@@ -18,19 +18,19 @@ namespace ai {
 
     }
 
-    ChoiceList::ChoiceList(instance::Fight *fight) {
+    ChoiceList::ChoiceList(engine::Engine* engine) {
         allAction.clear();
         ennemyTarget.clear();
         allyTarget.clear();
 
-        allAction = fight->getRules()->getTurnList().at(0)->CanUse();
+        allAction = engine->getRules().getTurnList().at(0)->CanUse();
 
-        for(int i=1; i<fight->getRules()->getTurnList().size();++i) {
-            if (fight->getRules()->getTurnList().at(0)->getIsCharacter() ==
-                !fight->getRules()->getTurnList()[i]->getIsCharacter()) {
-                ennemyTarget.push_back(fight->getRules()->getTurnList().at(i));
+        for(int i=1; i<engine->getRules().getTurnList().size();++i) {
+            if (engine->getRules().getTurnList().at(0)->getIsCharacter() ==
+                !engine->getRules().getTurnList()[i]->getIsCharacter()) {
+                ennemyTarget.push_back(engine->getRules().getTurnList().at(i));
             }
-            else allyTarget.push_back(fight->getRules()->getTurnList().at(i));
+            else allyTarget.push_back(engine->getRules().getTurnList().at(i));
         }
     }
 

@@ -17,13 +17,11 @@ namespace state {
         switch (monsterSeed){
             case BLOB:
                 PhysResist = 0.8;
-                XPgiven = playerLevel*20;
                 break;
 
             case SALAMANDER:
                 MaxHP = HP = getMaxHP()+playerLevel*10;
                 Strength = getStrength()+playerLevel;
-                XPgiven = playerLevel*20;
                 break;
 
             default:break;

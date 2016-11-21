@@ -3,30 +3,26 @@
 #define INSTANCE__FIGHT__H
 
 #include "render/FightRenderer.h"
-#include <string>
 #include "SFML/Graphics.hpp"
 #include "SFML/Audio.hpp"
 
 namespace render {
   class FightRenderer;
 };
-namespace state {
-  class State;
-};
-namespace instance {
-  class Rules;
-};
 namespace sf {
   class RenderWindow;
 };
+namespace state {
+  class State;
+};
+namespace engine {
+  class Engine;
+};
 namespace instance {
   class Screen;
-  class Action;
 }
 
 #include "Screen.h"
-#include "Action.h"
-#include "Rules.h"
 #include "render/FightRenderer.h"
 
 namespace instance {
@@ -37,18 +33,12 @@ namespace instance {
     // Attributes
   public:
     render::FightRenderer* renderer;
-  protected:
-    std::string currentAction;
-    state::State* state;
-    Rules* rules;
     // Operations
   public:
-    Fight (sf::RenderWindow* window, render::FightRenderer* renderer, state::State* state);
+    Fight (sf::RenderWindow* window, render::FightRenderer* renderer, state::State* state, engine::Engine* engine);
     virtual ~Fight ();
     void init ();
     void eventHandler ();
-    Rules* getRules ();
-    void setRules (Rules* rules);
     state::State* getState ();
   };
 

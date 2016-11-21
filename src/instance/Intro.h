@@ -12,6 +12,12 @@ namespace render {
 namespace sf {
   class RenderWindow;
 };
+namespace state {
+  class State;
+};
+namespace engine {
+  class Engine;
+};
 namespace instance {
   class Screen;
 }
@@ -29,7 +35,7 @@ namespace instance {
     render::IntroRenderer* renderer;
     // Operations
   public:
-    Intro (sf::RenderWindow* window, render::IntroRenderer* renderer);
+    Intro (sf::RenderWindow* window, render::IntroRenderer* renderer, state::State* state, engine::Engine* engine);
     virtual ~Intro ();
     void init ();
     void eventHandler ();

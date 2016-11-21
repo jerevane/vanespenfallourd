@@ -15,9 +15,6 @@ namespace state {
   /// class Monster - 
   class Monster : public state::Element {
     // Associations
-    // Attributes
-  protected:
-    int XPgiven;
     // Operations
   public:
     Monster (int playerLevel, int monsterSeed);

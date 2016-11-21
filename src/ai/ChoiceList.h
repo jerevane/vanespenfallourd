@@ -7,8 +7,8 @@
 namespace state {
   class Element;
 };
-namespace instance {
-  class Fight;
+namespace engine {
+  class Engine;
 }
 
 #include "state/Element.h"
@@ -26,7 +26,7 @@ namespace ai {
   public:
     ChoiceList ();
     ~ChoiceList ();
-    ChoiceList (instance::Fight* fight);
+    ChoiceList (engine::Engine* engine);
     std::multimap<int,state::Element*> getRandomChoicePossibilities ();
     std::multimap<int,state::Element*> getRandomGoodChoicePossibilities ();
   };

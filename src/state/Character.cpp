@@ -85,18 +85,6 @@ namespace state {
         else setPowerToOverdrive(power -1);
     }
 
-    Character::Character(std::string name, int characterID, Item * item) {
-        Element();
-        setName(name);
-        XPToNextLevel = 50;
-        PowerToOverdrive = 5;
-        IsCharacter = true;
-        items = item;
-        if(characterID==0){
-            SphereGridInstance = new SphereGrid(0, this);
-        }
-        else SphereGridInstance = new SphereGrid(1, this);
-    }
 
 
 };

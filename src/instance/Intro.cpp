@@ -17,7 +17,9 @@ namespace instance {
 
 namespace instance {
 
-    Intro::Intro(sf::RenderWindow* w, render::IntroRenderer* rd) : Screen(w), renderer(rd)  {
+    Intro::Intro(sf::RenderWindow* w, render::IntroRenderer* rd,
+                 state::State* state, engine::Engine* engine) : Screen(w, state, engine),
+                                                                renderer(rd)  {
     }
 
     void Intro::init() {
@@ -32,7 +34,7 @@ namespace instance {
         if(event.type == sf::Event::KeyPressed)
         {
 
-            needScreenChange = true;
+            state->needScreenChange = true;
 
 
         }

@@ -3,6 +3,9 @@
 #define AI__RANDOMGOODCHOICE__H
 
 
+namespace engine {
+  class Engine;
+};
 namespace instance {
   class Fight;
 };
@@ -16,11 +19,14 @@ namespace ai {
 
   /// class RandomGoodChoice - 
   class RandomGoodChoice : public ai::AI {
+    // Attributes
+  public:
+    engine::Engine* engine;
     // Operations
   public:
     RandomGoodChoice ();
     ~RandomGoodChoice ();
-    RandomGoodChoice (instance::Fight* fight);
+    RandomGoodChoice (instance::Fight* fight, engine::Engine* engine);
     void run ();
   };
 

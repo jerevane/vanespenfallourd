@@ -15,7 +15,8 @@ namespace instance {
 
 namespace instance {
 
-    Inn::Inn(sf::RenderWindow* w, render::InnRenderer* rd) : Screen(w), renderer(rd)  {
+    Inn::Inn(sf::RenderWindow* w, render::InnRenderer* rd,
+             state::State* state, engine::Engine* engine) : Screen(w, state, engine), renderer(rd)  {
 
     }
 

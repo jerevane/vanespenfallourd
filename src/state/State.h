@@ -3,21 +3,18 @@
 #define STATE__STATE__H
 
 #include <vector>
+#include <string>
 
 namespace state {
   class Node;
   class Element;
   class ElementList;
   class Observer;
-};
-namespace instance {
-  class Screen;
 }
 
 #include "Observer.h"
 #include "StateTypeID.h"
 #include "ElementList.h"
-#include "instance/Screen.h"
 #include "Node.h"
 
 namespace state {
@@ -29,6 +26,9 @@ namespace state {
   public:
     std::vector<state::Node*> tabNode;
     Element* currentTurn;
+    std::string currentAction;
+    bool needScreenChange;
+    std::string nextScreen;
   protected:
     Node* node;
     ElementList* elementlist;
@@ -46,7 +46,6 @@ namespace state {
     int getId ();
     void setId (int id);
     void run (int id);
-    void playTurn (Element* element);
     bool getPlayerFinishedTurn ();
     void setPlayerFinishedTurn (bool pft);
   };

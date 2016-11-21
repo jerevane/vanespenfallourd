@@ -6,11 +6,12 @@
 
 namespace state {
   class SphereGrid;
-  class Item;
   class Element;
+  class Item;
 }
 
 #include "Element.h"
+#include "Item.h"
 #include "SphereGrid.h"
 #include "CharacterTypeID.h"
 
@@ -27,7 +28,6 @@ namespace state {
     // Operations
   public:
     Character (std::string name);
-    Character (std::string name, int characterID, Item* item);
     Character (int characterID, std::string name);
     void LevelUp ();
     void GainXP (int xp);

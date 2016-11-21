@@ -1,4 +1,5 @@
 #include <iostream>
+#include <engine/Engine.h>
 
 
 #include "state.hpp"
@@ -34,8 +35,22 @@ int main(int argc,char* argv[])
 
     //Init default state
     state::State* state = new state::State(e1, n1, 0);
-    Application* FinalFantastique = new Application();
-    FinalFantastique->play(state);
+
+    //Init default engine
+    engine::Engine* engine = new engine::Engine();
+    engine::Rules* rules = new engine::Rules(state, false, true);
+    engine->setRules(*rules);
+    engine->getRules().setState(state);
+    engine->getRules().init();
+    //Fix while we find the problem in turnlist
+    engine->getRules().setTurnList(e1->element);
+
+    std::cout << std::to_string(engine->getRules().getTurnList().size()) << std::endl;
+
+    Application* FinalFantastique = new Application(state, engine);
+    std::cout << std::to_string(e1->element.size()) << std::endl;
+
+    FinalFantastique->play(state, engine);
 
     return 0;
 }

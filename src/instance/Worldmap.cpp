@@ -9,14 +9,14 @@
 
 namespace instance {
 
-    Worldmap::Worldmap(sf::RenderWindow* w, render::WorldmapRenderer* rd) : Screen(w), renderer(rd) {
+    Worldmap::Worldmap(sf::RenderWindow* w, render::WorldmapRenderer* rd,
+                       state::State* state, engine::Engine* engine) : Screen(w, state, engine), renderer(rd) {
     }
 
     Worldmap::~Worldmap() {}
 
-    void Worldmap::init(state::State* state) {
-        this->state = state;
-
+    void Worldmap::init() {
+        state->needScreenChange = false;
         renderer->initRender();
 
     }
@@ -33,19 +33,25 @@ namespace instance {
         }
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
         {
-            if (!(state->getNode()->getId() <= 0)) {
-                renderer->renderNodeChange(renderer->tabNodeSprite.at((state->getNode()->getId())),
-                                           renderer->tabNodeSprite.at((state->getNode()->getId() - 1)));
-                state->setNode(state->getNode()->getPreviousNode());
+            if (state->getNode()->getId() > 0) {
+                renderer->renderNodeChange(renderer->tabNodeSprite.at((unsigned long) (state->getNode()->getId())),
+                                           renderer->tabNodeSprite.at((unsigned long) (state->getNode()->getId() - 1)));
+                engine::MoveInUI* cmd = new engine::MoveInUI();
+                cmd->setState(state);
+                //add to engine
+                cmd->setChange(cmd->getState()->getNode()->getPreviousNode());
             }
 
         }
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
         {
-            if (!(state->getNode()->getId() >= 8)) {
-                renderer->renderNodeChange(renderer->tabNodeSprite.at((state->getNode()->getId())),
-                                           renderer->tabNodeSprite.at((state->getNode()->getId() + 1)));
-                state->setNode(state->getNode()->getNextNode());
+            if (state->getNode()->getId() < 8) {
+                renderer->renderNodeChange(renderer->tabNodeSprite.at((unsigned long) (state->getNode()->getId())),
+                                           renderer->tabNodeSprite.at((unsigned long) (state->getNode()->getId() + 1)));
+                engine::MoveInUI* cmd = new engine::MoveInUI();
+                cmd->setState(state);
+                //add to engine
+                cmd->setChange(cmd->getState()->getNode()->getNextNode());
             }
 
 
@@ -56,17 +62,14 @@ namespace instance {
             //TODO: Launch event
             //Switch case depending on node id, launch a different fight/event
             std::cout << "Fight would start if it was implemented" << std::endl;
-            nextScreen = "fight";
-            needScreenChange = true;
+            engine::MoveInUI* cmd = new engine::MoveInUI();
+            cmd->setState(state);
+            cmd->setScreenChange("fight");
         }
     }
 
     void Worldmap::setState(state::State *state) {
         this->state = state;
-    }
-
-    void Worldmap::init() {
-        //unused, refer to init(state)
     }
 };
 

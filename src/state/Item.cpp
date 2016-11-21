@@ -6,61 +6,21 @@
 
 namespace state {
 
+    Item::Item() {
 
-    std::string Item::UseItem(Element* target, int id) {
-        // Cette fonction implémente un switch case suivant les objets possiblement utilisées
-        switch(id){
-            case Potion :
-                items[Potion] = items[Potion]-1;
-                return POtion(target);
-
-            case Revive :
-                items[Revive] = items[Revive]-1;
-                return REvive(target);
-
-            case SuperPotion :
-                items[SuperPotion] = items[SuperPotion]-1;
-                return SUperPotion(target);
-
-            case Ether :
-                items[Ether] = items[Ether]-1;
-                return ETher(target);
-
-            default:break;
-        }
-        return "error";
     }
 
-    std::string Item::POtion(Element *target) {
+    Item::Item(int id ) {
+        Id = id;
+    }
+
+    std::string Item::UseItem() {
+        // Cette fonction implémente un switch case suivant les objets possiblement utilisées
         return "M_50_0_+";
     }
 
-    std::string Item::SUperPotion(Element *target) {
-        return "M_200_0_+";
-    }
+    Item::~Item() {
 
-    std::string Item::REvive(Element *target) {
-        return std::__cxx11::string();
-    }
-
-    std::string Item::ETher(Element *target) {
-        return std::__cxx11::string();
-    }
-
-    void Item::AddItem(int Id) {
-        items[Id] = items[Id] +1;
-    }
-
-    std::map<int, int> Item::getItem() {
-        return items;
-    }
-
-    void Item::init() {
-        items.clear();
-        items.insert(std::make_pair(Potion,0));
-        items.insert(std::make_pair(Revive,0));
-        items.insert(std::make_pair(SuperPotion,0));
-        items.insert(std::make_pair(Ether,0));
     }
 
 

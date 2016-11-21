@@ -147,13 +147,7 @@ namespace state {
             }
 
         }
-        tab_final.push_back(15);
-        for(int i=16;i<19;++i){
-            if(items->getItem()[i] != 0 ){
-                tab_final.push_back(i);
-            }
 
-        }
         return tab_final;
     }
 

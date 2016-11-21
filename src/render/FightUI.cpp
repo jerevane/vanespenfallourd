@@ -45,7 +45,7 @@ namespace render {
         }
         void FightUI::display ()
         {
-            window->draw(hp);
+            //window->draw(hp);
         }
     FightUI::~FightUI ()
         {
@@ -58,6 +58,7 @@ namespace render {
             font.loadFromFile("../res/Square.ttf");
             hp.setFont(font);
             hp.setPosition(400, 400);
+            hp.setString("test");
         }
 
 

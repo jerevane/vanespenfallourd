@@ -2,12 +2,13 @@
 #ifndef INSTANCE__RULES__C
 #define INSTANCE__RULES__C
 
+#include <iostream>
 #include "Rules.h"
 #include "../state/State.h"
 #include "algorithm"
 
 
-namespace instance {
+namespace engine {
 
 
     Rules::Rules() {
@@ -50,21 +51,20 @@ namespace instance {
 
     void Rules::init() {
         std::vector<int> tab_agi_element;
-        std::vector<state::Element*> tab_temp;
         int i,j;
         tab_agi_element.clear();
-        tab_temp.clear();
+        TurnList.clear();
 
         for(i=0; i<state->getElementList()->element.size();++i){
             tab_agi_element.push_back(state->getElementList()->element[i]->getAgility());
-            tab_temp.push_back(state->getElementList()->element[i]);
+            TurnList.push_back(state->getElementList()->element[i]);
         }
 
         i=0;j=1;
         while(i<state->getElementList()->element.size()-1){
             if(tab_agi_element[i]<tab_agi_element[j]){
                 std::swap(tab_agi_element[i],tab_agi_element[j]);
-                std::swap(tab_temp[i], tab_temp[j]);
+                std::swap(TurnList[i], TurnList[j]);
 
             }
             ++j;
@@ -73,19 +73,29 @@ namespace instance {
                 j=i+1;
             }
         }
-        TurnList = tab_temp;
+
+        std::cout << std::to_string(TurnList.size()) << std::endl;
 
     }
 
     void Rules::NextTurn() {
-        std::vector<state::Element*> tab_temp = TurnList;
-        state::Element* element_temp = tab_temp.at(0);
+        std::vector<state::Element*> TurnList = TurnList;
+        state::Element* element_temp = TurnList.at(0);
 
-        tab_temp.erase(tab_temp.begin());
-        tab_temp.push_back(element_temp);
+        TurnList.erase(TurnList.begin());
+        TurnList.push_back(element_temp);
 
-        TurnList = tab_temp;
 
+        TurnList.swap(TurnList);
+
+    }
+
+    void Rules::setState(state::State *state) {
+        this->state = state;
+    }
+
+    state::State *Rules::getState() {
+        return state;
     }
 };
 

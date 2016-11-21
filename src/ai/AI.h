@@ -11,8 +11,12 @@ namespace state {
 };
 namespace ai {
   class ChoiceList;
+};
+namespace engine {
+  class Engine;
 }
 
+#include "engine/Engine.h"
 #include "ChoiceList.h"
 #include "instance/Fight.h"
 

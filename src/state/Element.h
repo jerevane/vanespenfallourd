@@ -7,11 +7,9 @@
 
 namespace state {
   class Ability;
-  class Item;
 }
 
 #include "Ability.h"
-#include "Item.h"
 
 namespace state {
 
@@ -34,7 +32,6 @@ namespace state {
     std::string Dot;
     bool IsCharacter;
     std::string name;
-    Item* items;
     // Operations
   public:
     Element ();
