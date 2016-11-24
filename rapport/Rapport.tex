@@ -176,7 +176,22 @@ Le jeu est \`{a} temps discret donc les changements d'\'{e}tats ne se feront uni
 \chapter{IA}
 
 \section{Comportement}
-L'intelligence artificielle gèrant les ennemis ou le joueur 2 possède actuellement des règles simples choisissant une cible au hasard.
 
+L'intelligence artificielle peut g\'{e}rer les personnages comme les monstres du jeux. Son comportement est dict\'{e} par la classe Rules (pr\'{e}sent dans le package engine) avec les deux variables bool\'{e}ennes AICharneeded et AIMonsterneeded.
+Dans notre cas, l'intelligence artificielle doit choisir une action \`{a} effectuer sur une cible. Une premi\`{e}re i.a. devra choisir al\'{e}atoirement une action ainsi que sa cible, une seconde devra effectuer une action al\'{e}atoirement mais sur la meilleure cible et enfin une troisi\`{e}me devra choisir l'action la plus rentable sur la meilleure des cibles.
+Pour cela nous utiliserons deux classes types : AI et ChoiceList.
+
+\textbf{AI.} Cette classe contient toutes les informations dont \`{a} besoin une intelligence artificielle pour fonctionner. Les variables ChoiceTarget et ChoiceAction sont r\'{e}cup\'{e}r\'{e}es par l'engine qui devra actualiser l'\'{e}tat du jeu. Les sous classes RandomChoice et RandomGoodChoice sont les intelligences artificielles premi\`{e}res et secondes cit\'{e}es plus haut. La classe SmartChoice est ainsi la troisi\`{e}me.
+
+\textbf{ChoiceList.} Cette classe permet de cr\'{e}er un tableau avec les divers actions possibles sur n'importe quelles cibles. Ce tableau sera plus moins restreint suivant les besoins de l'intelligence artificielle utilis\'{e}e. Par exemple, l'i.a. RandomChoice aura besoin de toutes les combinaisons possibles d'action et de cible alors que RandomGoodChoice fera un premier tri sur les cibles suivant l'action execut\'{e}e. La restriction du tableau suivant les diff\'{e}rentes cibles possibles pour une action se base sur des paramètres logiques. Ainsi les actions d\'{e}fensives ne pourront pas \^{e}tre lanc\'{e}es sur des ennemies.
+
+\section{Intelligence artificielle haut niveau}
+
+L'intelligence artificielle dite de haut niveau (intitul\'{e} SmartChoice) s'appuit sur le parcours d'arbre de possibilit\'{e}s. En partant du tableau utilis\'{e} par l'i.a. RandomGoodChoice (qui conserve la meilleure cible pour une action donn\'{e}e), elle applique un algorithme appel\'{e} algorithme de MinMax. Cette algorithme a pour r\^{o}le de retourner une map avec comme clef les diff\'{e}rentes actions possibles et comme valeur li\'{e}e \`{a} cette clef son gain maximum. Le calcul de gain pour chaque action se fait suivant une fonction de pond\'{e}ration pr\'{e}sente dans la classe ChoiceList et le gain maximum est donc la somme du gain d'une action avec le gain le plus grand ou le plus faible de l'action du joueur suivant s'il est un alli\'{e} ou un ennemi. Avec cette map, l'i.a. d\'{e}cide de jouer l'action ayant le gain "max" le plus \'{e}lev\'{e} sur la meilleure cible, selectionn\'{e} pr\'{e}alablement avec le tableau de l'i.a. RandomGoodChoice. 
+
+\begin{sidewaysfigure}[ht]
+\caption{Diagramme de classe du package ai}
+\includegraphics[width=1\textwidth]{ai.jpeg}
+\end{sidewaysfigure}
 
 \end{document}
