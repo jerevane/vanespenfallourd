@@ -23,14 +23,14 @@ namespace ai {
         ennemyTarget.clear();
         allyTarget.clear();
 
-        allAction = engine->getRules().getTurnList().at(0)->CanUse();
+        player = engine->getRules()->getTurnList().at(0);
+        allAction = player->CanUse();
 
-        for(int i=1; i<engine->getRules().getTurnList().size();++i) {
-            if (engine->getRules().getTurnList().at(0)->getIsCharacter() ==
-                !engine->getRules().getTurnList()[i]->getIsCharacter()) {
-                ennemyTarget.push_back(engine->getRules().getTurnList().at(i));
+        for(unsigned long i=1; i<engine->getRules()->getTurnList().size();++i) {
+            if (player->getIsCharacter() == !engine->getRules()->getTurnList()[i]->getIsCharacter()) {
+                ennemyTarget.push_back(engine->getRules()->getTurnList().at(i));
             }
-            else allyTarget.push_back(engine->getRules().getTurnList().at(i));
+            else allyTarget.push_back(engine->getRules()->getTurnList().at(i));
         }
     }
 
@@ -40,12 +40,12 @@ namespace ai {
 
         for(int i=0; i<allAction.size(); ++i){
             if( i == 3|4|5|16|17|18 ){
-                for(int j=0; j<allyTarget.size(); ++j){
+                for(unsigned long j=0; j<allyTarget.size(); ++j){
                     result.insert(std::make_pair(i,allyTarget.at(j)));
                 }
             }
             else{
-                for(int j=0; j<ennemyTarget.size(); ++j){
+                for(unsigned long j=0; j<ennemyTarget.size(); ++j){
                     result.insert(std::make_pair(i,ennemyTarget.at(j)));
                 }
             }
@@ -212,9 +212,107 @@ namespace ai {
             }
         }
 
-
         return result;
     }
+
+    float ChoiceList::getWeightOnOneAction(std::multimap<int, state::Element *> action_target_map) {
+        auto iter = action_target_map.begin();
+        engine::Action *action = nullptr;
+        float weight=0;
+        state::Element* temp_target;
+        state::Element* temp_player = player->clone();
+
+        temp_target = iter->second->clone();
+        switch(iter->first){
+            case 0|1|2|9|10|11|12|13|14|15 :
+                // Spell offensif
+                if(iter->first == 15) action->Attack(temp_player,temp_target);
+                else action->SpellCast(iter->first, temp_player, temp_target );
+
+                 // Maintenant on peut pondérer suivant l'impact de l'action
+                // Si l'ennemi est mort, le gain est très important
+                if(temp_target->getIsDead()){
+                    weight = 20;
+                }
+                    // S'il ne l'est pas on calcul le score en fonction des PV enlevés par rapport aux PVmax
+                        // Ce score est diminué d'un malus pour le nombre de MP utilisé
+                else {
+                    // Formule : (PV_enlevé / PV_max)*20 (résultat entre 0 et 20)
+                    weight = ((iter->second->getHP() - temp_target->getHP())/ temp_target->getMaxHP())*20;
+                    weight = weight - ((player->getMP()-temp_player->getMP())/ temp_player->getMaxMP())*10;
+                }
+                break;
+
+            case 3|5|16|18 :
+                // Spell / Item defensif de type Heal
+
+                if(iter->first == 3|5|8){
+                    action->SpellCast(iter->first, temp_player, temp_target );
+                }
+                else action->UseItem(iter->first, temp_player,temp_target);
+
+                // Maintenant on peut pondérer suivant l'impact de l'action
+                // Calcul du score suivant le % de vie rendu
+                // Bonus : -> si -10% de vie
+                // Malus : -> MP consommé ou nombre d'objets restants du même type
+                weight = ((temp_target->getHP() - iter->second->getHP())/temp_target->getMaxHP())*20;
+                if(iter->second->getHP() <= 0.1*iter->second->getMaxHP()){
+                    weight = weight + 10;
+                }
+                if(iter->first == 3|5|8){
+                    weight = weight - ((player->getMP()-temp_player->getMP())/ temp_player->getMaxMP())*10;
+                }
+                else weight = weight - (1/player->getItem()->getItem().find(iter->first)->second);
+                break;
+
+            case 4|17 :
+                // Spell / Item defensif de type Rez
+
+                if(iter->first == 4){
+                    action->SpellCast(iter->first, temp_player, temp_target );
+                }
+                else action->UseItem(iter->first, temp_player,temp_target);
+
+                // Maintenant on peut pondérer suivant l'impact de l'action
+                // Si la cible est morte alors le gain est maximum
+                // Malus : -> MP consommé ou nombre d'objets restants du même type
+                if(iter->second->getIsDead()){
+                    weight = 20;
+                    if(iter->first == 4){
+                        weight = weight - ((player->getMP()-temp_player->getMP())/ temp_player->getMaxMP())*10;
+                    }
+                    else weight = weight - (1/player->getItem()->getItem().find(iter->first)->second);
+                }
+                else weight = 0;
+                break;
+
+            case 6|7|8|19 :
+                // Techniques à implementer
+                weight = 0;
+                break;
+
+            default:break;
+        }
+
+        return weight;
+    }
+
+    float ChoiceList::getWeightMaxMin(std::map<int, float> list_action_weight, bool maxormin) {
+        // Si minormax == true alors on prend le max sinon le min
+
+        auto iter = list_action_weight.begin();
+        float result=0;
+
+        while(iter != list_action_weight.end()){
+            if(result < iter->second) result = iter->second;
+            iter = iter ++;
+        }
+
+        if(maxormin) return result;
+        else return -result;
+    }
+
+
 };
 
 #endif

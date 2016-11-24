@@ -29,6 +29,7 @@ namespace engine {
     void TakeDamage (std::string damage, state::Element* target);
     void Heal (int heal, state::Element* target);
     void exec ();
+    void UseItem (int id_item, state::Element* caster, state::Element* target);
   };
 
 };

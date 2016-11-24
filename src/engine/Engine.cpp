@@ -26,16 +26,16 @@ namespace engine {
 
     void Engine::turnInit(state::Element *element) {
 
-      rules.getState()->currentTurn = element;
-      rules.getState()->setPlayerFinishedTurn(false);
+      rules->getState()->currentTurn = element;
+      rules->getState()->setPlayerFinishedTurn(false);
 
     }
 
-    Rules Engine::getRules() {
+    Rules* Engine::getRules() {
       return rules;
     }
 
-    void Engine::setRules(Rules rules) {
+    void Engine::setRules(Rules* rules) {
       this->rules = rules;
     }
 

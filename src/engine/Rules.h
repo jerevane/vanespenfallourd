@@ -36,6 +36,7 @@ namespace engine {
     void NextTurn ();
     void setState (state::State* state);
     state::State* getState ();
+    void PreviousTurn ();
   };
 
 };

@@ -31,6 +31,7 @@ namespace state {
     void setPreviousNode (Node* previousnode);
     Node* getNextNode ();
     void setNextNode (Node* nextnode);
+    Node* clone ();
   };
 
 };

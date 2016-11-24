@@ -7,13 +7,12 @@
 
 namespace state {
 
-    Monster::Monster() {
-        Element();
+    Monster::Monster() :Element() {
+
     }
 
-    Monster::Monster(int playerLevel, int monsterSeed) {
+    Monster::Monster(int playerLevel, int monsterSeed) :Element(){
         //Implementer dans cette fonction switch case pour chaque monstre
-        Element();
         switch (monsterSeed){
             case BLOB:
                 PhysResist = 0.8;
@@ -32,6 +31,36 @@ namespace state {
 
     Monster::~Monster() {
 
+    }
+
+    Element *Monster::clone() {
+        Monster* m = new Monster();
+
+        m->setHP(this->getHP());
+        m->setMaxHP(this->getMaxHP());
+        m->setMP(this->getMP());
+        m->setMaxMP(this->getMaxMP());
+
+        m->setStrength(this->getStrength());
+        m->setAgility(this->getAgility());
+        m->setIntelligence(this->getIntelligence());
+
+        m->setName(this->getName());
+        m->setItem(this->getItem()->clone());
+        m->setLevel(this->getLevel());
+        m->setDot(this->getDot());
+        m->setIsCharacter(this->getIsCharacter());
+
+        m->setPhysResist(this->getPhysResist());
+        m->setMagicResist(this->getMagicResist());
+
+        m->setXPgiven(XPgiven);
+
+        return m;
+    }
+
+    void Monster::setXPgiven(int xpgiven) {
+        XPgiven = xpgiven;
     }
 
 };

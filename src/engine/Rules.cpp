@@ -19,6 +19,7 @@ namespace engine {
         this->state = state;
         AICharNeeded = aichar;
         AIMonsterNeeded = aimonster;
+        init();
     }
 
     Rules::~Rules() {
@@ -79,14 +80,13 @@ namespace engine {
     }
 
     void Rules::NextTurn() {
-        std::vector<state::Element*> TurnList = TurnList;
-        state::Element* element_temp = TurnList.at(0);
+        std::vector<state::Element*> Turnlist = TurnList;
+        state::Element* element_temp = Turnlist.at(0);
 
-        TurnList.erase(TurnList.begin());
-        TurnList.push_back(element_temp);
+        Turnlist.erase(Turnlist.begin());
+        Turnlist.push_back(element_temp);
 
-
-        TurnList.swap(TurnList);
+        TurnList.swap(Turnlist);
 
     }
 
@@ -96,6 +96,16 @@ namespace engine {
 
     state::State *Rules::getState() {
         return state;
+    }
+
+    void Rules::PreviousTurn() {
+        std::vector<state::Element*> Turnlist = TurnList;
+        state::Element* element_temp = Turnlist.at(Turnlist.size()-1);
+
+        Turnlist.pop_back();
+        Turnlist.insert(Turnlist.begin(), element_temp);
+
+        TurnList.swap(Turnlist);
     }
 };
 

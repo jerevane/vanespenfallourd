@@ -54,6 +54,11 @@ namespace state {
         playerFinishedTurn = pft;
     }
 
+    State* State::clone() {
+        State* s = new State(this->elementlist->clone(), this->node->clone(), this->Id);
+        return s;
+    }
+
 };
 
 #endif

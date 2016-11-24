@@ -3,6 +3,7 @@
 #define STATE__ABILITY__C
 
 #include "Ability.h"
+#include "Element.h"
 
 namespace state {
 
@@ -10,49 +11,49 @@ namespace state {
         // Implémenter un switch case dans cette fonction pour chaque tech
         switch(ability){
             case BRazier :
-                return Brazier();
+                return Brazier(caster);
 
             case POISON :
-                return Poison();
+                return Poison(caster);
 
             case FLare :
-                return Flare();
+                return Flare(caster);
 
             case FAstHeal :
-                return FastHeal();
+                return FastHeal(caster);
 
             case REsurrection :
-                return Resurrection();
+                return Resurrection(caster);
 
             case HAste :
-                return Haste();
+                return Haste(caster);
 
             case DEfender :
-                return Defender();
+                return Defender(caster);
 
             case COunterAttack :
-                return CounterAttack();
+                return CounterAttack(caster);
 
             case BAttleCries :
-                return BattleCries();
+                return BattleCries(caster);
 
             case BLeeding :
-                return Bleeding();
+                return Bleeding(caster);
 
             case TRipleAttack :
-                return TripleAttack();
+                return TripleAttack(caster);
 
             case DOubleUse :
-                return DoubleUse();
+                return DoubleUse(caster);
 
             case MUltipleArrow :
-                return MultipleArrow();
+                return MultipleArrow(caster);
 
             case POisonArrow :
-                return PoisonArrow();
+                return PoisonArrow(caster);
 
             case PIercingArrow :
-                return PiercingArrow();
+                return PiercingArrow(caster);
 
             default:break;
         }
@@ -71,63 +72,73 @@ namespace state {
         abilities[ability]=false;
     }
 
-    std::string Ability::Brazier() {
+    std::string Ability::Brazier(Element* caster) {
+        std::string result ="M_";
+        int dmg = caster->getIntelligence()*10+20;
+        result = result + std::to_string(dmg) + "_0_-";
+
+        return result;
+    }
+
+    std::string Ability::Poison(Element* caster) {
+        std::string result = "M_0_";
+        int dmg = caster->getIntelligence()*10;
+        result = result + std::to_string(dmg) + "_-";
+        return result;
+    }
+
+    std::string Ability::Flare(Element* caster) {
         return std::__cxx11::string();
     }
 
-    std::string Ability::Poison() {
+    std::string Ability::FastHeal(Element* caster) {
+        std::string result = "M_";
+        int dmg = caster->getIntelligence()*20;
+        result = result + std::to_string(dmg) + "0_+";
+        return result;
+    }
+
+    std::string Ability::Resurrection(Element* caster) {
         return std::__cxx11::string();
     }
 
-    std::string Ability::Flare() {
+    std::string Ability::Haste(Element* caster) {
         return std::__cxx11::string();
     }
 
-    std::string Ability::FastHeal() {
+    std::string Ability::Defender(Element* caster) {
         return std::__cxx11::string();
     }
 
-    std::string Ability::Resurrection() {
+    std::string Ability::CounterAttack(Element* caster) {
         return std::__cxx11::string();
     }
 
-    std::string Ability::Haste() {
+    std::string Ability::BattleCries(Element* caster) {
         return std::__cxx11::string();
     }
 
-    std::string Ability::Defender() {
+    std::string Ability::Bleeding(Element* caster) {
         return std::__cxx11::string();
     }
 
-    std::string Ability::CounterAttack() {
+    std::string Ability::TripleAttack(Element* caster) {
         return std::__cxx11::string();
     }
 
-    std::string Ability::BattleCries() {
+    std::string Ability::DoubleUse(Element* caster) {
         return std::__cxx11::string();
     }
 
-    std::string Ability::Bleeding() {
+    std::string Ability::MultipleArrow(Element* caster) {
         return std::__cxx11::string();
     }
 
-    std::string Ability::TripleAttack() {
+    std::string Ability::PoisonArrow(Element* caster) {
         return std::__cxx11::string();
     }
 
-    std::string Ability::DoubleUse() {
-        return std::__cxx11::string();
-    }
-
-    std::string Ability::MultipleArrow() {
-        return std::__cxx11::string();
-    }
-
-    std::string Ability::PoisonArrow() {
-        return std::__cxx11::string();
-    }
-
-    std::string Ability::PiercingArrow() {
+    std::string Ability::PiercingArrow(Element* caster) {
         return std::__cxx11::string();
     }
 

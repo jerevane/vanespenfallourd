@@ -15,11 +15,16 @@ namespace state {
   /// class Monster - 
   class Monster : public state::Element {
     // Associations
+    // Attributes
+  protected:
+    int XPgiven;
     // Operations
   public:
     Monster (int playerLevel, int monsterSeed);
     ~Monster ();
     Monster ();
+    Element* clone ();
+    void setXPgiven (int xpgiven);
   };
 
 };

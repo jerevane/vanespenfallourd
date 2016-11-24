@@ -6,10 +6,10 @@
 namespace state {
 
   enum ItemTypeID {
-    Potion     = 0,
-    Revive     = 1,
-    SuperPotion     = 2,
-    Ether     = 3
+    Potion     = 16,
+    Revive     = 17,
+    SuperPotion     = 18,
+    Ether     = 19
   };
 
 };

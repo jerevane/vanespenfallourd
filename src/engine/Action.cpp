@@ -22,6 +22,9 @@ namespace engine {
         if(action == 15){
             Attack(caster, target);
         }
+        else if (action > 15){
+            UseItem(action, caster, target);
+        }
         else SpellCast(action, caster, target);
         notify = true;
     }
@@ -99,6 +102,12 @@ namespace engine {
 
     void Action::exec() {
 
+    }
+
+    void Action::UseItem(int id_item, state::Element *caster, state::Element *target) {
+        std::string result;
+        result = caster->getItem()->UseItem(target,id_item);
+        TakeDamage(result,target);
     }
 };
 

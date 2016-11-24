@@ -30,7 +30,7 @@ namespace instance
     void Fight::init()
     {
         state->needScreenChange = false;
-        std::cout << std::to_string(engine->getRules().getTurnList().size()) << std::endl;
+        std::cout << std::to_string(engine->getRules()->getTurnList().size()) << std::endl;
         engine->turnInit(state->getElementList()->element.at(0));
 
         for (auto i = 0; i < state->getElementList()->element.size();i++)

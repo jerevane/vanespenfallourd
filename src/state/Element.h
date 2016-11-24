@@ -7,15 +7,20 @@
 
 namespace state {
   class Ability;
+  class Item;
+  class Element;
 }
 
 #include "Ability.h"
+#include "Item.h"
 
 namespace state {
 
   /// class Element - 
   class Element {
     // Attributes
+  public:
+    int Id;
   protected:
     int HP;
     int MP;
@@ -32,6 +37,7 @@ namespace state {
     std::string Dot;
     bool IsCharacter;
     std::string name;
+    Item* items;
     // Operations
   public:
     Element ();
@@ -64,6 +70,10 @@ namespace state {
     void setName (std::string name);
     Ability getAbility ();
     std::vector<int> CanUse ();
+    virtual Element* clone () = 0;
+    std::string getName ();
+    void setItem (Item* item);
+    Item* getItem ();
   };
 
 };

@@ -51,6 +51,12 @@ namespace state {
         Next = nextnode;
     }
 
+    Node *Node::clone() {
+        Node* n = new Node(Id);
+        n->setWasVisited(WasVisited);
+        return n;
+    }
+
 }
 
 

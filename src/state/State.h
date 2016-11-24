@@ -9,6 +9,7 @@ namespace state {
   class Node;
   class Element;
   class ElementList;
+  class State;
   class Observer;
 }
 
@@ -27,8 +28,8 @@ namespace state {
     std::vector<state::Node*> tabNode;
     Element* currentTurn;
     std::string currentAction;
-    bool needScreenChange;
     std::string nextScreen;
+    bool needScreenChange;
   protected:
     Node* node;
     ElementList* elementlist;
@@ -46,8 +47,10 @@ namespace state {
     int getId ();
     void setId (int id);
     void run (int id);
+    void playTurn (Element* element);
     bool getPlayerFinishedTurn ();
     void setPlayerFinishedTurn (bool pft);
+    State* clone ();
   };
 
 };

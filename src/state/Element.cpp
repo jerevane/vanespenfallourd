@@ -147,10 +147,26 @@ namespace state {
             }
 
         }
+        for(int i=16;i<19;++i){
+            if(items->getItem()[i] != 0 ){
+                tab_final.push_back(i);
+            }
 
+        }
         return tab_final;
     }
 
+    std::string Element::getName() {
+        return name;
+    }
+
+    void Element::setItem(Item *item) {
+        items = item;
+    }
+
+    Item *Element::getItem() {
+        return items;
+    }
 
 }
 

@@ -7,6 +7,7 @@
 namespace state {
   class Element;
   class ElementFactory;
+  class ElementList;
   class Observer;
 }
 
@@ -26,6 +27,8 @@ namespace state {
     // Operations
   public:
     ElementList ();
+    ElementList (std::vector<Element*> elements);
+    ElementList* clone ();
   };
 
 };

@@ -24,14 +24,14 @@ namespace engine {
   public:
     std::vector<Command> commands;
   protected:
-    Rules rules;
+    Rules* rules;
     // Operations
   public:
     void addCmd (Command* cmd);
     Engine ();
     ~Engine ();
-    Rules getRules ();
-    void setRules (Rules rules);
+    Rules* getRules ();
+    void setRules (Rules* rules);
     void turnInit (state::Element* element);
   };
 

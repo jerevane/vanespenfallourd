@@ -3,6 +3,7 @@
 #define AI__CHOICELIST__H
 
 #include <vector>
+#include <map>
 
 namespace state {
   class Element;
@@ -22,6 +23,7 @@ namespace ai {
     std::vector<int> allAction;
     std::vector<state::Element*> allyTarget;
     std::vector<state::Element*> ennemyTarget;
+    state::Element* player;
     // Operations
   public:
     ChoiceList ();
@@ -29,6 +31,8 @@ namespace ai {
     ChoiceList (engine::Engine* engine);
     std::multimap<int,state::Element*> getRandomChoicePossibilities ();
     std::multimap<int,state::Element*> getRandomGoodChoicePossibilities ();
+    float getWeightOnOneAction (std::multimap<int,state::Element*> action_target_map);
+    float getWeightMaxMin (std::map<int,float> list_action_weight, bool maxormin);
   };
 
 };

@@ -6,16 +6,14 @@
 
 namespace state {
 
-    Character::Character(std::string name) {
-        Element();
+    Character::Character(std::string name) :Element(){
         setName(name);
         XPToNextLevel = 50;
         PowerToOverdrive = 5;
         IsCharacter = true;
     }
 
-    Character::Character(int characterID, std::string name) {
-        Element();
+    Character::Character(int characterID, std::string name) :Element(){
         setName(name);
         XPToNextLevel = 50;
         PowerToOverdrive = 5;
@@ -85,6 +83,48 @@ namespace state {
         else setPowerToOverdrive(power -1);
     }
 
+    Character::Character(std::string name, int characterID, Item * item) :Element() {
+        setName(name);
+        XPToNextLevel = 50;
+        PowerToOverdrive = 5;
+        IsCharacter = true;
+        items = item;
+        if(characterID==0){
+            SphereGridInstance = new SphereGrid(0, this);
+        }
+        else SphereGridInstance = new SphereGrid(1, this);
+    }
+
+    Element *Character::clone() {
+        Character* c = new Character(this->getName());
+
+        c->setHP(this->getHP());
+        c->setMaxHP(this->getMaxHP());
+        c->setMP(this->getMP());
+        c->setMaxMP(this->getMaxMP());
+
+        c->setStrength(this->getStrength());
+        c->setAgility(this->getAgility());
+        c->setIntelligence(this->getIntelligence());
+
+        c->setItem(this->getItem()->clone());
+        c->setLevel(this->getLevel());
+        c->setDot(this->getDot());
+        c->setIsCharacter(this->getIsCharacter());
+
+        c->setPhysResist(this->getPhysResist());
+        c->setMagicResist(this->getMagicResist());
+
+        c->setSphereGridInstance(SphereGridInstance);
+        c->setXPtoNextLevel(XPToNextLevel);
+        c->setPowerToOverdrive(PowerToOverdrive);
+
+        return c;
+    }
+
+    void Character::setXPtoNextLevel(int xptonextlevel) {
+        XPToNextLevel = xptonextlevel;
+    }
 
 
 };
