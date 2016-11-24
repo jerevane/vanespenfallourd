@@ -16,7 +16,7 @@ namespace render {
 
 
     InnRenderer::InnRenderer(sf::RenderWindow *rwindow) : Renderer(rwindow) {
-        background.loadFromFile("../res/innbackground.jpg");
+        background.loadFromFile("res/innbackground.jpg");
         setBackground();
     }
 

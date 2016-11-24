@@ -39,7 +39,7 @@ namespace instance {
 
       std::cout << "SFML window created" << std::endl;
 
-      font.loadFromFile("../res/Square.ttf");
+      font.loadFromFile("res/Square.ttf");
       intro.renderer->initRender();
       intro.init();
 
@@ -59,8 +59,9 @@ namespace instance {
                 fightR->state = state;
                 Fight* f1 = new Fight(this, fightR, state, engine);
                 f1->init();
+                fightR->initRender();
                 f1->run(fightR, state);
-                tempstr = "temp";
+                break;
             }
 
         }

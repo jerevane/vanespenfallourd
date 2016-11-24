@@ -41,10 +41,8 @@ int main(int argc,char* argv[])
     engine::Rules* rules = new engine::Rules(state, false, true);
     engine->setRules(rules);
     engine->getRules()->setState(state);
-    //Fix while we find the problem in turnlist
-    engine->getRules()->setTurnList(e1->element);
-
-    std::cout << std::to_string(engine->getRules()->getTurnList().size()) << std::endl;
+    engine->getRules()->init();
+    engine->turnInit(engine->getRules()->getTurnList()[0]);
 
     Application* FinalFantastique = new Application(state, engine);
     std::cout << std::to_string(e1->element.size()) << std::endl;

@@ -21,8 +21,8 @@ ENDIF(CMAKE_COMPILER_IS_GNUCC)
 # Generate headers
 set(DIA2CODE "${PROJECT_SOURCE_DIR}/dia2code/bin/dia2code")
 exec_program(${DIA2CODE} ARGS -d ../src -t cpp -cl Ability,AbilityTypeID,SphereGrid,Item,Character,Element,Monster,ItemTypeID,CharacterTypeID,SphereGridTypeID,MonsterTypeID,ElementFactory,AElementAlloc,State,Observer,ElementList,ElementAlloc,Node,StateTypeID ../src/state.dia)
-exec_program(${DIA2CODE} ARGS -d ../src -t cpp -cl Application,Screen,Intro,Fight,Worldmap,Inn,Rules,Action ../src/instance.dia)
-exec_program(${DIA2CODE} ARGS -d ../src -t cpp -cl Renderer,IntroRenderer,FightRenderer,WorldmapRenderer,FightUI,ElemSprite,InnRenderer,TextureSetter ../src/render.dia)
+exec_program(${DIA2CODE} ARGS -d ../src -t cpp -cl Application,Screen,FightUI,TargetUI,SpellUI,UI,Intro,Fight,Worldmap,Inn,Rules,Action ../src/instance.dia)
+exec_program(${DIA2CODE} ARGS -d ../src -t cpp -cl Renderer,IntroRenderer,FightRenderer,WorldmapRenderer,ElemSprite,InnRenderer,TextureSetter ../src/render.dia)
 exec_program(${DIA2CODE} ARGS -d ../src -t cpp -cl AI,SmartChoice,RandomChoice,RandomGoodChoice,ChoiceList ../src/ai.dia)
 exec_program(${DIA2CODE} ARGS -d ../src -t cpp -cl Rules,Command,Action,MoveInUI,Engine ../src/engine.dia)
 

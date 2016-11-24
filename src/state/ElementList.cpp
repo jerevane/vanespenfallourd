@@ -10,8 +10,13 @@ namespace state {
 
     ElementList::ElementList() {
         element.push_back(new state::Character("Claude"));
-        element.push_back(new state::Monster());
-        element.push_back(new state::Monster());
+        element.push_back(new state::Character("Youenn"));
+        element.push_back(new state::Monster(1, 2));
+        element.push_back(new state::Monster(1, 2));
+        element.push_back(new state::Monster(1, 2));
+        element[2]->setName("Fire Elemental 1");
+        element[3]->setName("Fire Elemental 2");
+        element[4]->setName("Fire Elemental 3");
     }
 
     ElementList *ElementList::clone() {

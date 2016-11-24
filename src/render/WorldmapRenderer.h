@@ -11,6 +11,7 @@ namespace render {
 };
 namespace sf {
   class Text;
+  class Sprite;
 };
 namespace render {
   class Renderer;
@@ -33,7 +34,7 @@ namespace render {
     std::vector<render::ElemSprite*> tabNodeSprite;
   protected:
     sf::Text tmap;
-    render::ElemSprite* charSprite;
+    sf::Sprite* charSprite;
     // Operations
   public:
     WorldmapRenderer (sf::RenderWindow* rwindow);

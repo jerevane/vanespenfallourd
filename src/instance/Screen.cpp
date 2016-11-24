@@ -37,7 +37,7 @@ namespace instance {
             {
                 while (window->pollEvent(event))
                 {
-                    if (event.type == sf::Event::Closed || sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+                    if (event.type == sf::Event::Closed)
                     {
 
                         state->needScreenChange = true;
@@ -51,6 +51,8 @@ namespace instance {
 
                 window->clear(sf::Color(0,0,0,255));
                 renderer->render();
+                if (ui)
+                    ui->display();
                 window->display();
             }
             return state->nextScreen;

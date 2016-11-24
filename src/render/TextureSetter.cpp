@@ -31,15 +31,42 @@ namespace render {
 
         for(auto i : nodeTextureMap)
         {
-            i.second->loadFromFile("../res/red_circle.png");
+            i.second->loadFromFile("res/red_circle.png");
 
         }
 
-        sf::Texture* tTemp = new sf::Texture;
-        elementTextureMap.insert(std::pair<std::string, sf::Texture*>("0_Claude_150_450", tTemp));
-        tTemp->loadFromFile("../res/Claude_64x64/Claude014.png");
-        //elementTextureMap.insert(std::pair<std::string, sf::Texture*>("1_Youenn_0_0", new sf::Texture));
-        //Add rest of monsters etc
+        sf::Texture* t1 = new sf::Texture();
+        t1->loadFromFile("res/sprite_0.png");
+        elementTextureMap.insert(std::pair<int, sf::Texture*>(0, t1));
+        sf::Texture* t2 = new sf::Texture();
+        t2->loadFromFile("res/sprite_0.png");
+        elementTextureMap.insert(std::pair<int, sf::Texture*>(1, t2));
+        sf::Texture* t3 = new sf::Texture();
+        t3->loadFromFile("res/sprite_0.png");
+        elementTextureMap.insert(std::pair<int, sf::Texture*>(2, t3));
+        sf::Texture* t4 = new sf::Texture();
+        t4->loadFromFile("res/sprite_0.png");
+        elementTextureMap.insert(std::pair<int, sf::Texture*>(3, t4));
+        sf::Texture* t5 = new sf::Texture();
+        t5->loadFromFile("res/sprite_0.png");
+        elementTextureMap.insert(std::pair<int, sf::Texture*>(4, t5));
+        sf::Texture* t6 = new sf::Texture();
+        t6->loadFromFile("res/sprite_0.png");
+        elementTextureMap.insert(std::pair<int, sf::Texture*>(5, t6));
+        sf::Texture* t7 = new sf::Texture();
+        t7->loadFromFile("res/sprite_0.png");
+        elementTextureMap.insert(std::pair<int, sf::Texture*>(6, t7));
+        sf::Texture* t8 = new sf::Texture();
+        t8->loadFromFile("res/sprite_0.png");
+        elementTextureMap.insert(std::pair<int, sf::Texture*>(7, t8));
+        sf::Texture* t9 = new sf::Texture();
+        t9->loadFromFile("res/sprite_0.png");
+        elementTextureMap.insert(std::pair<int, sf::Texture*>(8, t9));
+        sf::Texture* t10 = new sf::Texture();
+        t10->loadFromFile("res/sprite_0.png");
+        elementTextureMap.insert(std::pair<int, sf::Texture*>(9, t10));
+
+
     }
 
     TextureSetter::~TextureSetter() {

@@ -4,156 +4,186 @@
 
 
 namespace sf {
-  class RenderWindow;
+    class RenderWindow;
 };
 namespace instance {
-  class Screen;
+    class Screen;
 }
 
 #include "Fight.h"
-#include <map>
-#include <render/FightRenderer.h>
 #include <iostream>
-#include "../state/ElementList.h"
-#include "../state/Element.h"
+#include <typeinfo>
+#include "FightUI.h"
+#include "TargetUI.h"
 
-namespace instance
-{
+namespace instance {
 
-    Fight::Fight(sf::RenderWindow* w, render::FightRenderer* rd,
-                 state::State* state, engine::Engine* engine) : Screen(w, state, engine), renderer(rd)
-    {
-        //state->turnInit(state->getElementList()->element.at(state->iter->second));
-        //++state->iter;
+    Fight::Fight(sf::RenderWindow *w, render::FightRenderer *rd,
+                 state::State *state, engine::Engine *engine) : Screen(w, state, engine),
+                                                                renderer(rd) {
+        ui = new FightUI(window);
     }
 
-    void Fight::init()
-    {
+    void Fight::init() {
         state->needScreenChange = false;
-        std::cout << std::to_string(engine->getRules()->getTurnList().size()) << std::endl;
-        engine->turnInit(state->getElementList()->element.at(0));
+        state->currentAction = "attack";
+        engine->target = state->getElementList()->element.at(2);
+        engine->targetIndex = 2;
 
-        for (auto i = 0; i < state->getElementList()->element.size();i++)
-        {
+        for (auto i = 0; i < state->getElementList()->element.size(); i++) {
             //Sort elements by agility to determine turn order.
-            //state->turnOrderMap.insert(std::pair<int, int>(state->getElementList()->element.at(i)->getAgility(),i));
 
-            if (state->getElementList()->element.at(i)->getIsCharacter())
-            {
-                if (!state->getElementList()->element.at(i)->getIsDead())
-                {
+            if (state->getElementList()->element.at(i)->getIsCharacter()) {
+                if (!state->getElementList()->element.at(i)->getIsDead()) {
                     //No use yet, just in case
-                } else
-                {
+                } else {
                     //If character is dead, bring back to life with 1HP
                     state->getElementList()->element.at(i)->setIsDead(false);
                     state->getElementList()->element.at(i)->setHP(1);
                 }
             }
         }
-        //Sets the iterator to loop through the map following the turn order
-        //state->iter = state->turnOrderMap.rbegin();
     }
 
 
     Fight::~Fight() {}
 
-    void Fight::eventHandler()
-    {
-        if((event.type == sf::Event::KeyPressed)&(state->currentTurn->getIsCharacter()))
-        {
-            if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-            {
-                if (state->currentAction == "attack")
-                {
-                    engine::MoveInUI* cmd = new engine::MoveInUI();
-                    cmd->setChange("overdrive");
-                    //update UI
-                }
-                if (state->currentAction == "spell")
-                {
-                    engine::MoveInUI* cmd = new engine::MoveInUI();
-                    cmd->setChange("item");
-                    //update UI
+    void Fight::eventHandler() {
+        if ((event.type == sf::Event::KeyPressed) & (state->currentTurn->getIsCharacter())) {
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+                if (ui->idstr == "FightUI") {
+                    if (state->currentAction == "attack") {
+                        engine::MoveInUI *cmd = new engine::MoveInUI(state);
+                        cmd->setChange("overdrive");
+                        ((FightUI *) ui)->menuItemSwitch(((FightUI *) ui)->attack, ((FightUI *) ui)->overdrive);
+                    }
+                    if (state->currentAction == "spell") {
+                        engine::MoveInUI *cmd = new engine::MoveInUI(state);
+                        cmd->setChange("item");
+                        ((FightUI *) ui)->menuItemSwitch(((FightUI *) ui)->abilities, ((FightUI *) ui)->item);
+                    }
+                } else if (ui->idstr == "TargetUI") {
                 }
             }
-            if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-            {
-                if (state->currentAction == "item")
-                {
-                    engine::MoveInUI* cmd = new engine::MoveInUI();
-                    cmd->setChange("spell");
-                    //update UI
-                }
-                if (state->currentAction == "overdrive")
-                {
-                    engine::MoveInUI* cmd = new engine::MoveInUI();
-                    cmd->setChange("attack");
-                    //update UI
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+                if (ui->idstr == "FightUI") {
+
+                    if (state->currentAction == "item") {
+                        engine::MoveInUI *cmd = new engine::MoveInUI(state);
+                        cmd->setChange("spell");
+                        ((FightUI *) ui)->menuItemSwitch(((FightUI *) ui)->item, ((FightUI *) ui)->abilities);
+                    }
+                    if (state->currentAction == "overdrive") {
+                        engine::MoveInUI *cmd = new engine::MoveInUI(state);
+                        cmd->setChange("attack");
+                        ((FightUI *) ui)->menuItemSwitch(((FightUI *) ui)->overdrive, ((FightUI *) ui)->attack);
+                    }
+                } else if (ui->idstr == "TargetUI") {
                 }
             }
-            if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-            {
-                if (state->currentAction == "item")
-                {
-                    engine::MoveInUI* cmd = new engine::MoveInUI();
-                    cmd->setChange("overdrive");
-                    //update UI
-                }
-                if (state->currentAction == "spell")
-                {
-                    engine::MoveInUI* cmd = new engine::MoveInUI();
-                    cmd->setChange("attack");
-                    //update UI
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+                if (ui->idstr == "FightUI") {
+
+                    if (state->currentAction == "item") {
+                        engine::MoveInUI *cmd = new engine::MoveInUI(state);
+                        cmd->setChange("overdrive");
+                        ((FightUI *) ui)->menuItemSwitch(((FightUI *) ui)->item, ((FightUI *) ui)->overdrive);
+                    }
+                    if (state->currentAction == "spell") {
+                        engine::MoveInUI *cmd = new engine::MoveInUI(state);
+                        cmd->setChange("attack");
+                        ((FightUI *) ui)->menuItemSwitch(((FightUI *) ui)->abilities, ((FightUI *) ui)->attack);
+                    }
+                } else if (ui->idstr == "TargetUI") {
+                    if (engine->target == state->getElementList()->element
+                            .at(2)) {
+                        engine->target = state->getElementList()->element
+                                .at(state->getElementList()->element.size() - 1);
+                        ((TargetUI *) ui)->menuItemSwitch(renderer->spriteList.at(renderer->spriteList.size() - 1));
+                        engine->targetIndex = renderer->spriteList.size() - 1;
+                    } else {
+                        engine->target = state->getElementList()->element.at(engine->targetIndex - 1);
+                        ((TargetUI *) ui)->menuItemSwitch(renderer->spriteList.at(engine->targetIndex - 1));
+                        engine->targetIndex -= 1;
+                    }
                 }
             }
-            if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-            {
-                if (state->currentAction == "attack")
-                {
-                    engine::MoveInUI* cmd = new engine::MoveInUI();
-                    cmd->setChange("spell");
-                    //update UI
-                }
-                if (state->currentAction == "overdrive")
-                {
-                    engine::MoveInUI* cmd = new engine::MoveInUI();
-                    cmd->setChange("item");
-                    //update UI
-                }
-            }
-            if(sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
-            {
-                if (state->currentAction == "item")
-                {
-                    state->setPlayerFinishedTurn(true);
-                }
-                if (state->currentAction == "overdrive")
-                {
-                    state->setPlayerFinishedTurn(true);
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+                if (ui->idstr == "FightUI") {
 
-                }
-                if (state->currentAction == "spell")
-                {
-                    state->setPlayerFinishedTurn(true);
-
-                }
-                if (state->currentAction == "attack")
-                {
-
-                    state->setPlayerFinishedTurn(true);
-
+                    if (state->currentAction == "attack") {
+                        engine::MoveInUI *cmd = new engine::MoveInUI(state);
+                        cmd->setChange("spell");
+                        ((FightUI *) ui)->menuItemSwitch(((FightUI *) ui)->attack, ((FightUI *) ui)->abilities);
+                    }
+                    if (state->currentAction == "overdrive") {
+                        engine::MoveInUI *cmd = new engine::MoveInUI(state);
+                        cmd->setChange("item");
+                        ((FightUI *) ui)->menuItemSwitch(((FightUI *) ui)->overdrive, ((FightUI *) ui)->item);
+                    }
+                } else if (ui->idstr == "TargetUI") {
+                    if (engine->target == state->getElementList()->element
+                            .at(state->getElementList()->element.size() - 1)) {
+                        engine->target = state->getElementList()->element.at(2);
+                        ((TargetUI *) ui)->menuItemSwitch(renderer->spriteList.at(2));
+                        engine->targetIndex = 2;
+                    } else {
+                        engine->target = state->getElementList()->element.at(engine->targetIndex + 1);
+                        ((TargetUI *) ui)->menuItemSwitch(renderer->spriteList.at(engine->targetIndex + 1));
+                        engine->targetIndex += 1;
+                    }
                 }
             }
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return)) {
+                if (ui->idstr == "FightUI") {
+                    if (state->currentAction == "attack")
+                        ui = new TargetUI(window, renderer->spriteList[2]);
+
+                } else if (ui->idstr == "TargetUI") {
+
+                    if (state->currentAction == "item") {
+                        state->setPlayerFinishedTurn(true);
+                        ui = new FightUI(window);
+                    }
+                    if (state->currentAction == "overdrive") {
+                        state->setPlayerFinishedTurn(true);
+                        ui = new FightUI(window);
+
+                    }
+                    if (state->currentAction == "spell") {
+                        state->setPlayerFinishedTurn(true);
+                        ui = new FightUI(window);
+                        engine->getRules()->NextTurn();
+                        engine->turnInit(engine->getRules()->getTurnList()[0]);
+
+                    }
+                    if (state->currentAction == "attack") {
+                        engine::Action *action = new engine::Action();
+                        action->setState(state);
+                        action->Attack(state->currentTurn, engine->target);
+                        state->setPlayerFinishedTurn(true);
+                        engine->target = state->getElementList()->element[2];
+                        engine->targetIndex = 2;
+                        ui = new FightUI(window);
+                        engine->getRules()->NextTurn();
+                        engine->turnInit(engine->getRules()->getTurnList()[0]);
+                    }
 
 
+                }
+            }
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+                if (ui->idstr == "TargetUI") {
+                    ui = new FightUI(window);
+                }
+            }
         }
+
     }
 
     state::State *Fight::getState() {
         return state;
     }
-
 };
 
 #endif

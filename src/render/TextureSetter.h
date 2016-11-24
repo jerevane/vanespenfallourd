@@ -23,7 +23,7 @@ namespace render {
     // Attributes
   public:
     std::map<std::string, sf::Texture*> nodeTextureMap;
-    std::map<std::string, sf::Texture*> elementTextureMap;
+    std::map<int, sf::Texture*> elementTextureMap;
     // Operations
   public:
     TextureSetter ();

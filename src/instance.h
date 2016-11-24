@@ -8,4 +8,8 @@
 #include "instance/Fight.h"
 #include "instance/Inn.h"
 #include "instance/Application.h"
+#include "instance/FightUI.h"
+#include "instance/UI.h"
+#include "instance/SpellUI.h"
+#include "instance/TargetUI.h"
 #endif

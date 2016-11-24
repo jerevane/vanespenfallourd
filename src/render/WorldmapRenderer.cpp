@@ -18,7 +18,7 @@ namespace render {
 
     WorldmapRenderer::WorldmapRenderer(sf::RenderWindow *rwindow) : Renderer(rwindow) {
 
-        background.loadFromFile("../res/mapbackground.png");
+        background.loadFromFile("res/mapbackground.png");
         setBackground();
     }
 
@@ -32,10 +32,7 @@ namespace render {
         renderNodes(tabNodeSprite);
 
         //render character sprite
-        charSprite->setTexture(*charSprite->texture);
-        charSprite->setOrigin((int)charSprite->getTexture()->getSize().x/2, (int)charSprite->getTexture()->getSize().y);
-        charSprite->setPosition({charSprite->getPositionX(),
-                                          charSprite->getPositionY()});
+
         window->draw(*charSprite);
 
     }
@@ -50,7 +47,10 @@ namespace render {
 
     void WorldmapRenderer::initRender() {
 
-        font.loadFromFile("../res/Square.ttf");
+
+        sf::Texture* tTemp = new sf::Texture;
+        tTemp->loadFromFile("res/Claude_64x64/Claude014.png");
+        font.loadFromFile("res/Square.ttf");
         TextureSetter* tSetter = new TextureSetter;
         std::vector<std::string> tempArray;
         tmap.setFont(font);
@@ -97,33 +97,12 @@ namespace render {
             tabNodeSprite.at(i)->setTexture(*tabNodeSprite.at(i)->texture);
         }
 
-        for(auto i : tSetter->elementTextureMap)
-        {
-            std::string tempStr;
-            tempStr = i.first;
-            for (int j=0; j<i.first.size(); j++)
-            {
-                if (tempStr[j] == '_') {
-                    tempStr[j] = ' ';
-                }
-            }
 
-            std::stringstream ss(tempStr);
-            std::string tempChar;
-            while (ss >> tempChar) {
-                tempArray.push_back(tempChar);
-            }
-            assert(tempArray.size() == 4);
+        charSprite = new sf::Sprite();
+        charSprite->setTexture(*tTemp);
+        charSprite->setOrigin((int)charSprite->getTexture()->getSize().x/2, (int)charSprite->getTexture()->getSize().y);
+        charSprite->setPosition(150, 450);
 
-            charSprite = new render::ElemSprite(new state::Character("Claude"),
-                                                i.second,
-                                                std::stof(tempArray.at(2)),
-                                                std::stof(tempArray.at(3)),
-                                                tempArray.at(1),
-                                                std::stoi(tempArray.at(0)));
-
-            tempArray.clear();
-        }
 
     }
 
@@ -142,8 +121,7 @@ namespace render {
     }
 
     void WorldmapRenderer::renderNodeChange(render::ElemSprite *n1, render::ElemSprite *n2) {
-        charSprite->setPositionX(n2->getPositionX());
-        charSprite->setPositionY(n2->getPositionY());
+        charSprite->setPosition(n2->getPositionX(), n2->getPositionY());
 
 
     }

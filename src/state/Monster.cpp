@@ -13,6 +13,7 @@ namespace state {
 
     Monster::Monster(int playerLevel, int monsterSeed) :Element(){
         //Implementer dans cette fonction switch case pour chaque monstre
+        Id = monsterSeed;
         switch (monsterSeed){
             case BLOB:
                 PhysResist = 0.8;

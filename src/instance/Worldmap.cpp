@@ -36,7 +36,7 @@ namespace instance {
             if (state->getNode()->getId() > 0) {
                 renderer->renderNodeChange(renderer->tabNodeSprite.at((unsigned long) (state->getNode()->getId())),
                                            renderer->tabNodeSprite.at((unsigned long) (state->getNode()->getId() - 1)));
-                engine::MoveInUI* cmd = new engine::MoveInUI();
+                engine::MoveInUI* cmd = new engine::MoveInUI(state);
                 cmd->setState(state);
                 //add to engine
                 cmd->setChange(cmd->getState()->getNode()->getPreviousNode());
@@ -48,7 +48,7 @@ namespace instance {
             if (state->getNode()->getId() < 8) {
                 renderer->renderNodeChange(renderer->tabNodeSprite.at((unsigned long) (state->getNode()->getId())),
                                            renderer->tabNodeSprite.at((unsigned long) (state->getNode()->getId() + 1)));
-                engine::MoveInUI* cmd = new engine::MoveInUI();
+                engine::MoveInUI* cmd = new engine::MoveInUI(state);
                 cmd->setState(state);
                 //add to engine
                 cmd->setChange(cmd->getState()->getNode()->getNextNode());
@@ -61,8 +61,7 @@ namespace instance {
         {
             //TODO: Launch event
             //Switch case depending on node id, launch a different fight/event
-            std::cout << "Fight would start if it was implemented" << std::endl;
-            engine::MoveInUI* cmd = new engine::MoveInUI();
+            engine::MoveInUI* cmd = new engine::MoveInUI(state);
             cmd->setState(state);
             cmd->setScreenChange("fight");
         }

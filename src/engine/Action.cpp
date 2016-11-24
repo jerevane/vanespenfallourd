@@ -2,6 +2,7 @@
 #ifndef ENGINE__ACTION__C
 #define ENGINE__ACTION__C
 
+#include <sstream>
 #include "Action.h"
 
 
@@ -44,29 +45,42 @@ namespace engine {
     }
 
     void Action::TakeDamage(std::string damage, state::Element *target) {
-        std::string delimiter = "_";
-        std::string typedmg = damage.substr(0, damage.find(delimiter));
-        std::string dmg = damage.substr(1, damage.find(delimiter));
-        std::string dot = damage.substr(2, damage.find(delimiter));
-        std::string isHeal = damage.substr(3, damage.find(delimiter));
-        std::string dot_target = target->getDot();
-        int dot_target_dmg = stoi(dot_target.substr(0,dot_target.find(delimiter)));
-        int dot_target_turn = stoi(dot_target.substr(1,dot_target.find(delimiter)));
+        std::vector<std::string> tempArray;
+        for (int i = 0; i < damage.size(); ++i)
+        {
+            if (damage[i] == '_') {
+                damage[i] = ' ';
+            }
+        }
+
+        std::stringstream ss(damage);
+        std::string tempChar;
+        while (ss >> tempChar) {
+            tempArray.push_back(tempChar);
+        }
+        std::string typedmg = tempArray[0];
+        std::string dmg = tempArray[1];
+        std::string dot = tempArray[2];
+        std::string isHeal =  tempArray[3];
+        //std::string dot_target = target->getDot();
+        //int dot_target_dmg = stoi(dot_target.substr(0,dot_target.find(delimiter)));
+        //int dot_target_turn = stoi(dot_target.substr(1,dot_target.find(delimiter)));
         int temp = stoi(dmg);
         // Si Soin
-        if(isHeal.compare("+")){
+        if(isHeal == "+"){
             Heal(temp, target);
         }
             // Sinon damage
         else{
             // Prise en charge resistance + dot
-            if(typedmg.compare("M") ==0) {
+            if(typedmg == ("M")) {
                 temp = temp - (int) (temp * target->getMagicResist());
             }
             else {
                 temp = temp - (int) (temp * target->getPhysResist());
             }
-            temp = target->getHP() - temp - stoi(dot_target.substr(0,dot_target.find(delimiter)));
+            //temp = target->getHP() - temp - stoi(dot_target.substr(0,dot_target.find(delimiter)));
+            temp = target->getHP() - temp;
             if(temp<=0){
                 // Si mort alors reset dot et set IsDead
                 target->setIsDead(true);
@@ -77,17 +91,17 @@ namespace engine {
                 // Inflige les degats et prise en charge dot
                 target->setHP(temp);
                 // Si tech inflige dot
-                if (dot.compare("0") != 0) {
-                    target->setDot(dot + "4");
-                }
-                else{
-                    // Si dot enlève un tour au dot
-                    if(dot_target_turn !=0){
-                        dot_target_turn = dot_target_turn -1;
-                        target->setDot(std::to_string(dot_target_dmg)+std::to_string(dot_target_turn));
-                    }
-                    else target->setDot("0_0");
-                }
+//                if (dot != "0") {
+//                    target->setDot(dot + "4");
+//                }
+//                else{
+//                    // Si dot enlève un tour au dot
+////                    if(dot_target_turn !=0){
+////                        dot_target_turn = dot_target_turn -1;
+////                        target->setDot(std::to_string(dot_target_dmg)+std::to_string(dot_target_turn));
+////                    }
+////                    else target->setDot("0_0");
+//                }
             }
         }
     }

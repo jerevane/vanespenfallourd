@@ -4,7 +4,7 @@
 
 #include "engine/Engine.h"
 #include "engine/Command.h"
+#include "engine/MoveInUI.h"
 #include "engine/Action.h"
 #include "engine/Rules.h"
-#include "engine/MoveInUI.h"
 #endif

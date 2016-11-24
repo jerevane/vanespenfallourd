@@ -12,7 +12,6 @@ namespace state {
 
 #include "Element.h"
 #include "SphereGrid.h"
-#include "CharacterTypeID.h"
 
 namespace state {
 

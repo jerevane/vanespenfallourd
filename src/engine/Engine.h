@@ -6,10 +6,12 @@
 
 namespace engine {
   class Command;
-  class Rules;
 };
 namespace state {
   class Element;
+};
+namespace engine {
+  class Rules;
 }
 
 #include "Command.h"
@@ -23,6 +25,8 @@ namespace engine {
     // Attributes
   public:
     std::vector<Command> commands;
+    state::Element* target;
+    unsigned long targetIndex;
   protected:
     Rules* rules;
     // Operations

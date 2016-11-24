@@ -4,9 +4,14 @@
 
 #include "SFML/Graphics.hpp"
 #include "SFML/Audio.hpp"
+#include <vector>
 
+namespace sf {
+  class Sprite;
+  class Text;
+  class Texture;
+};
 namespace render {
-  class FightUI;
   class Renderer;
 };
 namespace instance {
@@ -14,7 +19,6 @@ namespace instance {
 }
 
 #include "Renderer.h"
-#include "FightUI.h"
 #include "instance/Fight.h"
 
 namespace render {
@@ -24,7 +28,9 @@ namespace render {
     // Associations
     // Attributes
   public:
-    FightUI* ui;
+    std::vector<sf::Sprite*> spriteList;
+    std::vector<sf::Text> hpTexts;
+    sf::Text turnText;
     // Operations
   public:
     FightRenderer (sf::RenderWindow* window);
@@ -32,6 +38,7 @@ namespace render {
     void render ();
     void setBackground ();
     void initRender ();
+    void initElemSprite (float px, float py, sf::Texture* text, sf::Sprite* sprite);
   };
 
 };

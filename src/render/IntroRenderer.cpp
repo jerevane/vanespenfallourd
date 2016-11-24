@@ -11,7 +11,7 @@ namespace render {
   class Renderer;
 
     IntroRenderer::IntroRenderer(sf::RenderWindow *rwindow) : Renderer(rwindow) {
-        background.loadFromFile("../res/introbackground.png");
+        background.loadFromFile("res/introbackground.png");
         setBackground();
     }
 
@@ -36,7 +36,7 @@ namespace render {
 
     void IntroRenderer::initRender() {
 
-        font.loadFromFile("../res/Square.ttf");
+        font.loadFromFile("res/Square.ttf");
 
         title.setFont(font);
         title.setCharacterSize(80);

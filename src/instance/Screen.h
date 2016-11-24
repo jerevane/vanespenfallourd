@@ -12,6 +12,9 @@ namespace engine {
 namespace state {
   class State;
 };
+namespace instance {
+  class UI;
+};
 namespace sf {
   class RenderWindow;
 };
@@ -30,6 +33,7 @@ namespace engine {
 #include "engine/Engine.h"
 #include "state/Element.h"
 #include "state/State.h"
+#include "UI.h"
 #include "engine/Command.h"
 #include "engine/MoveInUI.h"
 #include "engine/Action.h"
@@ -44,6 +48,7 @@ namespace instance {
   public:
     engine::Engine* engine;
     state::State* state;
+    UI* ui;
   protected:
     sf::RenderWindow* window;
     sf::Event event;

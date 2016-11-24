@@ -4,6 +4,9 @@
 
 #include <string>
 
+namespace state {
+  class State;
+};
 namespace engine {
   class Command;
 }
@@ -20,6 +23,7 @@ namespace engine {
     void setChange (std::string tarStr);
     void exec ();
     void setScreenChange (std::string nextscrn);
+    MoveInUI (state::State* state);
   };
 
 };

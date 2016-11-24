@@ -2,6 +2,7 @@
 #ifndef RENDER__FIGHTRENDERER__C
 #define RENDER__FIGHTRENDERER__C
 
+#include <iostream>
 #include "FightRenderer.h"
 
 namespace render {
@@ -16,8 +17,9 @@ namespace render {
 
     FightRenderer::FightRenderer(sf::RenderWindow *window) : Renderer(window)
     {
-        background.loadFromFile("../res/fightbackground.jpg");
+        background.loadFromFile("res/fightbackground.jpg");
         setBackground();
+        texturesetter = new TextureSetter();
     }
 
     FightRenderer::~FightRenderer() {
@@ -26,8 +28,22 @@ namespace render {
 
     void FightRenderer::render()
     {
+        int j = 0;
         window->draw(spriteScreen);
-        ui->display();
+        for (auto i : spriteList)
+        {
+            window->draw(*i);
+        }
+        for (auto i : hpTexts)
+        {
+            i.setString(std::to_string(state->getElementList()->element[j]->getHP())
+                        + " / " + std::to_string(state->getElementList()->element[j]->getMaxHP()));
+            window->draw(i);
+            ++j;
+        }
+        turnText.setString("Current turn: "+state->currentTurn->getName());
+        window->draw(turnText);
+
     }
 
     void FightRenderer::setBackground() {
@@ -38,10 +54,95 @@ namespace render {
     }
 
     void FightRenderer::initRender() {
-        ui = new FightUI(window);
-        sf::Text temptxt;
-        temptxt.setString(std::to_string(state->currentTurn->getHP()));
-        ui->setHp(temptxt);
+
+        font.loadFromFile("res/Square.ttf");
+
+        sf::Sprite* monster1 = new sf::Sprite();
+        sf::Sprite* monster2 = new sf::Sprite();
+        sf::Sprite* monster3 = new sf::Sprite();
+
+        sf::Texture* claudeT = new sf::Texture();
+        claudeT->loadFromFile("res/Claude_192x192/Claude021.png");
+        sf::Texture* youennT = new sf::Texture();
+        youennT->loadFromFile("res/Youenn_192x192/Youenn021.png");
+
+        sf::Sprite* claudeS = new sf::Sprite();
+        sf::Sprite* youennS = new sf::Sprite();
+
+        turnText = sf::Text();
+        turnText.setFont(font);
+        turnText.setPosition(400, 50);
+
+        initElemSprite(100, 475, claudeT, claudeS);
+        initElemSprite(200, 425, youennT, youennS);
+
+        claudeS->setScale(0.8, 0.8);
+        youennS->setScale(0.8, 0.8);
+
+        spriteList.push_back(claudeS);
+        spriteList.push_back(youennS);
+
+        if (state->getElementList()->element.size() == 4)
+        {
+
+            initElemSprite(700, 475, texturesetter->elementTextureMap
+                    .find(state->getElementList()->element[2]->Id)->second, monster1);
+
+            initElemSprite(600, 425, texturesetter->elementTextureMap
+                    .find(state->getElementList()->element[3]->Id)->second, monster2);
+
+
+            spriteList.push_back(monster1);
+            spriteList.push_back(monster2);
+
+        } else if (state->getElementList()->element.size() == 5)
+        {
+
+            initElemSprite(550, 375, texturesetter->elementTextureMap
+                    .find(state->getElementList()->element[2]->Id)->second, monster1);
+
+            initElemSprite(650, 450, texturesetter->elementTextureMap
+                    .find(state->getElementList()->element[3]->Id)->second, monster2);
+
+            initElemSprite(750, 500, texturesetter->elementTextureMap
+                    .find(state->getElementList()->element[4]->Id)->second, monster3);
+
+
+            monster1->setScale(0.8, 0.8);
+            monster2->setScale(0.8, 0.8);
+            monster3->setScale(0.8, 0.8);
+
+
+            spriteList.push_back(monster1);
+            spriteList.push_back(monster2);
+            spriteList.push_back(monster3);
+
+        } else if (state->getElementList()->element.size() == 3) {
+            //Boss battle
+        }
+
+        int j = 0;
+
+        for(auto i : state->getElementList()->element)
+        {
+            sf::Text* temptxt = new sf::Text();
+            temptxt->setFont(font);
+            temptxt->setPosition(spriteList[j]->getPosition().x-50,
+                                 (float) (spriteList[j]->getPosition().y - 1.05 * spriteList[j]->getTexture()->getSize().y / 2));
+            std::string tempstr = std::to_string(i->getHP()) + " / " + std::to_string(i->getMaxHP());
+            temptxt->setString(tempstr);
+            hpTexts.push_back(*temptxt);
+            ++j;
+        }
+
+
+    }
+
+    void FightRenderer::initElemSprite(float px, float py, sf::Texture *text, sf::Sprite* sprite) {
+        sprite->setTexture(*text);
+        sprite->setOrigin((int)text->getSize().x/2, (int)text->getSize().y/2);
+        sprite->move(px, py);
+
     }
 
 };

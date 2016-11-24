@@ -23,6 +23,10 @@ namespace engine {
       state->nextScreen = nextscrn;
       state->needScreenChange = true;
     }
+
+    MoveInUI::MoveInUI(state::State *state) {
+        setState(state);
+    }
 };
 
 #endif
