@@ -40,6 +40,8 @@ namespace state {
     std::string MultipleArrow (Element* caster);
     std::string PoisonArrow (Element* caster);
     std::string PiercingArrow (Element* caster);
+    Ability ();
+    void init ();
   };
 
 };

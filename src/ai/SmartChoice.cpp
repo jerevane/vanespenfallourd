@@ -17,9 +17,9 @@ namespace ai {
 
     }
 
-    SmartChoice::SmartChoice(instance::Fight *fight, engine::Engine *engine) :AI(fight) {
+    SmartChoice::SmartChoice(engine::Engine *engine) :AI(engine) {
         Id = 2;
-        this->engine = engine;
+        choiceList = new ChoiceList(engine);
     }
 
     void SmartChoice::run() {
@@ -30,15 +30,16 @@ namespace ai {
         float maxgain=0;
 
         std::multimap<int, state::Element*> choice = choiceList->getRandomGoodChoicePossibilities();
-        std::map<int, float> temp = minmax(engine, minormax, 4);
+        std::map<int, float> temp = minmax(engine, minormax, 5);
         auto iter = temp.begin();
         while(iter != temp.end()){
             if(maxgain < iter->second){
                 best_action = iter->first;
                 maxgain = iter->second;
             }
+            iter++;
         }
-        std::cout << "\n AI level 3, gain max at this turn : " << best_action << "\n" << std::endl;
+        std::cout << "\n AI level 3, gain max at this turn : " << maxgain << "\n" << std::endl;
         if(maxgain <= 0){
             std::cout << "Ce joueur va perdre si son ennemi joue son meilleur coup !\n" << std::endl;
         }
@@ -60,7 +61,7 @@ namespace ai {
         state::State* state_temp = engine->getRules()->getState()->clone();
 
         engine::Rules* rules_new = new engine::Rules(state_temp, rules_temp->getAICharNeeded(),
-                                                     rules_temp->getAIMonsterNeeded());
+                                                     rules_temp->getAIMonsterNeeded(), rules_temp->getLevelAI());
         engine->setRules(rules_new);
 
         // Création de la ChoiceList spécifique au player actuel
@@ -103,6 +104,7 @@ namespace ai {
                 // On revient en arrière pour l'action suivante
                 rules_new->PreviousTurn();
             }
+            iter_choice++;
         }
 
         // On remet les règles du départ

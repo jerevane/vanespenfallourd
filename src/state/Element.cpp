@@ -17,6 +17,8 @@ namespace state {
         IsDead = false;
         Level = 1;
         IsCharacter = false;
+        items = new Item();
+        abilities = new Ability();
     }
 
 
@@ -131,28 +133,31 @@ namespace state {
         this->name = name;
     }
 
-    Ability Element::getAbility() {
+    Ability* Element::getAbility() {
         return abilities;
     }
 
     std::vector<int> Element::CanUse() {
-        std::map<int,bool> tab_abilities = abilities.getAbility();
+        std::map<int,bool> tab_abilities = abilities->getAbility();
         std::vector<int> tab_final ;
         tab_final.clear();
-        for(int i =0; i<15;++i){
-            if(tab_abilities[i]==true){
-                if(getMP()>=10){
-                    tab_final.push_back(i);
+        if(tab_abilities.empty()) ;
+        else {
+            for(int i =0; i<15;++i){
+                if(tab_abilities[i]==true){
+                    if(getMP()>=10){
+                        tab_final.push_back(i);
+                    }
                 }
-            }
 
+            }
         }
-        for(int i=16;i<19;++i){
-            if(items->getItem()[i] != 0 ){
+        for (int i = 16; i < 19; ++i) {
+            if (items->getItem()[i] != 0) {
                 tab_final.push_back(i);
             }
-
         }
+        tab_final.push_back(15);
         return tab_final;
     }
 

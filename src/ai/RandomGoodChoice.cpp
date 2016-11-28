@@ -15,9 +15,8 @@ namespace ai {
 
     }
 
-    RandomGoodChoice::RandomGoodChoice(instance::Fight* fight, engine::Engine* engine) : AI(fight) {
+    RandomGoodChoice::RandomGoodChoice(engine::Engine* engine) : AI(engine) {
         Id = 1;
-        this->engine = engine;
         choiceList = new ChoiceList(engine);
     }
 

@@ -65,7 +65,7 @@ namespace state {
     }
 
     void Ability::setAbility(int ability) {
-        abilities[ability]=true;
+        abilities[ability] = true;
     }
 
     void Ability::unsetAbility(int ability) {
@@ -94,7 +94,7 @@ namespace state {
     std::string Ability::FastHeal(Element* caster) {
         std::string result = "M_";
         int dmg = caster->getIntelligence()*20;
-        result = result + std::to_string(dmg) + "0_+";
+        result = result + std::to_string(dmg) + "_0_+";
         return result;
     }
 
@@ -140,6 +140,16 @@ namespace state {
 
     std::string Ability::PiercingArrow(Element* caster) {
         return std::__cxx11::string();
+    }
+
+    Ability::Ability() {
+        init();
+    }
+
+    void Ability::init() {
+        for(int i=0;i<15;++i){
+            abilities.insert(std::make_pair(i,false));
+        }
     }
 
 

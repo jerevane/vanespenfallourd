@@ -57,33 +57,33 @@ namespace state {
             case Comp :
                 switch(Id){
                     case BlackMage :
-                        if(Position==2) character->getAbility().setAbility(BRazier);
-                        else if(Position==5) character->getAbility().setAbility(POISON);
-                        else if(Position==12) character->getAbility().setAbility(FLare);
+                        if(Position==2) character->getAbility()->setAbility(BRazier);
+                        else if(Position==5) character->getAbility()->setAbility(POISON);
+                        else if(Position==12) character->getAbility()->setAbility(FLare);
                         break;
 
                     case WhiteMage :
-                        if(Position==2) character->getAbility().setAbility(FAstHeal);
-                        else if(Position==5) character->getAbility().setAbility(REsurrection);
-                        else if(Position==12) character->getAbility().setAbility(HAste);
+                        if(Position==2) character->getAbility()->setAbility(FAstHeal);
+                        else if(Position==5) character->getAbility()->setAbility(REsurrection);
+                        else if(Position==12) character->getAbility()->setAbility(HAste);
                         break;
 
                     case War :
-                        if(Position==2) character->getAbility().setAbility(DEfender);
-                        else if(Position==5) character->getAbility().setAbility(COunterAttack);
-                        else if(Position==12) character->getAbility().setAbility(BAttleCries);
+                        if(Position==2) character->getAbility()->setAbility(DEfender);
+                        else if(Position==5) character->getAbility()->setAbility(COunterAttack);
+                        else if(Position==12) character->getAbility()->setAbility(BAttleCries);
                         break;
 
                     case Rogue :
-                        if(Position==2) character->getAbility().setAbility(BLeeding);
-                        else if(Position==5) character->getAbility().setAbility(TRipleAttack);
-                        else if(Position==12) character->getAbility().setAbility(DOubleUse);
+                        if(Position==2) character->getAbility()->setAbility(BLeeding);
+                        else if(Position==5) character->getAbility()->setAbility(TRipleAttack);
+                        else if(Position==12) character->getAbility()->setAbility(DOubleUse);
                         break;
 
                     case Hunt :
-                        if(Position==2) character->getAbility().setAbility(MUltipleArrow);
-                        else if(Position==5) character->getAbility().setAbility(POisonArrow);
-                        else if(Position==12) character->getAbility().setAbility(PIercingArrow);
+                        if(Position==2) character->getAbility()->setAbility(MUltipleArrow);
+                        else if(Position==5) character->getAbility()->setAbility(POisonArrow);
+                        else if(Position==12) character->getAbility()->setAbility(PIercingArrow);
                         break;
 
                     default:break;

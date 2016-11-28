@@ -11,8 +11,8 @@ namespace state {
   class Element;
 }
 
-#include "Ability.h"
 #include "Item.h"
+#include "Ability.h"
 
 namespace state {
 
@@ -33,7 +33,7 @@ namespace state {
     float MagicResist;
     float PhysResist;
     int Level;
-    Ability abilities;
+    Ability* abilities;
     std::string Dot;
     bool IsCharacter;
     std::string name;
@@ -68,7 +68,7 @@ namespace state {
     bool getIsCharacter ();
     void setIsCharacter (bool ischaracter);
     void setName (std::string name);
-    Ability getAbility ();
+    Ability* getAbility ();
     std::vector<int> CanUse ();
     virtual Element* clone () = 0;
     std::string getName ();

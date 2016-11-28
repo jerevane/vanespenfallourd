@@ -6,9 +6,6 @@
 namespace engine {
   class Engine;
 };
-namespace instance {
-  class Fight;
-};
 namespace ai {
   class AI;
 }
@@ -19,14 +16,11 @@ namespace ai {
 
   /// class RandomGoodChoice - 
   class RandomGoodChoice : public ai::AI {
-    // Attributes
-  public:
-    engine::Engine* engine;
     // Operations
   public:
     RandomGoodChoice ();
     ~RandomGoodChoice ();
-    RandomGoodChoice (instance::Fight* fight, engine::Engine* engine);
+    RandomGoodChoice (engine::Engine* engine);
     void run ();
   };
 

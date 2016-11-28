@@ -17,6 +17,25 @@ namespace state {
         element[2]->setName("Fire Elemental 1");
         element[3]->setName("Fire Elemental 2");
         element[4]->setName("Fire Elemental 3");
+
+        element.at(0)->getAbility()->setAbility(0);
+        element.at(0)->getAbility()->setAbility(1);
+        element.at(0)->getAbility()->setAbility(3);
+
+        element.at(1)->getAbility()->setAbility(0);
+        element.at(1)->getAbility()->setAbility(1);
+        element.at(1)->getAbility()->setAbility(3);
+
+
+        Item* item = new Item();
+        item->AddItem(16);
+
+        element.at(2)->setItem(item);
+        element.at(3)->setItem(item);
+        element.at(4)->setItem(item);
+
+
+
     }
 
     ElementList *ElementList::clone() {

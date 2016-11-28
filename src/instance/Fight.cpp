@@ -13,6 +13,9 @@ namespace instance {
 #include "Fight.h"
 #include <iostream>
 #include <typeinfo>
+#include <ai/RandomChoice.h>
+#include <ai/RandomGoodChoice.h>
+#include <ai/SmartChoice.h>
 #include "FightUI.h"
 #include "TargetUI.h"
 
@@ -49,7 +52,9 @@ namespace instance {
     Fight::~Fight() {}
 
     void Fight::eventHandler() {
-        if ((event.type == sf::Event::KeyPressed) & (state->currentTurn->getIsCharacter())) {
+        if ((event.type == sf::Event::KeyPressed ) & ((state->currentTurn->getIsCharacter() &
+                !engine->getRules()->getAICharNeeded()) | (!state->currentTurn->getIsCharacter() &
+                    !engine->getRules()->getAIMonsterNeeded())  )) {
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
                 if (ui->idstr == "FightUI") {
                     if (state->currentAction == "attack") {
@@ -178,11 +183,47 @@ namespace instance {
                 }
             }
         }
+        else if((event.type == sf::Event::KeyPressed ) & ((state->currentTurn->getIsCharacter() &
+                !engine->getRules()->getAICharNeeded()) | !(!state->currentTurn->getIsCharacter() &
+                !engine->getRules()->getAIMonsterNeeded())  )) turnPlayedByAI(engine->getRules()->getLevelAI());
 
     }
 
     state::State *Fight::getState() {
         return state;
+    }
+
+    void Fight::turnPlayedByAI(int id) {
+        ai::AI* ai;
+        engine::Action *action = nullptr;
+        bool notify = false;
+
+        switch(id){
+            case 0 :
+                ai = new ai::RandomChoice(engine);
+                break;
+
+            case 1 :
+                ai = new ai::RandomGoodChoice(engine);
+                break;
+
+            case 2 :
+                ai = new ai::SmartChoice(engine);
+                break;
+
+            default :
+                ai = new ai::RandomChoice(engine);
+                break;
+        }
+
+        ai->run();
+        action->apply(state, state->currentTurn, ai->getChoiceAction(), ai->getChoiceTarget(), notify);
+        std::cout << "L'IA a attaqué " << ai->getChoiceTarget()->getName() <<
+                  " avec cette action " << ai->getChoiceAction() << "\n" << std::endl;
+        ui = new FightUI(window);
+        engine->getRules()->NextTurn();
+        engine->turnInit(engine->getRules()->getTurnList()[0]);
+
     }
 };
 

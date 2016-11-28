@@ -15,17 +15,9 @@
 
     }
 
-    ai::AI::AI(instance::Fight *fight) {
-        this->fight = fight;
+    ai::AI::AI(engine::Engine* engine) {
+        this->engine = engine;
         Notify = false;
-    }
-
-    instance::Fight *ai::AI::getFight() {
-        return fight;
-    }
-
-    void ai::AI::setFight(instance::Fight *fight) {
-        this->fight = fight;
     }
 
     int ai::AI::getChoiceAction() {
@@ -47,6 +39,10 @@
     void ai::AI::setNotify(bool notify) {
         Notify = notify;
     }
+
+state::Element *ai::AI::getChoiceTarget() {
+    return ChoiceTarget;
+}
 
 
 #endif

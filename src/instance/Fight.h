@@ -40,6 +40,7 @@ namespace instance {
     void init ();
     void eventHandler ();
     state::State* getState ();
+    void turnPlayedByAI (int Id);
   };
 
 };

@@ -15,9 +15,8 @@ ai::RandomChoice::~RandomChoice() {
 
 }
 
-ai::RandomChoice::RandomChoice(instance::Fight *fight, engine::Engine* engine) : AI(fight) {
+ai::RandomChoice::RandomChoice(engine::Engine* engine) : AI(engine) {
     Id = 0;
-    this->engine = engine;
 
 }
 

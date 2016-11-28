@@ -32,7 +32,7 @@ namespace engine {
 
     void Action::SpellCast(int ability, state::Element *caster, state::Element *target) {
         std::string result;
-        result = caster->getAbility().LaunchAbility(ability, caster);
+        result = caster->getAbility()->LaunchAbility(ability, caster);
         TakeDamage(result,target);
     }
 
@@ -108,10 +108,13 @@ namespace engine {
 
     void Action::Heal(int heal, state::Element *target) {
         int hp_target = target->getHP();
-        if(hp_target+heal>= target->getMaxHP()){
-            target->setHP(target->getMaxHP());
+        // Le heal prend effet uniquement si la target n'est pas morte
+        if(!target->getIsDead()){
+            if(hp_target+heal>= target->getMaxHP()){
+                target->setHP(target->getMaxHP());
+            }
+            else target->setHP(hp_target+heal);
         }
-        else target->setHP(hp_target+heal);
     }
 
     void Action::exec() {

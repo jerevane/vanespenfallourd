@@ -28,49 +28,60 @@ namespace ai {
 
         for(unsigned long i=1; i<engine->getRules()->getTurnList().size();++i) {
             if (player->getIsCharacter() == !engine->getRules()->getTurnList()[i]->getIsCharacter()) {
-                ennemyTarget.push_back(engine->getRules()->getTurnList().at(i));
+                if(!engine->getRules()->getTurnList().at(i)->getIsDead()) ennemyTarget.push_back(engine->getRules()->getTurnList().at(i));
             }
             else allyTarget.push_back(engine->getRules()->getTurnList().at(i));
         }
+
     }
 
     std::multimap<int, state::Element *> ChoiceList::getRandomChoicePossibilities() {
-        std::multimap<int,state::Element* > result;
-        result.clear();
+        std::multimap<int,state::Element* > resultat;
+        //resultat.clear();
 
-        for(int i=0; i<allAction.size(); ++i){
-            if( i == 3|4|5|16|17|18 ){
-                for(unsigned long j=0; j<allyTarget.size(); ++j){
-                    result.insert(std::make_pair(i,allyTarget.at(j)));
-                }
-            }
-            else{
-                for(unsigned long j=0; j<ennemyTarget.size(); ++j){
-                    result.insert(std::make_pair(i,ennemyTarget.at(j)));
-                }
-            }
+        for(int i=0; i<allAction.size(); ++i) {
+            switch (allAction[i]) {
+                case 3:
+                case 4:
+                case 5:
+                case 16:
+                case 18:
+                    for (unsigned long j = 0; j < allyTarget.size(); ++j) {
+                        resultat.insert(std::make_pair(allAction[i], allyTarget.at(j)));
+                    }
+                    break;
 
+                default:
+                    for (unsigned long j = 0; j < ennemyTarget.size(); ++j) {
+                        resultat.insert(std::make_pair(allAction[i], ennemyTarget.at(j)));
+                    }
+                    break;
+
+            }
         }
 
-        return result;
+        return resultat;
     }
 
     std::multimap<int, state::Element *> ChoiceList::getRandomGoodChoicePossibilities() {
         std::multimap<int, state::Element *> result = getRandomChoicePossibilities();
         std::vector<state::Element*> temp;
-        temp.clear();
+        std::multimap<int, state::Element *>::iterator iterator_temp ;
 
-        for(int i=0; i<19; ++i){
-            int j=0,k=1,t=0;
-            auto iter = result.find(i);
-            if(iter != result.end()){
+        for(auto iter=result.begin(); iter!=result.end(); ++iter){
+            int j=0,k=1;
+            temp.clear();
                 // Construction du tableau des targets des actions
-                for (auto it=result.equal_range(i).first; it!=result.equal_range(i).second; ++it){
-                    temp.at((unsigned long) t) = it->second;
-                    ++t;
+                for (auto it=result.equal_range(iter->first).first; it!=result.equal_range(iter->first).second; ++it){
+                    auto blabla = it;
+                    temp.push_back(blabla->second);
                 }
-                switch(i){
-                    case 0|1|2|6|7 :
+                switch(iter->first){
+                    case 0:
+                    case 1:
+                    case 2:
+                    case 6:
+                    case 7:
                         // Spell Offensif -> best choice = lower HP && lower magic resist
                         // Tri ordre croissant HP puis erase si magic resist >0.6
                         // S'il existe plus d'une possibilité erase les suivantes
@@ -88,9 +99,9 @@ namespace ai {
                         for(int l=0; l<temp.size(); ++l){
                             if(temp.at((unsigned long) l)->getMagicResist() > 0.6){
                                 // On cherche l'équivalent dans la multimap
-                                iter = result.equal_range(i).second;
-                                while(iter->second != temp.at((unsigned long) l)) ++iter;
-                                result.erase(iter);
+                                iterator_temp = result.equal_range(iter->first).first;
+                                while(iterator_temp->second != temp.at((unsigned long) l)) ++iterator_temp;
+                                result.erase(iterator_temp);
                                 temp.erase(temp.begin()+l);
                                 --l;
                             }
@@ -99,19 +110,24 @@ namespace ai {
                         if(temp.size()>=1){
                             while(temp.size()!=1){
                                 // On cherche l'équivalent dans la multimap
-                                iter = result.equal_range(i).second;
-                                while(iter->second != temp.at(1)) ++iter;
-                                result.erase(iter);
+                                iterator_temp = result.equal_range(iter->first).first;
+                                while(iterator_temp->second != temp.at(1)) ++iterator_temp;
+                                result.erase(iterator_temp);
                                 temp.erase(temp.begin()+1);
 
                             }
                         }
-                        else result.erase(i);
+                        else result.erase(iter);
+                        break;
 
                         // Fin Spell Offensif
 
                         // Spell Defensif
-                    case 3|5|8|16|18 :
+                    case 3:
+                    case 5:
+                    case 8:
+                    case 16:
+                    case 18:
                         // Type Heal
                         // Best choice = target lower HP
                         // Keep only the lower
@@ -130,16 +146,18 @@ namespace ai {
                         if(temp.size()>=1){
                             while(temp.size()!=1){
                                 // On cherche l'équivalent dans la multimap
-                                iter = result.equal_range(i).second;
-                                while(iter->second != temp.at(1)) ++iter;
-                                result.erase(iter);
+                                iterator_temp = result.equal_range(iter->first).first;
+                                while(iterator_temp->second != temp.at(1)) ++iterator_temp;
+                                result.erase(iterator_temp);
                                 temp.erase(temp.begin()+1);
 
                             }
                         }
-                        else result.erase(i);
+                        else result.erase(iter);
+                        break;
 
-                    case 4|17 :
+                    case 4:
+                    case 17:
                         // Type Rez
                         // Best choice = ally if he is dead
                         // Erase all other possibilities
@@ -147,9 +165,9 @@ namespace ai {
                         for(int l=0; l<temp.size(); ++l){
                             if(!temp.at((unsigned long) l)->getIsDead()){
                                 // On cherche l'équivalent dans la multimap
-                                iter = result.equal_range(i).second;
-                                while(iter->second != temp.at((unsigned long) l)) ++iter;
-                                result.erase(iter);
+                                iterator_temp = result.equal_range(iter->first).first;
+                                while(iterator_temp->second != temp.at((unsigned long) l)) ++iterator_temp;
+                                result.erase(iterator_temp);
                                 temp.erase(temp.begin()+l);
                                 --l;
                             }
@@ -157,18 +175,25 @@ namespace ai {
                         if(temp.size()>=1){
                             while(temp.size()!=1){
                                 // On cherche l'équivalent dans la multimap
-                                iter = result.equal_range(i).second;
-                                while(iter->second != temp.at(1)) ++iter;
+                                iterator_temp = result.equal_range(iter->first).first;
+                                while(iterator_temp->second != temp.at(1)) ++iterator_temp;
                                 result.erase(iter);
                                 temp.erase(temp.begin()+1);
 
                             }
                         }
-                        else result.erase(i);
+                        else result.erase(iter);
+                        break;
 
                         // Fin Spell Defensif
 
-                    case 9|10|11|12|13|14 :
+                    case 9:
+                    case 10:
+                    case 11:
+                    case 12:
+                    case 13:
+                    case 14:
+                    case 15:
                         // Attack Offensif
                         // Best choice = lower HP && lower physic resist
 
@@ -185,9 +210,9 @@ namespace ai {
                         for(int l=0; l<temp.size(); ++l){
                             if(temp.at((unsigned long) l)->getPhysResist() > 0.6){
                                 // On cherche l'équivalent dans la multimap
-                                iter = result.equal_range(i).second;
-                                while(iter->second != temp.at((unsigned long) l)) ++iter;
-                                result.erase(iter);
+                                iterator_temp= result.equal_range(iter->first).first;
+                                while(iterator_temp->second != temp.at((unsigned long) l)) ++iterator_temp;
+                                result.erase(iterator_temp);
                                 temp.erase(temp.begin()+l);
                                 --l;
                             }
@@ -196,21 +221,21 @@ namespace ai {
                         if(temp.size()>=1){
                             while(temp.size()!=1){
                                 // On cherche l'équivalent dans la multimap
-                                iter = result.equal_range(i).second;
-                                while(iter->second != temp.at(1)) ++iter;
-                                result.erase(iter);
+                                iterator_temp = result.equal_range(iter->first).first;
+                                while(iterator_temp->second != temp.at(1)) ++iterator_temp;
+                                result.erase(iterator_temp);
                                 temp.erase(temp.begin()+1);
 
                             }
                         }
-                        else result.erase(i);
+                        else result.erase(iter);
+                        break;
 
                         // Fin Attack Offensif
 
                     default:break;
                 }
             }
-        }
 
         return result;
     }
@@ -224,7 +249,16 @@ namespace ai {
 
         temp_target = iter->second->clone();
         switch(iter->first){
-            case 0|1|2|9|10|11|12|13|14|15 :
+            case 0:
+            case 1:
+            case 2:
+            case 9:
+            case 10:
+            case 11:
+            case 12:
+            case 13:
+            case 14:
+            case 15:
                 // Spell offensif
                 if(iter->first == 15) action->Attack(temp_player,temp_target);
                 else action->SpellCast(iter->first, temp_player, temp_target );
@@ -243,10 +277,13 @@ namespace ai {
                 }
                 break;
 
-            case 3|5|16|18 :
+            case 3:
+            case 5:
+            case 16:
+            case 18:
                 // Spell / Item defensif de type Heal
 
-                if(iter->first == 3|5|8){
+                if(iter->first == (3|5|8)){
                     action->SpellCast(iter->first, temp_player, temp_target );
                 }
                 else action->UseItem(iter->first, temp_player,temp_target);
@@ -259,13 +296,14 @@ namespace ai {
                 if(iter->second->getHP() <= 0.1*iter->second->getMaxHP()){
                     weight = weight + 10;
                 }
-                if(iter->first == 3|5|8){
+                if(iter->first == (3|5|8)){
                     weight = weight - ((player->getMP()-temp_player->getMP())/ temp_player->getMaxMP())*10;
                 }
                 else weight = weight - (1/player->getItem()->getItem().find(iter->first)->second);
                 break;
 
-            case 4|17 :
+            case 4:
+            case 17:
                 // Spell / Item defensif de type Rez
 
                 if(iter->first == 4){
@@ -286,7 +324,10 @@ namespace ai {
                 else weight = 0;
                 break;
 
-            case 6|7|8|19 :
+            case 6:
+            case 7:
+            case 8:
+            case 19:
                 // Techniques à implementer
                 weight = 0;
                 break;
@@ -300,12 +341,11 @@ namespace ai {
     float ChoiceList::getWeightMaxMin(std::map<int, float> list_action_weight, bool maxormin) {
         // Si minormax == true alors on prend le max sinon le min
 
-        auto iter = list_action_weight.begin();
         float result=0;
 
-        while(iter != list_action_weight.end()){
-            if(result < iter->second) result = iter->second;
-            iter = iter ++;
+        for(auto iter =list_action_weight.begin(); iter!=list_action_weight.end(); ++iter){
+            auto cacahuete = iter;
+            if(result < cacahuete->second) result = cacahuete->second;
         }
 
         if(maxormin) return result;

@@ -38,7 +38,12 @@ int main(int argc,char* argv[])
 
     //Init default engine
     engine::Engine* engine = new engine::Engine();
-    engine::Rules* rules = new engine::Rules(state, false, true);
+    // first bool = aichar , second bool = aimonster, int = level AI
+    //                                                      1 -> AI = RandomChoice
+    //                                                      2 -> AI = RandomGoodChoice
+    //                                                      3 -> AI = SmartChoice
+    // abilities and items are configured in ElementList.cpp
+    engine::Rules* rules = new engine::Rules(state, true, true, 2);
     engine->setRules(rules);
     engine->getRules()->setState(state);
     engine->getRules()->init();

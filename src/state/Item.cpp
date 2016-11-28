@@ -71,6 +71,10 @@ namespace state {
     void Item::setItem(std::map<int, int> item) {
         items = item;
     }
+
+    Item::Item() {
+        init();
+    }
 };
 
 #endif

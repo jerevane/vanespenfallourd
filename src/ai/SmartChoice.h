@@ -7,9 +7,6 @@
 namespace engine {
   class Engine;
 };
-namespace instance {
-  class Fight;
-};
 namespace ai {
   class AI;
 }
@@ -20,14 +17,11 @@ namespace ai {
 
   /// class SmartChoice - 
   class SmartChoice : public ai::AI {
-    // Attributes
-  public:
-    engine::Engine* engine;
     // Operations
   public:
     SmartChoice ();
     ~SmartChoice ();
-    SmartChoice (instance::Fight* fight, engine::Engine* engine);
+    SmartChoice (engine::Engine* engine);
     void run ();
     std::map<int,float> minmax (engine::Engine* engine, bool minormax, int step);
   };

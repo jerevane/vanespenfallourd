@@ -79,7 +79,7 @@ namespace state {
 
     void Character::managementOverdrive(int overdriveAbility) {
         int power = getPowerToOverdrive();
-        if(power==0) abilities.setAbility(overdriveAbility);
+        if(power==0) abilities->setAbility(overdriveAbility);
         else setPowerToOverdrive(power -1);
     }
 

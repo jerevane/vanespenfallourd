@@ -32,6 +32,7 @@ namespace state {
     void init ();
     Item* clone ();
     void setItem (std::map<int, int> item);
+    Item ();
   };
 
 };

@@ -15,10 +15,11 @@ namespace engine {
 
     }
 
-    Rules::Rules(state::State *state, bool aichar, bool aimonster) {
+    Rules::Rules(state::State *state, bool aichar, bool aimonster, int levelai) {
         this->state = state;
         AICharNeeded = aichar;
         AIMonsterNeeded = aimonster;
+        levelAI = levelai;
         init();
     }
 
@@ -106,6 +107,10 @@ namespace engine {
         Turnlist.insert(Turnlist.begin(), element_temp);
 
         TurnList.swap(Turnlist);
+    }
+
+    int Rules::getLevelAI() {
+        return levelAI;
     }
 };
 

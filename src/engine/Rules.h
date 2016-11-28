@@ -21,10 +21,11 @@ namespace engine {
     bool AICharNeeded;
     bool AIMonsterNeeded;
     std::vector<state::Element*> TurnList;
+    int levelAI;
     // Operations
   public:
     Rules ();
-    Rules (state::State* state, bool aichar, bool aimonster);
+    Rules (state::State* state, bool aichar, bool aimonster, int levelai);
     ~Rules ();
     bool getAICharNeeded ();
     void setAICharNeeded (bool aicharneeded);
@@ -37,6 +38,7 @@ namespace engine {
     void setState (state::State* state);
     state::State* getState ();
     void PreviousTurn ();
+    int getLevelAI ();
   };
 
 };

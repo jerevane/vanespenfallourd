@@ -3,8 +3,8 @@
 #define AI__AI__H
 
 
-namespace instance {
-  class Fight;
+namespace engine {
+  class Engine;
 };
 namespace state {
   class Element;
@@ -12,8 +12,8 @@ namespace state {
 namespace ai {
   class ChoiceList;
 };
-namespace engine {
-  class Engine;
+namespace instance {
+  class Fight;
 }
 
 #include "engine/Engine.h"
@@ -27,7 +27,7 @@ namespace ai {
     // Associations
     // Attributes
   protected:
-    instance::Fight* fight;
+    engine::Engine* engine;
     int ChoiceAction;
     int Id;
     bool Notify;
@@ -37,15 +37,14 @@ namespace ai {
   public:
     AI ();
     ~AI ();
-    AI (instance::Fight* fight);
-    instance::Fight* getFight ();
-    void setFight (instance::Fight* fight);
+    AI (engine::Engine* engine);
     int getChoiceAction ();
     void setChoiceAction (int choiceaction);
     int getId ();
     bool getNotify ();
     void setNotify (bool notify);
     virtual void run () = 0;
+    state::Element* getChoiceTarget ();
   };
 
 };
