@@ -12,18 +12,26 @@ namespace engine {
 }
 
 #include "Command.h"
+#include "ActionTypeID.h"
 
 namespace engine {
 
   /// class MoveInUI - 
   class MoveInUI : public engine::Command {
+    // Associations
+    // Attributes
+  public:
+    int actionType;
+    std::string str;
+    state::Node* node;
     // Operations
   public:
-    void setChange (state::Node* tarnode);
-    void setChange (std::string tarStr);
+    void setNode (state::Node* tarnode);
+    void setAction (std::string tarStr);
     void exec ();
     void setScreenChange (std::string nextscrn);
-    MoveInUI (state::State* state);
+    MoveInUI (state::State* state, int actionType, state::Node* arg);
+    MoveInUI (state::State* state, int actionType, std::string arg);
   };
 
 };

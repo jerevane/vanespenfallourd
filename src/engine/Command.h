@@ -2,6 +2,7 @@
 #ifndef ENGINE__COMMAND__H
 #define ENGINE__COMMAND__H
 
+#include <string>
 
 namespace state {
   class State;
@@ -14,6 +15,8 @@ namespace engine {
   /// class Command - 
   class Command {
     // Attributes
+  public:
+    std::string idstr;
   protected:
     state::State* state;
     // Operations

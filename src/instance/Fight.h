@@ -33,6 +33,7 @@ namespace instance {
     // Attributes
   public:
     render::FightRenderer* renderer;
+    int spellCounter;
     // Operations
   public:
     Fight (sf::RenderWindow* window, render::FightRenderer* renderer, state::State* state, engine::Engine* engine);

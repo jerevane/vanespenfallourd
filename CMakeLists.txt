@@ -24,7 +24,7 @@ exec_program(${DIA2CODE} ARGS -d ../src -t cpp -cl Ability,AbilityTypeID,SphereG
 exec_program(${DIA2CODE} ARGS -d ../src -t cpp -cl Application,Screen,FightUI,TargetUI,SpellUI,UI,Intro,Fight,Worldmap,Inn,Rules,Action ../src/instance.dia)
 exec_program(${DIA2CODE} ARGS -d ../src -t cpp -cl Renderer,IntroRenderer,FightRenderer,WorldmapRenderer,ElemSprite,InnRenderer,TextureSetter ../src/render.dia)
 exec_program(${DIA2CODE} ARGS -d ../src -t cpp -cl AI,SmartChoice,RandomChoice,RandomGoodChoice,ChoiceList ../src/ai.dia)
-exec_program(${DIA2CODE} ARGS -d ../src -t cpp -cl Rules,Command,Action,MoveInUI,Engine ../src/engine.dia)
+exec_program(${DIA2CODE} ARGS -d ../src -t cpp -cl Rules,Command,Action,ActionTypeID,MoveInUI,Engine ../src/engine.dia)
 
 
 # Sources

@@ -7,4 +7,5 @@
 #include "engine/MoveInUI.h"
 #include "engine/Action.h"
 #include "engine/Rules.h"
+#include "engine/ActionTypeID.h"
 #endif

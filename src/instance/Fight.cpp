@@ -18,6 +18,7 @@ namespace instance {
 #include <ai/SmartChoice.h>
 #include "FightUI.h"
 #include "TargetUI.h"
+#include "SpellUI.h"
 
 namespace instance {
 
@@ -28,6 +29,7 @@ namespace instance {
     }
 
     void Fight::init() {
+        spellCounter = 0;
         state->needScreenChange = false;
         state->currentAction = "attack";
         engine->target = state->getElementList()->element.at(2);
@@ -58,45 +60,59 @@ namespace instance {
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
                 if (ui->idstr == "FightUI") {
                     if (state->currentAction == "attack") {
-                        engine::MoveInUI *cmd = new engine::MoveInUI(state);
-                        cmd->setChange("overdrive");
+                        engine::MoveInUI *cmd = new engine::MoveInUI(state, 1, "overdrive");
+                        engine->addCmd(cmd);
                         ((FightUI *) ui)->menuItemSwitch(((FightUI *) ui)->attack, ((FightUI *) ui)->overdrive);
                     }
                     if (state->currentAction == "spell") {
-                        engine::MoveInUI *cmd = new engine::MoveInUI(state);
-                        cmd->setChange("item");
+                        engine::MoveInUI *cmd = new engine::MoveInUI(state, 1, "item");
+                        engine->addCmd(cmd);
                         ((FightUI *) ui)->menuItemSwitch(((FightUI *) ui)->abilities, ((FightUI *) ui)->item);
                     }
                 } else if (ui->idstr == "TargetUI") {
+                } else if (ui->idstr == "SpellUI") {
+                    int prevcountervalue = spellCounter;
+                    if ((spellCounter+3) <= ((SpellUI *) ui)->maxSpell) {
+                        spellCounter += 3;
+                        ((SpellUI *) ui)->menuItemSwitch(*((SpellUI *) ui)->spellTexts[prevcountervalue],
+                                                         *((SpellUI *) ui)->spellTexts[spellCounter]);
+                    }
                 }
             }
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
                 if (ui->idstr == "FightUI") {
 
                     if (state->currentAction == "item") {
-                        engine::MoveInUI *cmd = new engine::MoveInUI(state);
-                        cmd->setChange("spell");
+                        engine::MoveInUI *cmd = new engine::MoveInUI(state, 1, "spell");
+                        engine->addCmd(cmd);
                         ((FightUI *) ui)->menuItemSwitch(((FightUI *) ui)->item, ((FightUI *) ui)->abilities);
                     }
                     if (state->currentAction == "overdrive") {
-                        engine::MoveInUI *cmd = new engine::MoveInUI(state);
-                        cmd->setChange("attack");
+                        engine::MoveInUI *cmd = new engine::MoveInUI(state, 1, "attack");
+                        engine->addCmd(cmd);
                         ((FightUI *) ui)->menuItemSwitch(((FightUI *) ui)->overdrive, ((FightUI *) ui)->attack);
                     }
                 } else if (ui->idstr == "TargetUI") {
+                } else if (ui->idstr == "SpellUI") {
+                    int prevcountervalue = spellCounter;
+                    if ((spellCounter-3) >= 0) {
+                        spellCounter -= 3;
+                        ((SpellUI *) ui)->menuItemSwitch(*((SpellUI *) ui)->spellTexts[prevcountervalue],
+                                                         *((SpellUI *) ui)->spellTexts[spellCounter]);
+                    }
                 }
             }
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
                 if (ui->idstr == "FightUI") {
 
                     if (state->currentAction == "item") {
-                        engine::MoveInUI *cmd = new engine::MoveInUI(state);
-                        cmd->setChange("overdrive");
+                        engine::MoveInUI *cmd = new engine::MoveInUI(state, 1, "overdrive");
+                        engine->addCmd(cmd);
                         ((FightUI *) ui)->menuItemSwitch(((FightUI *) ui)->item, ((FightUI *) ui)->overdrive);
                     }
                     if (state->currentAction == "spell") {
-                        engine::MoveInUI *cmd = new engine::MoveInUI(state);
-                        cmd->setChange("attack");
+                        engine::MoveInUI *cmd = new engine::MoveInUI(state, 1, "attack");
+                        engine->addCmd(cmd);
                         ((FightUI *) ui)->menuItemSwitch(((FightUI *) ui)->abilities, ((FightUI *) ui)->attack);
                     }
                 } else if (ui->idstr == "TargetUI") {
@@ -111,19 +127,26 @@ namespace instance {
                         ((TargetUI *) ui)->menuItemSwitch(renderer->spriteList.at(engine->targetIndex - 1));
                         engine->targetIndex -= 1;
                     }
+                } else if (ui->idstr == "SpellUI") {
+                    int prevcountervalue = spellCounter;
+                    if ((spellCounter-1) >= 0) {
+                        spellCounter -= 1;
+                        ((SpellUI *) ui)->menuItemSwitch(*((SpellUI *) ui)->spellTexts[prevcountervalue],
+                                                         *((SpellUI *) ui)->spellTexts[spellCounter]);
+                    }
                 }
             }
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
                 if (ui->idstr == "FightUI") {
 
                     if (state->currentAction == "attack") {
-                        engine::MoveInUI *cmd = new engine::MoveInUI(state);
-                        cmd->setChange("spell");
+                        engine::MoveInUI *cmd = new engine::MoveInUI(state, 1, "spell");
+                        engine->addCmd(cmd);
                         ((FightUI *) ui)->menuItemSwitch(((FightUI *) ui)->attack, ((FightUI *) ui)->abilities);
                     }
                     if (state->currentAction == "overdrive") {
-                        engine::MoveInUI *cmd = new engine::MoveInUI(state);
-                        cmd->setChange("item");
+                        engine::MoveInUI *cmd = new engine::MoveInUI(state, 1, "item");
+                        engine->addCmd(cmd);
                         ((FightUI *) ui)->menuItemSwitch(((FightUI *) ui)->overdrive, ((FightUI *) ui)->item);
                     }
                 } else if (ui->idstr == "TargetUI") {
@@ -137,12 +160,21 @@ namespace instance {
                         ((TargetUI *) ui)->menuItemSwitch(renderer->spriteList.at(engine->targetIndex + 1));
                         engine->targetIndex += 1;
                     }
+                } else if (ui->idstr == "SpellUI") {
+                    int prevcountervalue = spellCounter;
+                    if ((spellCounter+1) <= ((SpellUI *) ui)->maxSpell) {
+                        spellCounter += 1;
+                        ((SpellUI *) ui)->menuItemSwitch(*((SpellUI *) ui)->spellTexts[prevcountervalue],
+                                                         *((SpellUI *) ui)->spellTexts[spellCounter]);
+                    }
                 }
             }
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return)) {
                 if (ui->idstr == "FightUI") {
                     if (state->currentAction == "attack")
                         ui = new TargetUI(window, renderer->spriteList[2]);
+                    else if (state->currentAction == "spell")
+                        ui = new SpellUI(window, state->currentTurn->getAbility()->getAbility());
 
                 } else if (ui->idstr == "TargetUI") {
 
@@ -156,6 +188,12 @@ namespace instance {
 
                     }
                     if (state->currentAction == "spell") {
+                        engine::Action *action = new engine::Action(state->currentTurn,
+                                                                    engine->target,
+                                                                    engine->spellToCast);
+                        action->setState(state);
+                        engine->addCmd(action);
+
                         state->setPlayerFinishedTurn(true);
                         ui = new FightUI(window);
                         engine->getRules()->NextTurn();
@@ -163,9 +201,12 @@ namespace instance {
 
                     }
                     if (state->currentAction == "attack") {
-                        engine::Action *action = new engine::Action();
+                        engine::Action *action = new engine::Action(state->currentTurn,
+                                                                    engine->target,
+                                                                    15);
                         action->setState(state);
-                        action->Attack(state->currentTurn, engine->target);
+                        engine->addCmd(action);
+
                         state->setPlayerFinishedTurn(true);
                         engine->target = state->getElementList()->element[2];
                         engine->targetIndex = 2;
@@ -174,12 +215,21 @@ namespace instance {
                         engine->turnInit(engine->getRules()->getTurnList()[0]);
                     }
 
+                } else if (ui->idstr == "SpellUI") {
+                    auto pos = std::find(((SpellUI *) ui)->spells.begin(),
+                                        ((SpellUI *) ui)->spells.end(),
+                                        ((SpellUI *) ui)->spells[spellCounter]);
 
+                    if(pos != ((SpellUI *) ui)->spells.end()) {
+                        engine->spellToCast = pos - ((SpellUI *) ui)->spells.begin();
+                        ui = new TargetUI(window, renderer->spriteList[2]);
+                    }
                 }
             }
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
-                if (ui->idstr == "TargetUI") {
+                if ((ui->idstr == "TargetUI")|(ui->idstr == "SpellUI")) {
                     ui = new FightUI(window);
+                    state-> currentAction = "attack";
                 }
             }
         }
@@ -195,7 +245,7 @@ namespace instance {
 
     void Fight::turnPlayedByAI(int id) {
         ai::AI* ai;
-        engine::Action *action = nullptr;
+        engine::Action *action = nullptr; //DAFUQ MAMENE, DAFUQ
         bool notify = false;
 
         switch(id){

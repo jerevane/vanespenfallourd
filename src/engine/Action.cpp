@@ -118,13 +118,19 @@ namespace engine {
     }
 
     void Action::exec() {
-
+        apply(state, caster, action, target, true);
     }
 
     void Action::UseItem(int id_item, state::Element *caster, state::Element *target) {
         std::string result;
         result = caster->getItem()->UseItem(target,id_item);
         TakeDamage(result,target);
+    }
+
+    Action::Action(state::Element *caster, state::Element *target, int action) : caster(caster),
+                                                                                 target(target),
+                                                                                 action(action)
+    {
     }
 };
 

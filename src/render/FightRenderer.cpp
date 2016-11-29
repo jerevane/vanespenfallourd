@@ -71,7 +71,7 @@ namespace render {
 
         turnText = sf::Text();
         turnText.setFont(font);
-        turnText.setPosition(400, 50);
+        turnText.setPosition(250, 50);
 
         initElemSprite(100, 475, claudeT, claudeS);
         initElemSprite(200, 425, youennT, youennS);

@@ -12,11 +12,15 @@ namespace engine {
 
 }
 
+#include <iostream>
 #include "Engine.h"
 
 namespace engine {
     void Engine::addCmd(Command* cmd) {
-      //commands.push_back(*cmd);
+        if (!cmd)
+            throw std::runtime_error("Null command");
+      std::lock_guard<std::mutex> lock(mtx);
+      commandsToSwap.push_back(cmd);
     }
 
     Engine::Engine() {
@@ -42,6 +46,20 @@ namespace engine {
 
     void Engine::setRules(Rules* rules) {
       this->rules = rules;
+    }
+
+    void Engine::flush() {
+        std::cout << "Thread launched" << std::endl;
+        while(1) {
+            {
+                std::lock_guard<std::mutex> lock(mtx);
+                std::swap(commandsToFlush, commandsToSwap);
+            }
+            for (auto i : commandsToFlush) {
+                i->exec();
+            }
+            commandsToFlush.clear();
+        }
     }
 
 };

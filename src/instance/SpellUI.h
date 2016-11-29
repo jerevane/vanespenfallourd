@@ -5,6 +5,8 @@
 #include "SFML/Graphics.hpp"
 #include "SFML/Audio.hpp"
 #include <vector>
+#include <string>
+#include <map>
 
 namespace sf {
   class RenderWindow;
@@ -22,13 +24,15 @@ namespace instance {
     // Attributes
   public:
     std::vector<sf::Text*> spellTexts;
+    std::vector<std::string> spells;
+    int maxSpell;
   protected:
     sf::RenderWindow* window;
     // Operations
   public:
     void display ();
     ~SpellUI ();
-    SpellUI (sf::RenderWindow* window, std::vector<state::Ability*> spells);
+    SpellUI (sf::RenderWindow* window, std::map<int, bool> spells);
     void menuItemSwitch (sf::Text& t1, sf::Text& t2);
   };
 

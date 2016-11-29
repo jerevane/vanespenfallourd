@@ -7,15 +7,28 @@
 namespace engine {
 
 
-    void MoveInUI::setChange(state::Node *tarnode) {
+    void MoveInUI::setNode(state::Node *tarnode) {
       state->setNode(tarnode);
     }
 
-    void MoveInUI::setChange(std::string tarStr) {
+    void MoveInUI::setAction(std::string tarStr) {
       state->currentAction = tarStr;
     }
 
     void MoveInUI::exec() {
+        switch(actionType){
+            case ACTIONCHANGE:
+                setAction(str);
+                break;
+            case NODECHANGE:
+                setNode(node);
+                break;
+            case SCREENCHANGE:
+                setScreenChange(str);
+                break;
+            default:
+                break;
+        }
 
     }
 
@@ -24,9 +37,18 @@ namespace engine {
       state->needScreenChange = true;
     }
 
-    MoveInUI::MoveInUI(state::State *state) {
+    MoveInUI::MoveInUI(state::State *state, int actionType, state::Node *arg) : actionType(actionType),
+                                                                                node(arg)
+    {
         setState(state);
     }
+
+    MoveInUI::MoveInUI(state::State *state, int actionType, std::string arg) : actionType(actionType),
+                                                                               str(arg)
+    {
+        setState(state);
+    }
+
 };
 
 #endif

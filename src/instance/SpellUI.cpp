@@ -17,15 +17,70 @@ namespace instance {
 namespace instance {
 
     void SpellUI::display() {
-
+        for(auto i : spellTexts)
+        {
+            window->draw(*i);
+        }
     }
 
     SpellUI::~SpellUI() {
 
     }
 
-    SpellUI::SpellUI(sf::RenderWindow *window, std::vector<state::Ability*> spells) {
+    SpellUI::SpellUI(sf::RenderWindow *window, std::map<int, bool> spells) : window(window){
         idstr = "SpellUI";
+
+        font.loadFromFile("res/Square.ttf");
+
+        this->spells.push_back("Brazier");
+        this->spells.push_back("Poison");
+        this->spells.push_back("Flare");
+        this->spells.push_back("Fast heal");
+        this->spells.push_back("Resurrection");
+        this->spells.push_back("Haste");
+        this->spells.push_back("Defender");
+        this->spells.push_back("Counter-strike");
+        this->spells.push_back("Battlecry");
+        this->spells.push_back("Bleed");
+        this->spells.push_back("Triple attack");
+        this->spells.push_back("Double use");
+        this->spells.push_back("Multi-arrow");
+        this->spells.push_back("Poison arrow");
+        this->spells.push_back("Piercing arrow");
+
+        int tempcounter = 1;
+        int baseposx = 100;
+        int baseposy = 100;
+        maxSpell = 0;
+
+        for(auto i : spells)
+        {
+            sf::Text* temptxt = new sf::Text;
+            if (i.second)
+            {
+                maxSpell += 1;
+                temptxt->setString(this->spells[i.first]);
+                temptxt->setFont(font);
+                temptxt->setScale(0.8,0.8);
+
+                if(tempcounter%4 != 0)
+                {
+                    temptxt->setPosition(baseposx, baseposy);
+                    baseposx += 150;
+                    tempcounter += 1;
+                } else {
+                    baseposx = 100;
+                    baseposy += 50;
+                    temptxt->setPosition(baseposx, baseposy);
+                    baseposx += 150;
+                    tempcounter += 1;
+                }
+
+                spellTexts.push_back(temptxt);
+            }
+        }
+
+        spellTexts[0]->setColor(sf::Color::Red);
 
     }
 

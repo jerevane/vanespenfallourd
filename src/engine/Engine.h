@@ -3,6 +3,7 @@
 #define ENGINE__ENGINE__H
 
 #include <vector>
+#include <mutex>
 
 namespace engine {
   class Command;
@@ -24,9 +25,12 @@ namespace engine {
     // Associations
     // Attributes
   public:
-    std::vector<Command> commands;
+    std::vector<Command*> commandsToSwap;
+    std::vector<Command*> commandsToFlush;
     state::Element* target;
     unsigned long targetIndex;
+    int spellToCast;
+    std::mutex mtx;
   protected:
     Rules* rules;
     // Operations
@@ -37,6 +41,7 @@ namespace engine {
     Rules* getRules ();
     void setRules (Rules* rules);
     void turnInit (state::Element* element);
+    void flush ();
   };
 
 };

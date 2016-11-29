@@ -5,8 +5,8 @@
 #include <string>
 
 namespace state {
-  class State;
   class Element;
+  class State;
 };
 namespace engine {
   class Command;
@@ -19,6 +19,11 @@ namespace engine {
 
   /// class Action - 
   class Action : public engine::Command {
+    // Attributes
+  public:
+    state::Element* target;
+    state::Element* caster;
+    int action;
     // Operations
   public:
     Action ();
@@ -30,6 +35,7 @@ namespace engine {
     void Heal (int heal, state::Element* target);
     void exec ();
     void UseItem (int id_item, state::Element* caster, state::Element* target);
+    Action (state::Element* caster, state::Element* target, int action);
   };
 
 };

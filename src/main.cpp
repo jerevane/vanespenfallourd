@@ -1,5 +1,6 @@
 #include <iostream>
 #include <engine/Engine.h>
+#include <thread>
 
 
 #include "state.hpp"
@@ -39,20 +40,28 @@ int main(int argc,char* argv[])
     //Init default engine
     engine::Engine* engine = new engine::Engine();
     // first bool = aichar , second bool = aimonster, int = level AI
-    //                                                      1 -> AI = RandomChoice
-    //                                                      2 -> AI = RandomGoodChoice
-    //                                                      3 -> AI = SmartChoice
+    //                                                      0 -> AI = RandomChoice
+    //                                                      1 -> AI = RandomGoodChoice
+    //                                                      2 -> AI = SmartChoice
     // abilities and items are configured in ElementList.cpp
-    engine::Rules* rules = new engine::Rules(state, true, true, 2);
+    engine::Rules* rules = new engine::Rules(state, false, true, 1);
     engine->setRules(rules);
     engine->getRules()->setState(state);
     engine->getRules()->init();
     engine->turnInit(engine->getRules()->getTurnList()[0]);
+
+    //Init Engine thread
+    std::thread engThread(&engine::Engine::flush, engine);
+
 
     Application* FinalFantastique = new Application(state, engine);
     std::cout << std::to_string(e1->element.size()) << std::endl;
 
     FinalFantastique->play(state, engine);
 
+    engThread.join();
+
     return 0;
 }
+
+
