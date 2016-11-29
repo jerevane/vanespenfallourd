@@ -72,7 +72,7 @@ namespace instance {
                 } else if (ui->idstr == "TargetUI") {
                 } else if (ui->idstr == "SpellUI") {
                     int prevcountervalue = spellCounter;
-                    if ((spellCounter+3) <= ((SpellUI *) ui)->maxSpell) {
+                    if ((spellCounter+3) < ((SpellUI *) ui)->maxSpell) {
                         spellCounter += 3;
                         ((SpellUI *) ui)->menuItemSwitch(*((SpellUI *) ui)->spellTexts[prevcountervalue],
                                                          *((SpellUI *) ui)->spellTexts[spellCounter]);
@@ -117,7 +117,7 @@ namespace instance {
                     }
                 } else if (ui->idstr == "TargetUI") {
                     if (engine->target == state->getElementList()->element
-                            .at(2)) {
+                            .at(0)) {
                         engine->target = state->getElementList()->element
                                 .at(state->getElementList()->element.size() - 1);
                         ((TargetUI *) ui)->menuItemSwitch(renderer->spriteList.at(renderer->spriteList.size() - 1));
@@ -152,8 +152,8 @@ namespace instance {
                 } else if (ui->idstr == "TargetUI") {
                     if (engine->target == state->getElementList()->element
                             .at(state->getElementList()->element.size() - 1)) {
-                        engine->target = state->getElementList()->element.at(2);
-                        ((TargetUI *) ui)->menuItemSwitch(renderer->spriteList.at(2));
+                        engine->target = state->getElementList()->element.at(0);
+                        ((TargetUI *) ui)->menuItemSwitch(renderer->spriteList.at(0));
                         engine->targetIndex = 2;
                     } else {
                         engine->target = state->getElementList()->element.at(engine->targetIndex + 1);
@@ -162,7 +162,7 @@ namespace instance {
                     }
                 } else if (ui->idstr == "SpellUI") {
                     int prevcountervalue = spellCounter;
-                    if ((spellCounter+1) <= ((SpellUI *) ui)->maxSpell) {
+                    if ((spellCounter+1) < ((SpellUI *) ui)->maxSpell) {
                         spellCounter += 1;
                         ((SpellUI *) ui)->menuItemSwitch(*((SpellUI *) ui)->spellTexts[prevcountervalue],
                                                          *((SpellUI *) ui)->spellTexts[spellCounter]);
