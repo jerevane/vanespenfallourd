@@ -277,4 +277,7 @@ namespace instance {
     }
 };
 
+void simKeyPress() {
+}
+
 #endif
