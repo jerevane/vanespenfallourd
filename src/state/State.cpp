@@ -56,6 +56,12 @@ namespace state {
 
     State* State::clone() {
         State* s = new State(this->elementlist->clone(), this->node->clone(), this->Id);
+        s->currentTurn = (this->currentTurn);
+        s->currentAction = (this->currentAction);
+        s->needScreenChange = (this->needScreenChange);
+        s->setPlayerFinishedTurn(this->getPlayerFinishedTurn());
+        s->setNode(this->getNode());
+
         return s;
     }
 

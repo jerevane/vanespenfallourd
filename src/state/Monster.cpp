@@ -46,6 +46,9 @@ namespace state {
         m->setAgility(this->getAgility());
         m->setIntelligence(this->getIntelligence());
 
+        m->setAbility(this->getAbility());
+
+        m->setId(this->getId());
         m->setName(this->getName());
         m->setItem(this->getItem()->clone());
         m->setLevel(this->getLevel());

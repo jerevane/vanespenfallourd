@@ -74,6 +74,9 @@ namespace state {
     std::string getName ();
     void setItem (Item* item);
     Item* getItem ();
+    void setAbility (Ability* ability);
+    void setId (int id);
+    int getId ();
   };
 
 };

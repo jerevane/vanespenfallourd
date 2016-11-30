@@ -60,8 +60,10 @@ namespace ai {
 
         state::State* state_temp = engine->getRules()->getState()->clone();
 
+
         engine::Rules* rules_new = new engine::Rules(state_temp, rules_temp->getAICharNeeded(),
                                                      rules_temp->getAIMonsterNeeded(), rules_temp->getLevelAI());
+        state_temp->currentTurn = rules_new->getTurnList().at(0);
         engine->setRules(rules_new);
 
         // Création de la ChoiceList spécifique au player actuel
@@ -91,9 +93,10 @@ namespace ai {
                 state::State* state_temp_after_apply = state_temp->clone();
                 action->apply(state_temp_after_apply, rules_new->getTurnList().at(0), iter_choice->first,
                               iter_choice->second, notify);
-
+                rules_new->setState(state_temp_after_apply);
                 // On passe au tour suivant
                 rules_new->NextTurn();
+                engine->turnInit(engine->getRules()->getTurnList()[0]);
 
                 // On insère dans le tableau résultat l'action et l'addition du poid de l'action et du MaxMin des autres
                 // possibilités
@@ -103,6 +106,7 @@ namespace ai {
 
                 // On revient en arrière pour l'action suivante
                 rules_new->PreviousTurn();
+                engine->turnInit(engine->getRules()->getTurnList()[0]);
             }
             iter_choice++;
         }
@@ -112,6 +116,7 @@ namespace ai {
 
         return result;
     }
+
 };
 
 #endif

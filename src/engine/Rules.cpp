@@ -88,6 +88,7 @@ namespace engine {
         Turnlist.push_back(element_temp);
 
         TurnList.swap(Turnlist);
+        if(TurnList.at(0)->getIsDead()) NextTurn();
 
     }
 
@@ -107,6 +108,7 @@ namespace engine {
         Turnlist.insert(Turnlist.begin(), element_temp);
 
         TurnList.swap(Turnlist);
+        if(TurnList.at(0)->getIsDead()) PreviousTurn();
     }
 
     int Rules::getLevelAI() {

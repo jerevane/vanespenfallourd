@@ -107,6 +107,9 @@ namespace state {
         c->setAgility(this->getAgility());
         c->setIntelligence(this->getIntelligence());
 
+        c->setAbility(this->getAbility());
+
+        c->setId(this->getId());
         c->setItem(this->getItem()->clone());
         c->setLevel(this->getLevel());
         c->setDot(this->getDot());
