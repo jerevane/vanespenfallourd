@@ -42,23 +42,19 @@ Voici les packages de notre projet :
 
 \textbf{Package state.} Package central qui gère l'\'{e}tat du jeu.
 
-\textbf{Package engine.} Package qui modifie l'\'{e}tat de jeu en fonction de diff\'{e}rents inputs.
+\textbf{Package engine.} Package qui modifie l'\'{e}tat de jeu et stocke les commandes.
 
 \textbf{Package ai.} Package qui gère le contrôle par l'ordinateur des monstres et, potentiellement, un personnage principal.
 
 \textbf{Package server.} Package contenant la gestion de l'API du jeu, que ce soit par r\'{e}seau ou localement.
 
-\textbf{Package instance.} Gère les différents contexte de jeu et leur rendu.
+\textbf{Package instance.} Package contenant l'Interface Homme-Machine.
 
-\textbf{Package client.} Package contenant les diff\'{e}rents traitements et commandes faites localement, sur la machine du joueur, afin de produire le comportement souhait\'{e} du jeu.
-
-\textbf{Package entity.} Package contenant toutes les entit\'{e}s du jeu. Cela rassemble les Personnages Non Joueurs, les personnages principaux et les diff\'{e}rents ennemis.
-
-\textbf{Package capacities.} Package contenant les diff\'{e}rents sorts et capacit\'{e}s utilis\'{e}es par les personnages principaux et les ennemis.
+\textbf{Package render.} Package contenant la gestion du rendu.
 
 \begin{figure}
 \caption{Diagramme des packages}
-\includegraphics[width=0.80\textwidth]{Diagramme_packages.jpg}
+\includegraphics[width=0.80\textwidth]{packdia.jpeg}
 \end{figure}
 
 \chapter{Description et conception des \'{e}tats}
@@ -105,8 +101,6 @@ Dans cette section, nous expliciterons le diagrammes des classes pour les \'{e}t
 
 \textbf{Classes Element.} Cette classe et ses classes filles contiennent tout les \'{e}l\'{e}ments vivants du jeu. On distingue deux classes filles : Character et Monster. La classe Character possède des dépendances avec des classes comme SphereGrid et Item qui représentent l'\'{e}volution des personnages ainsi que les objets dont ils pourront faire l'usage. 
 
-\textbf{Fabrique d'\'{e}l\'{e}ments.} Cette classe a pour but de rendre plus facile la construction d'\'{e}l\'{e}ments vivants, notamment des monstres provenant d'un \'{e}v\`{e}nement al\'{e}atoire (consid\'{e}r\'{e} comme non boss).
-
 \textbf{Liste d'\'{e}l\'{e}ments.} Elle va contenir toute les informations sur l'ensemble des \'{e}l\'{e}ments pr\'{e}sent dans le jeu. 
 
 \textbf{Classes Node.} Cette classe permet de faire le lien entre l'apparition d'\'{e}v\`{e}nements et les \'{e}l\'{e}ments. C'est une liste chain\'{e}e dont le d\'{e}placement est bidirectionnel. 
@@ -115,46 +109,19 @@ Dans cette section, nous expliciterons le diagrammes des classes pour les \'{e}t
 
 \textbf{Observer.} Cette classe permettra de relever les changements d'\'{e}tats du jeu et de le transmettre aux autres packages.
 
-\begin{sidewaysfigure}[ht]
-\caption{Diagramme des classes du package state}
-\includegraphics[width=1.25\textwidth]{state.jpeg}
-\end{sidewaysfigure}
 
 \chapter{Rendu : Strat\'{e}gie et Conception}
 \section{Strat\'{e}gie de rendu d'un état}
-Notre jeu \'{e}tant à temps discret, le rendu d'un \'{e}tat sera assez simple. Le tout étant de distinguer entre un changement d'\'{e}tat qui n'entra\^{i}ne pas un lourd besoin de rendu (ie. pendant un combat) et un changement d'\'{e}tat demandant un changement de sprites (ie. changer de ville).
+Notre jeu \'{e}tant à temps discret, le rendu d'un \'{e}tat sera assez simple. Le tout étant de distinguer entre le rendu et l'IHM qui correspond au menu.
 
-Pour se faire, nous introduisons le concept d'instance, offrant une classe par contexte (ie. Combat, Carte du monde, Menu d'intro...) g\'{e}rant la logique d'initialisation et les donn\'{e}es relatives des changments d'\'{e}tat du jeu. Le rendu de ces classes, utilisant les m\'{e}thodes de SFML, sera faite par les classes du package render.
+Pour se faire, nous introduisons le concept d'instance, offrant une classe par contexte (ie. Combat, Carte du monde, Menu d'intro...) g\'{e}rant l'IHM pour chaque environnement. Le rendu sera fait par les classes du package render en associant un Renderer à chaque contexte.
 
 \section{Conception logiciel}
-Le diagramme des classes du package render se trouve en fin de cette partie. Nous expliquerons le r\^{o}le de chaque classe de ce diagramme.
 
 \textbf{Renderer.} Cette classe contient toutes les informations communes entre chaque contexte. Elle est néanmoins abstraite et ses classes filles (WorldMapRender, FightRender ...) doivent ainsi red\'{e}finir ces m\'{e}thodes afin de diff\'{e}rencier correctement chaque contexte et chaque \'{e}tat du jeu.
 
-\textbf{ElemSprite.} Cette classe poss\`{e}de les caract\'{e}ristiques des sprites des \'{e}l\'{e}ments du jeu. Nous pouvons, gr\^{a}ce \`{a} cette classe, personaliser et placer des \'{e}l\'{e}ments vivants et non vivants \`{a} chaque \'{e}tat du jeu. Elle n'est pour l'instant reli\'{e}e seulement \`{a} WorldMapRenderer car nous n'avons pas coder les autres instances.
-
 \textbf{TextureSetter.} C'est dans cette classe que l'on va instancier toutes les textures des \'{e}l\'{e}ments vivants et non vivants du jeu. Ce tableau sera utilis\'{e} par les classes filles de Renderer.
 
-\textbf{ClaudeUI, YouennUI.} Nous pr\'{e}voyons ses classes qui devront afficher un menu \`{a} l'utilisateur afin qu'il puisse choisir parmis les diff\'{e}rentes attaques disponible pour le personnage. 
-
-\begin{sidewaysfigure}[ht]
-\caption{Diagramme des classes du package render}
-\includegraphics[width=1\textwidth]{render.jpeg}
-\end{sidewaysfigure}
- 
-\section{Exemple de rendu}
-
-Ecran d'acceuil du jeu avec la possibilité d'afficher une entité avec ses points de vie.
-
-\begin{sidewaysfigure}[ht]
-\caption{Ecran d'acceuil du jeu Final Fantastique}
-\includegraphics[width=1\textwidth]{Ecran_acceuil_ff.png}
-\end{sidewaysfigure}
-
-\begin{sidewaysfigure}[ht]
-\caption{Ecran d'acceuil avec l'elementaire de feu}
-\includegraphics[width=1\textwidth]{Ecran_acceuil_fire_elemental.png}
-\end{sidewaysfigure}
 
 \chapter{R\`{e}gle de changement d'\'{e}tat}
 
@@ -168,10 +135,6 @@ Le jeu est \`{a} temps discret donc les changements d'\'{e}tats ne se feront uni
 
 \textbf{Info, Worldmap, Fight, Inn.} Les classes filles de Screen nous permette de mieux personaliser les contextes suivant les choix de l'utilisateur et sa position dans l'histoire du jeu.
 
-\begin{sidewaysfigure}[ht]
-\caption{Diagramme de classe du package instance}
-\includegraphics[width=1\textwidth]{instance.jpeg}
-\end{sidewaysfigure}
 
 \chapter{IA}
 
@@ -193,5 +156,17 @@ L'intelligence artificielle dite de haut niveau (intitul\'{e} SmartChoice) s'app
 \caption{Diagramme de classe du package ai}
 \includegraphics[width=1\textwidth]{ai.jpeg}
 \end{sidewaysfigure}
+
+\chapter{Engine}
+
+L'engine a pour but de stocker les commandes g\'{e}n\'{e}r\'{e}es par l'utilisateur ou l'IA avant qu'un thread parall\`{e}le au principal vide le tableau de commandes et les ex\'{e}cute.
+
+\section{Stockage de commandes}
+
+Les commandes envoy\'{e}es par l'IHM sont de deux types différents : MoveInUI correspondant au changement d'\'{e}tat associ\'{e} \'{a} un d\'{e}placement dans le menu et Action correspondant aux diff\'{e}rentes actions lors d'un combat (attaque, objet, soin, etc..). Ces commandes sont stock\'{e}es dans un tableau de l'engine en attendant que le thread secondaire les ex\'{e}cute.
+
+\section{Ex\'{e}cution des commandes}
+
+Le thread secondaire est pris dans une boucle infinie dans laquelle il transf\`{e}re les commandes dans un tableau secondaire avant de le lock et d'ex\'{e}cuter toutes les commandes. Le tableau secondaire permet de ne pas locker le tableau principal, ce qui agirait comme un bottleneck dans l'ajout de commandes par l'IHM.
 
 \end{document}

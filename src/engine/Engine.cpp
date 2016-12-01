@@ -33,6 +33,7 @@ namespace engine {
     void Engine::turnInit(state::Element *element) {
 
       rules->getState()->currentTurn = element;
+      rules->getState()->currentAction = "attack";
       rules->getState()->setPlayerFinishedTurn(false);
       if (!element->getIsCharacter())
       {

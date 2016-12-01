@@ -218,7 +218,7 @@ namespace instance {
                 } else if (ui->idstr == "SpellUI") {
                     auto pos = std::find(((SpellUI *) ui)->spells.begin(),
                                         ((SpellUI *) ui)->spells.end(),
-                                        ((SpellUI *) ui)->spells[spellCounter]);
+                                        ((SpellUI *) ui)->spellTexts[spellCounter]->getString());
 
                     if(pos != ((SpellUI *) ui)->spells.end()) {
                         engine->spellToCast = pos - ((SpellUI *) ui)->spells.begin();
