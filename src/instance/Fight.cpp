@@ -220,6 +220,8 @@ namespace instance {
                                         ((SpellUI *) ui)->spells.end(),
                                         ((SpellUI *) ui)->spellTexts[spellCounter]->getString());
 
+                    //std::cout << ((SpellUI *)ui)->spellTexts[spellCounter]->getString() << std::endl;
+
                     if(pos != ((SpellUI *) ui)->spells.end()) {
                         engine->spellToCast = pos - ((SpellUI *) ui)->spells.begin();
                         ui = new TargetUI(window, renderer->spriteList[2]);

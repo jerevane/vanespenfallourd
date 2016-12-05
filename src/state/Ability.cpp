@@ -74,7 +74,7 @@ namespace state {
 
     std::string Ability::Brazier(Element* caster) {
         std::string result ="M_";
-        int dmg = caster->getIntelligence()*10+20;
+        int dmg = caster->getIntelligence()*10;
         result = result + std::to_string(dmg) + "_0_-";
 
         return result;

@@ -173,6 +173,17 @@ namespace state {
         return items;
     }
 
+    void Element::setAbility(Ability *ability) {
+        abilities = ability;
+    }
+
+    void Element::setId(int id) {
+        Id = id;
+    }
+
+    int Element::getId() {
+        return Id;
+    }
 }
 
 #endif
