@@ -16,6 +16,10 @@
 \BOOKMARK [0][-]{chapter.5}{IA}{}% 16
 \BOOKMARK [1][-]{section.5.1}{Comportement}{chapter.5}% 17
 \BOOKMARK [1][-]{section.5.2}{Intelligence artificielle haut niveau}{chapter.5}% 18
-\BOOKMARK [0][-]{chapter.6}{Engine}{}% 19
+\BOOKMARK [0][-]{chapter.6}{Engine et modularisation}{}% 19
 \BOOKMARK [1][-]{section.6.1}{Stockage de commandes}{chapter.6}% 20
 \BOOKMARK [1][-]{section.6.2}{Ex\351cution des commandes}{chapter.6}% 21
+\BOOKMARK [0][-]{chapter.7}{Server : conception de l'API}{}% 22
+\BOOKMARK [1][-]{section.7.1}{API REST}{chapter.7}% 23
+\BOOKMARK [2][-]{subsection.7.1.1}{Envoi des commandes au serveur}{section.7.1}% 24
+\BOOKMARK [2][-]{subsection.7.1.2}{R\351cup\351ration des commandes}{section.7.1}% 25

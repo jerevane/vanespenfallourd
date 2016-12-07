@@ -82,7 +82,7 @@ namespace state {
 
     std::string Ability::Poison(Element* caster) {
         std::string result = "M_0_";
-        int dmg = caster->getIntelligence()*10;
+        int dmg = caster->getIntelligence()*5;
         result = result + std::to_string(dmg) + "_-";
         return result;
     }

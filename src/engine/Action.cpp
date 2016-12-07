@@ -62,9 +62,21 @@ namespace engine {
         std::string dmg = tempArray[1];
         std::string dot = tempArray[2];
         std::string isHeal =  tempArray[3];
-        //std::string dot_target = target->getDot();
-        //int dot_target_dmg = stoi(dot_target.substr(0,dot_target.find(delimiter)));
-        //int dot_target_turn = stoi(dot_target.substr(1,dot_target.find(delimiter)));
+        std::string dot_target = target->getDot();
+//        for (int i = 0; i < dot_target.size(); ++i)
+//        {
+//            if (dot_target[i] == '_') {
+//                dot_target[i] = ' ';
+//            }
+//        }
+//        tempChar.clear();
+//        tempArray.clear();
+//        std::stringstream ss2(dot_target);
+//        while (ss2 >> tempChar) {
+//            tempArray.push_back(tempChar);
+//        }
+//        int dot_target_dmg = stoi(tempArray[0]);
+//        int dot_target_turn = stoi(tempArray[1]);
         int temp = stoi(dmg);
         // Si Soin
         if(isHeal == "+"){
@@ -79,7 +91,7 @@ namespace engine {
             else {
                 temp = temp - (int) (temp * target->getPhysResist());
             }
-            //temp = target->getHP() - temp - stoi(dot_target.substr(0,dot_target.find(delimiter)));
+            //temp = target->getHP() - temp - dot_target_dmg;
             temp = target->getHP() - temp;
             if(temp<=0){
                 // Si mort alors reset dot et set IsDead
@@ -90,18 +102,18 @@ namespace engine {
             else {
                 // Inflige les degats et prise en charge dot
                 target->setHP(temp);
-                // Si tech inflige dot
+//                // Si tech inflige dot
 //                if (dot != "0") {
 //                    target->setDot(dot + "4");
 //                }
 //                else{
 //                    // Si dot enlève un tour au dot
-////                    if(dot_target_turn !=0){
-////                        dot_target_turn = dot_target_turn -1;
-////                        target->setDot(std::to_string(dot_target_dmg)+std::to_string(dot_target_turn));
-////                    }
-////                    else target->setDot("0_0");
-//                }
+//                    if(dot_target_turn !=0){
+//                        dot_target_turn = dot_target_turn -1;
+//                        target->setDot(std::to_string(dot_target_dmg)+std::to_string(dot_target_turn));
+//                    }
+//                    else target->setDot("0_0");
+
             }
         }
     }

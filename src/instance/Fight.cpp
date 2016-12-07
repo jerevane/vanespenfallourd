@@ -154,7 +154,7 @@ namespace instance {
                             .at(state->getElementList()->element.size() - 1)) {
                         engine->target = state->getElementList()->element.at(0);
                         ((TargetUI *) ui)->menuItemSwitch(renderer->spriteList.at(0));
-                        engine->targetIndex = 2;
+                        engine->targetIndex = 0;
                     } else {
                         engine->target = state->getElementList()->element.at(engine->targetIndex + 1);
                         ((TargetUI *) ui)->menuItemSwitch(renderer->spriteList.at(engine->targetIndex + 1));
@@ -171,13 +171,43 @@ namespace instance {
             }
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return)) {
                 if (ui->idstr == "FightUI") {
-                    if (state->currentAction == "attack")
-                        ui = new TargetUI(window, renderer->spriteList[2]);
-                    else if (state->currentAction == "spell")
+                    if (!state->getElementList()->element[2]->getIsDead())
+                    {
+                        engine->target = state->getElementList()->element[2];
+                        engine->targetIndex = 2;
+                        if (state->currentAction == "attack")
+                            ui = new TargetUI(window, renderer->spriteList[2]);
+                    } else if (!state->getElementList()->element[3]->getIsDead())
+                    {
+                        engine->target = state->getElementList()->element[3];
+                        engine->targetIndex = 3;
+                        if (state->currentAction == "attack")
+                            ui = new TargetUI(window, renderer->spriteList[3]);
+                    } else {
+                        engine->target = state->getElementList()->element[4];
+                        engine->targetIndex = 4;
+                        if (state->currentAction == "attack")
+                            ui = new TargetUI(window, renderer->spriteList[4]);
+                    }
+
+                    if (state->currentAction == "spell")
                         ui = new SpellUI(window, state->currentTurn->getAbility()->getAbility());
 
                 } else if (ui->idstr == "TargetUI") {
+                    if (state->currentAction == "attack") {
+                        engine::Action *action = new engine::Action(state->currentTurn,
+                                                                    engine->target,
+                                                                    15);
+                        action->setState(state);
+                        engine->addCmd(action);
 
+                        state->setPlayerFinishedTurn(true);
+                        engine->target = state->getElementList()->element[2];
+                        engine->targetIndex = 2;
+                        ui = new FightUI(window);
+                        engine->getRules()->NextTurn();
+                        engine->turnInit(engine->getRules()->getTurnList()[0]);
+                    }
                     if (state->currentAction == "item") {
                         state->setPlayerFinishedTurn(true);
                         ui = new FightUI(window);
@@ -200,20 +230,7 @@ namespace instance {
                         engine->turnInit(engine->getRules()->getTurnList()[0]);
 
                     }
-                    if (state->currentAction == "attack") {
-                        engine::Action *action = new engine::Action(state->currentTurn,
-                                                                    engine->target,
-                                                                    15);
-                        action->setState(state);
-                        engine->addCmd(action);
 
-                        state->setPlayerFinishedTurn(true);
-                        engine->target = state->getElementList()->element[2];
-                        engine->targetIndex = 2;
-                        ui = new FightUI(window);
-                        engine->getRules()->NextTurn();
-                        engine->turnInit(engine->getRules()->getTurnList()[0]);
-                    }
 
                 } else if (ui->idstr == "SpellUI") {
                     auto pos = std::find(((SpellUI *) ui)->spells.begin(),
