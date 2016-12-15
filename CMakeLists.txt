@@ -13,8 +13,8 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 IF(CMAKE_COMPILER_IS_GNUCC)
-	SET(CMAKE_C_FLAGS   "${CMAKE_C_FLAGS}   -Wall -std=c11   -pthread -g")
-	SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -std=c++11 -pthread -g")
+	SET(CMAKE_C_FLAGS   "${CMAKE_C_FLAGS}   -std=c11   -pthread -g")
+	SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -pthread -g")
 ENDIF(CMAKE_COMPILER_IS_GNUCC)
 
 
@@ -25,13 +25,28 @@ exec_program(${DIA2CODE} ARGS -d ../src -t cpp -cl Application,Screen,FightUI,Ta
 exec_program(${DIA2CODE} ARGS -d ../src -t cpp -cl Renderer,IntroRenderer,FightRenderer,WorldmapRenderer,ElemSprite,InnRenderer,TextureSetter ../src/render.dia)
 exec_program(${DIA2CODE} ARGS -d ../src -t cpp -cl AI,SmartChoice,RandomChoice,RandomGoodChoice,ChoiceList ../src/ai.dia)
 exec_program(${DIA2CODE} ARGS -d ../src -t cpp -cl Rules,Command,Action,ActionTypeID,MoveInUI,Engine ../src/engine.dia)
+exec_program(${DIA2CODE} ARGS -d ../src -t cpp -cl User,UserDB ../src/server.dia)
 
+# jsoncpp
+include_directories ("${PROJECT_SOURCE_DIR}/res/jsoncpp/dist")
+file(GLOB jsoncpp_sources "${PROJECT_SOURCE_DIR}/res/jsoncpp/dist/jsoncpp.cpp")
+
+# pistache
+include_directories (${PROJECT_SOURCE_DIR}/res/pistache/include)
+file(GLOB HEADER_FILES "include/*.h")
+file(GLOB pistache_sources "${PROJECT_SOURCE_DIR}/res/pistache/src/*.cpp")
+
+#chilkat
+include_directories ($PROJECT_SOURCE_DIR}/res/chilkat/include)
 
 # Sources
 file(GLOB_RECURSE main_sources src/*.cpp)
 
 # Executables
-add_executable(run ${main_sources})
+add_executable(run ${main_sources} ${jsoncpp_sources} ${pistache_sources})
+
+#chilkat
+target_link_libraries(run ${PROJECT_SOURCE_DIR}/res/chilkat/lib/libchilkat-9.5.0.a)
 
 # SFML
 if(WIN32)

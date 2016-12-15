@@ -452,7 +452,8 @@ gen_decl (declaration *d)
         }
 #else
         name = d->u.this_module->pkg->name;
-        print ("namespace %s {\n\n", name);
+	if (!strstr(name,"../.."))
+        	print ("namespace %s {\n\n", name);
         indentlevel++;
         d = d->u.this_module->contents;
         while (d != NULL) {
@@ -840,10 +841,15 @@ gen_namespace(batch *b,declaration *nsd)
                         print ("};\n");    
                     }                    
                     curnsname = incfile->package;
+
+	if (!strstr(incfile->package,"../.."))
                     print ("namespace %s {\n", incfile->package);
                     indentlevel++;
                 }
-                print ("class %s;\n", incfile->name);
+
+	if (!strstr(incfile->package,"../..")){
+            print ("class %s;\n", incfile->name);
+	} else { curnsname = NULL; }
             }
             incfile = incfile->next;
         }
@@ -879,7 +885,7 @@ gen_namespace(batch *b,declaration *nsd)
         }
         print ("\n");
     }
-
+    if (!strstr(nsname,"../.."))
     print ("namespace %s {\n\n", nsname);
     indentlevel++;
     gen_decl (d);

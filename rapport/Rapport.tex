@@ -196,13 +196,13 @@ Le thread secondaire est pris dans une boucle infinie dans laquelle il transf\`{
 \chapter{Server : conception de l'API}
 
 \section{API REST}
-La classe Server implante une API REST dont le but est de rassembler les diff\'{e}rentes commandes g\'{e}n\'{e}r\'{e}es sur un serveur distant avant que le client ne les r\'{e}cup\`{e}re pour les ex\'{e}cuter.
+La partie serveur de l'API est instaurée via la librairie Pistache tandis que la partie client est instaurée via Chilkat.
 
-Ainsi, la version actuelle implante deux types de requêtes.
+Le but de l'API est de rassembler les diff\'{e}rentes commandes g\'{e}n\'{e}r\'{e}es sur un serveur distant avant que le client ne les r\'{e}cup\`{e}re pour les ex\'{e}cuter mais aussi d'offrir les services CRUD sur une base de données d'utilisateurs.
 
 \subsection{Envoi des commandes au serveur}
 
-\textbf{Requête :} POST /cmd
+\textbf{Requête :} PUT /cmd
 
 \textbf{Données requête :} 
 
@@ -218,14 +218,14 @@ required: [ "unixtime", "cmdtype", "action", "casterindex", "targetindex" ]
 \end{lstlisting}
 
 
-\textbf{Réponse :} STATUS 200
+\textbf{Réponse :} STATUS 200 si OK, STATUS 500 si une erreur est survenue.
 
 \subsection{Récupération des commandes}
 
 \textbf{Requête :} GET /cmd
 
 
-\textbf{Réponse :} STATUS 200
+\textbf{Réponse :} STATUS 200 si OK, STATUS 404 si aucune commande n'est sur le serveur.
 
 \textbf{Données Réponse :} 
 
@@ -234,6 +234,65 @@ type: "object",
 properties: {
    "command": { type:object, minItems:0 },
 required: []
-
 \end{lstlisting}
+
+
+\subsection{Ajout/modification d'utilisateur}
+
+\textbf{Requête :} PUT /user/<id>
+
+
+\textbf{Données requête :} 
+
+\begin{lstlisting}[language=JSON]
+type: "object",
+properties: {
+   "id": { type:number },
+   "nom": { type:string }
+required: [ "id", "nom" ]
+\end{lstlisting}
+
+Crée un utilisateur si il n'existe pas, le modifie sinon.
+
+
+\textbf{Réponse :} STATUS 200 si OK, STATUS 500 si une erreur est survenue.
+
+\subsection{Demande d'utilisateur}
+
+\textbf{Requête :} GET /user/<id>
+
+
+\textbf{Réponse :} STATUS 200 si OK, STATUS 404 si l'utilisateur n'existe pas.
+
+\textbf{Données réponse :} 
+
+\begin{lstlisting}[language=JSON]
+type: "object",
+properties: {
+   "id": { type:number },
+   "nom": { type:string }
+required: [ "id", "nom" ]
+\end{lstlisting}
+
+\subsection{Demande de tous les utilisateurs}
+
+\textbf{Requête :} GET /user/all
+
+\textbf{Réponse :} STATUS 200 si OK, STATUS 500 si il y a eu un problème.
+
+\textbf{Données réponse :} 
+
+\begin{lstlisting}[language=JSON]
+type: "object",
+properties: {
+   "object": { type:number }
+required: [ "object" ]
+\end{lstlisting}
+
+\subsection{Suppression d'un utilisateur}
+
+\textbf{Requête :} DELETE /user/<id>
+
+\textbf{Réponse :} STATUS 200 si OK, STATUS 404 si l'utilisateur n'existe pas.
+
 \end{document}
