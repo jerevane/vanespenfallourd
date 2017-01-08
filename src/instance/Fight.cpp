@@ -10,8 +10,8 @@ namespace instance {
     class Screen;
 }
 
-#include <../../res/chilkat/include/C_CkHttpRequest.h>
-#include <../../res/chilkat/include/C_CkHttp.h>
+#include <../res/chilkat/include/C_CkHttpRequest.h>
+#include <../res/chilkat/include/C_CkHttp.h>
 
 #include "Fight.h"
 #include <iostream>

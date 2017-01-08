@@ -2,7 +2,8 @@
 #include <engine/Engine.h>
 #include <thread>
 
-
+#include <../res/chilkat/include/C_CkHttpRequest.h>
+#include <../res/chilkat/include/C_CkHttp.h>
 #include "state.hpp"
 #include "net.h"
 #include "http.h"
@@ -14,10 +15,68 @@
 using namespace std;
 using namespace instance;
 
+class MyHandler : public Net::Http::Handler {
+
+HTTP_PROTOTYPE(MyHandler);
+
+    std::vector<Json::Value> commands;
+
+    void onRequest(const Net::Http::Request& req, Net::Http::ResponseWriter response) {
+
+        Net::Rest::Router router;
+
+        if (req.resource() == "/cmd") {
+            if (req.method() == Net::Http::Method::Get) {
+
+                using namespace Net::Http;
+
+                int incr = 0;
+                Json::Value jsonresponse;
+
+                if (commands.size() > 0) {
+                    for (auto i : commands) {
+                        jsonresponse[std::to_string(incr)] = i;
+                        ++incr;
+                    }
+                    Json::FastWriter json2str;
+                    response.send(Net::Http::Code::Ok, json2str.write(jsonresponse));
+                } else {
+                    response.send(Net::Http::Code::Not_Found);
+                }
+
+            } else if (req.method() == Net::Http::Method::Put) {
+                try {
+                    Json::Reader str2json;
+                    Json::Value jsoncommand;
+                    str2json.parse(req.body(), jsoncommand);
+                    commands.push_back(jsoncommand);
+                    response.send(Net::Http::Code::Ok);
+                } catch (int e) {
+                    response.send(Net::Http::Code::Bad_Request);
+                }
+            }
+        }
+
+        Net::Rest::Routes::Get(router, "/users/all", Net::Rest::Routes::bind(&server::UserDB::getAllUsers, this));
+        Net::Rest::Routes::Get(router, "/users/:id", Net::Rest::Routes::bind(&server::UserDB::getUser, this));
+        Net::Rest::Routes::Put(router, "/users/:id", Net::Rest::Routes::bind(&server::UserDB::addOrModUser, this));
+        Net::Rest::Routes::Delete(router, "/users/:id", Net::Rest::Routes::bind(&server::UserDB::removeUser, this));
+
+    }
+
+    void onTimeout(const Net::Http::Request& req, Net::Http::ResponseWriter response) {
+
+        response.send(Net::Http::Code::Request_Timeout, "Timeout");
+    }
+
+};
+
 int main(int argc,char* argv[])
 {
 
-Net::Port port(9080);
+
+
+    Net::Port port(9080);
 
     int thr = 2;
 
@@ -40,7 +99,7 @@ Net::Port port(9080);
             .threads(thr)
             .flags(Net::Tcp::Options::InstallSignalHandler);
     server->init(opts);
-    server->setHandler(Http::make_handler<MyHandler>());
+    server->setHandler(Net::Http::make_handler<MyHandler>());
     server->serve();
 
     //Init Node chain
@@ -113,63 +172,7 @@ struct PrintException {
     }
 };
 
-server::UserDB* userdb = new server::UserDB;
 
-class MyHandler : public Net::Http::Handler {
 
-HTTP_PROTOTYPE(MyHandler);
-
-    std::vector<Json::Value> commands;
-
-    void onRequest(const Net::Http::Request& req, Net::Http::ResponseWriter response) {
-
-        Rest::Router router;
-
-        if (req.resource() == "/cmd") {
-            if (req.method() == Net::Http::Method::Get) {
-
-                using namespace Net::Http;
-
-                int incr = 0;
-                Json::Value jsonresponse;
-
-                if (commands.size() > 0) {
-                    for (auto i : commands) {
-                        jsonresponse[std::to_string(incr)] = i;
-                        ++incr;
-                    }
-                    Json::FastWriter json2str;
-                    response.send(Net::Http::Code::Ok, json2str.write(jsonresponse));
-                } else {
-                    response.send(Net::Http::Code::Not_Found);
-                }
-
-            } else if (req.method() == Net::Http::Method::Put) {
-                try {
-                    Json::Reader str2json;
-                    Json::Value jsoncommand;
-                    str2json.parse(req.body(), jsoncommand);
-                    commands.push_back(jsoncommand);
-                    response.send(Net::Http::Code::Ok);
-                } catch (int e) {
-                    response.send(Net::Http::Code::Bad_Request);
-                }
-            }
-        }
-
-        Rest::Routes::Get(router, "/users/all", Rest::Routes::bind(&server::UserDB::getAllUsers, userdb));
-        Rest::Routes::Get(router, "/users/:id", Rest::Routes::bind(&server::UserDB::getUser, userdb));
-        Rest::Routes::Put(router, "/users/:id", Rest::Routes::bind(&server::UserDB::addOrModUser, userdb));
-        Rest::Routes::Delete(router, "/users/:id", Rest::Routes::bind(&server::UserDB::removeUser, userdb));
-
-    }
-
-    void onTimeout(const Net::Http::Request& req, Net::Http::ResponseWriter response) {
-        response
-                .send(Net::Http::Code::Request_Timeout, "Timeout")
-                .then([=](ssize_t) { }, PrintException());
-    }
-
-};
 
 

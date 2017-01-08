@@ -37,7 +37,7 @@ file(GLOB HEADER_FILES "include/*.h")
 file(GLOB pistache_sources "${PROJECT_SOURCE_DIR}/res/pistache/src/*.cpp")
 
 #chilkat
-include_directories ($PROJECT_SOURCE_DIR}/res/chilkat/include)
+include_directories ($PROJECT_SOURCE_DIR}/src/include)
 
 # Sources
 file(GLOB_RECURSE main_sources src/*.cpp)
@@ -46,7 +46,7 @@ file(GLOB_RECURSE main_sources src/*.cpp)
 add_executable(run ${main_sources} ${jsoncpp_sources} ${pistache_sources})
 
 #chilkat
-target_link_libraries(run ${PROJECT_SOURCE_DIR}/res/chilkat/lib/libchilkat-9.5.0.a)
+target_link_libraries(run ${PROJECT_SOURCE_DIR}/lib/libchilkat-9.5.0.a)
 
 # SFML
 if(WIN32)

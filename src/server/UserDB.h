@@ -32,6 +32,7 @@ namespace server {
     void removeUser ( const Net::Rest::Request& request, Net::Http::ResponseWriter response);
     void getAllUsers ( const Net::Rest::Request& request, Net::Http::ResponseWriter response);
     void addOrModUser ( const Net::Rest::Request& request, Net::Http::ResponseWriter response);
+    void onRequest ( const Net::Rest::Request& request, Net::Http::ResponseWriter response);
   };
 
 };
